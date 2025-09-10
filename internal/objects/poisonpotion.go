@@ -7,13 +7,13 @@ import (
 )
 
 func effectPoisonPotion(p *utils.Player) {
-	fmt.Println("Ouch! You lost 10 hp ! You now have ", p.Health, " hp left.")
 	p.Health -= 10
+	fmt.Println("Ouch! You lost 10 hp ! You now have ", p.Health, " hp left.")
 	time.Sleep(1 * time.Second)
-	fmt.Println("Ouch! You lost 10 hp ! You now have ", p.Health, " hp left.")
 	p.Health -= 10
+	fmt.Println("Ouch! You lost 10 hp ! You now have ", p.Health, " hp left.")
 	time.Sleep(1 * time.Second)
-	fmt.Println("Ouch! You lost 10 hp ! You now have ", p.Health, " hp left.")
 	p.Health -= 10
+	fmt.Println("Ouch! You lost 10 hp ! You now have ", p.Health, " hp left.")
 	time.Sleep(1 * time.Second)
 }
