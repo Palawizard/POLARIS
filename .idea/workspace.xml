@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f109752c-8673-4c8a-9312-78c9cc6517f9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/character/characterinfo.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/character/characterinfo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/character/inventory.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/character/inventory.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/game.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/game/game.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/menu/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/menu/menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/objects/potion.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/objects/potion.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/shop/shop.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/shop/shop.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/structures.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/structures.go" afterDir="false" />
-    </list>
+    <list default="true" id="f109752c-8673-4c8a-9312-78c9cc6517f9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
