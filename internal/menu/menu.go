@@ -2,12 +2,11 @@ package menu
 
 import (
 	"fmt"
-
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/utils"
 )
 
-func ShowMenu(player utils.Player) {
+func ShowMenu(player *utils.Player) {
 	for {
 		utils.Clearscreen()
 		fmt.Println("Menu")

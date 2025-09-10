@@ -1,6 +1,6 @@
 package main
 
-import game "projet-red_POLARIS/internal"
+import "projet-red_POLARIS/internal/game"
 
 func main() {
 	game.InitGame()
