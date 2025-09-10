@@ -3,6 +3,7 @@ package menu
 import (
 	"fmt"
 	"projet-red_POLARIS/internal/character"
+	"projet-red_POLARIS/internal/shop"
 	"projet-red_POLARIS/utils"
 )
 
@@ -22,10 +23,11 @@ func ShowMenu(player *utils.Player) {
 		case 1:
 			character.DisplayInfo(player)
 		case 2:
-			character.AccessInventory(player)
+			if character.AccessInventory(player) {
+				shop.Shop(player)
+			}
 		case 3:
 			return
-		default:
 		}
 	}
 }

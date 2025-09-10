@@ -2,11 +2,10 @@ package shop
 
 import (
 	"fmt"
-	"projet-red_POLARIS/internal/objects"
+	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/utils"
 )
 
-// Shop feature allowing you to access the shop and choose an item, either paid or free
 func Shop(player *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("Shop")
@@ -19,7 +18,8 @@ func Shop(player *utils.Player) {
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
-		objects.TakePotion(player)
+		character.AddInventory(player, "Potion")
+		fmt.Println("Vous recevez 1 Potion. Total :", player.Inventory["Potion"])
 	case 2:
 		return
 	}
