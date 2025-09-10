@@ -16,6 +16,12 @@ var Items = map[string]Item{
 		Price: 0,
 		Apply: effectHealthPotion,
 	},
+	"Poison": {
+		ID:    "Poison",
+		Label: "Potion de poison",
+		Price: 10,
+		Apply: effectPoisonPotion,
+	},
 }
 
 func GetItem(id string) (Item, bool) {
