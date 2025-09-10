@@ -98,16 +98,11 @@ func useItemMenu(p *utils.Player) {
 	}
 
 	id := opts[idx-1].id
-	before := p.Health
 
 	if ok := objects.ApplyItem(id, p); !ok {
 		fmt.Println("Impossible d'utiliser cet objet.")
 	} else {
 		RemoveInventory(p, id)
-
-		it, _ := objects.GetItem(id)
-		fmt.Printf("Vous utilisez %s. PV: %d → %d | Restant: x%d\n",
-			it.Label, before, p.Health, p.Inventory[id])
 	}
 
 	fmt.Println("\n1. Retour")
