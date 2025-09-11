@@ -1,11 +1,10 @@
-package character
+package utils
 
 import (
 	"fmt"
-	"projet-red_POLARIS/utils"
 )
 
-func IsDead(player *utils.Player) bool {
+func IsDead(player *Player) bool {
 	if player.Health <= 0 {
 		player.Health = player.MaxHealth / 2
 		fmt.Println("Oh no! You DIED! You respawned with", player.Health, "HP.")
