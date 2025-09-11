@@ -27,7 +27,7 @@ func Shop(player *utils.Player) {
 		fmt.Scan(&choice)
 		switch choice {
 		case 1:
-			Potionshop(player)
+			Itemshop(player)
 		case 2:
 			Spellshop(player)
 		case 3:
