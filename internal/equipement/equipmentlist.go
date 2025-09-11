@@ -10,16 +10,22 @@ type Equipment struct {
 	Defense int
 }
 
-var Equipments = map[string]Equipment{}
-
-// GetEquipment returns an Equipment from the Equipments map.
-// If the Equipment doesn't exist, it returns an empty Equipment.
-func GetEquipment(id string) Equipment {
-	return Equipments[id]
+var Equipments = map[string]Equipment{
+	"Adventurer's Hat":   {ID: "Adventurer's Hat", Name: "Adventurer's Hat", Type: "Head", Price: 5, Defense: 1},
+	"Adventurer's Tunic": {ID: "Adventurer's Tunic", Name: "Adventurer's Tunic", Type: "Body", Price: 5, Defense: 2},
+	"Adventurer's Boots": {ID: "Adventurer's Boots", Name: "Adventurer's Boots", Type: "Feet", Price: 5, Defense: 1},
 }
 
-// AddEquipment adds the given equipment to the player's inventory, incrementing its
-// count by 1. If the player's inventory is currently nil, it will be initialized.
+var Recipes = map[string]map[string]int{
+	"Adventurer's Hat":   {"Crow Feather": 1, "Boar Leather": 1},
+	"Adventurer's Tunic": {"Wolf Fur": 2, "Troll Skin": 1},
+	"Adventurer's Boots": {"Wolf Fur": 1, "Boar Leather": 1},
+}
+
+func GetEquipment(id string) Equipment { return Equipments[id] }
+
+// AddEquipment adds the given equipment to the player's equipment list, incrementing its count by 1.
+// If the player's equipment list is currently nil, it will be initialized.
 func AddEquipment(name string, p *utils.Player) {
 	if p.Equipment == nil {
 		p.Equipment = make(map[string]int)
@@ -28,13 +34,11 @@ func AddEquipment(name string, p *utils.Player) {
 }
 
 // RemoveEquipment removes one instance of the given equipment from the player's
-// inventory.
-//
-// If the equipment doesn't exist in the player's inventory, it does nothing.
-// If the equipment is the last one in the player's inventory, it is removed
-// from the inventory.
-// Otherwise, it decrements the count of the equipment in the player's inventory
-// by 1.
+// equipment list. If the player's equipment list is currently nil, it does
+// nothing. If the equipment is not found in the player's equipment list, it does
+// nothing. Otherwise, it decrements the count of the equipment in the player's
+// equipment list by one. If the count is zero after decrementing, it removes the
+// equipment from the player's equipment list.
 func RemoveEquipment(name string, p *utils.Player) {
 	if p.Equipment == nil {
 		return

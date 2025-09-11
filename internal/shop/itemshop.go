@@ -5,26 +5,32 @@ import (
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/utils"
+	"sort"
 	"time"
 )
 
-// Itemshop displays the player's current money and the items in the catalog,
-// along with their price and the number of items the player has in their
-// inventory. The player is prompted to enter the number of the item they wish
-// to buy. If the player enters a number that is not in the range of the options,
-// or if they do not have enough money, or if their inventory is full, it will
-// simply loop back to the start of the menu. If the player chooses to buy an
-// item, it will be added to their inventory, the cost of the item will be
-// subtracted from their money, and the player will be prompted to enter "1" to
-// return.
+// Itemshop displays the player's coins, and a list of items they can purchase
+// with their coins. The player is prompted to enter the number of the item
+// they wish to purchase. If the player enters a number that is not in the
+// range of the options, or if they do not have enough money, it will print
+// an error message and loop back to the start of the menu. If the player
+// chooses to purchase an item, it will be added to their inventory, and the
+// cost will be subtracted from their money. After the item is purchased, the
+// player will be prompted to enter "1" to return to the previous menu.
 func Itemshop(player *utils.Player) {
 	lastMsg := ""
-	catalog := []string{"Potion", "Poison", "Wolf Fur", "Troll Skin", "Boar Leather", "Crow Feather"}
-
 	for {
 		utils.Clearscreen()
 		fmt.Println("<=== Item Shop ===>")
 		fmt.Printf("Coins: %d\n\n", player.Money)
+
+		catalog := make([]string, 0, len(objects.Items))
+		for id := range objects.Items {
+			catalog = append(catalog, id)
+		}
+		sort.Slice(catalog, func(i, j int) bool {
+			return objects.Items[catalog[i]].Label < objects.Items[catalog[j]].Label
+		})
 
 		getInv := func(k string) int {
 			if player.Inventory == nil {
@@ -34,7 +40,7 @@ func Itemshop(player *utils.Player) {
 		}
 
 		for i, id := range catalog {
-			it, _ := objects.GetItem(id)
+			it := objects.Items[id]
 			fmt.Printf("%d. %s (%d coins)     [x%d]\n", i+1, it.Label, it.Price, getInv(id))
 		}
 		fmt.Printf("%d. Return\n", len(catalog)+1)
@@ -57,7 +63,7 @@ func Itemshop(player *utils.Player) {
 		}
 
 		id := catalog[choice-1]
-		it, _ := objects.GetItem(id)
+		it := objects.Items[id]
 
 		if !character.CheckInvSize(player) {
 			lastMsg = "Your inventory is full."
