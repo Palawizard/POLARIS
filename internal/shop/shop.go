@@ -26,10 +26,22 @@ func Shop(player *utils.Player) {
 		fmt.Println("Vous recevez 1 Potion de heal. Total :", player.Inventory["Potion"])
 		time.Sleep(2 * time.Second)
 	case 2:
+		if utils.Money < 10 {
+			fmt.Println("Vous n'avez pas assez d'argent.")
+			time.Sleep(2 * time.Second)
+			return
+		}
+		utils.Money -= 10
 		character.AddInventory(player, "Poison")
 		fmt.Println("Vous recevez 1 Potion de poison. Total :", player.Inventory["Poison"])
 		time.Sleep(2 * time.Second)
 	case 3:
+		if utils.Money < 70 {
+			fmt.Println("Vous n'avez pas assez d'argent.")
+			time.Sleep(2 * time.Second)
+			return
+		}
+		utils.Money -= 70
 		skills.SpellBook("Boule de feu", player)
 		fmt.Println("Vous recevez 1 Livre de Sort: Boule de feu. Total :", player.Inventory["Boule de feu"])
 		time.Sleep(2 * time.Second)

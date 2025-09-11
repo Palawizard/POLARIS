@@ -16,3 +16,5 @@ func Clearscreen() { // Pris sur internet
 	c.Stdout = os.Stdout
 	_ = c.Run()
 }
+
+var Money = 0
