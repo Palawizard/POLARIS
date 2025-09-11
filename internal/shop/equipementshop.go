@@ -10,10 +10,19 @@ import (
 func EquipementShop(player *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("<=== Shop d'équipement ===>")
-	fmt.Println("1. Fourrure de Loup (4$)")
-	fmt.Println("2. Peau de Troll (7$)")
-	fmt.Println("3. Cuir de Sanglier (3$)")
-	fmt.Println("4. Plume de Corbeau (1$)")
+	fmt.Printf("Argent: %d$\n\n", player.Money)
+
+	get := func(k string) int {
+		if player.Equipment == nil {
+			return 0
+		}
+		return player.Equipment[k]
+	}
+
+	fmt.Printf("1. Fourrure de Loup (4$)     [x%d]\n", get("Fourrure de loup"))
+	fmt.Printf("2. Peau de Troll (7$)        [x%d]\n", get("Peau de Troll"))
+	fmt.Printf("3. Cuir de Sanglier (3$)     [x%d]\n", get("Cuir de Sanglier"))
+	fmt.Printf("4. Plume de Corbeau (1$)     [x%d]\n", get("Plume de Corbeau"))
 	fmt.Println("5. Retour")
 
 	var choice int
@@ -27,7 +36,7 @@ func EquipementShop(player *utils.Player) {
 		}
 		player.Money -= 4
 		equipement.AddEquipment("Fourrure de loup", player)
-		fmt.Println("Vous recevez 1 fourrure de loup, total :", player.Equipment["Fourrure de loup"])
+		fmt.Println("Vous recevez 1 Fourrure de loup, total :", player.Equipment["Fourrure de loup"])
 		time.Sleep(2 * time.Second)
 	case 2:
 		if player.Money < 7 {

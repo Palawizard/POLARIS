@@ -28,6 +28,18 @@ func SpellBook(id string, player *utils.Player) bool {
 	if !ok || it.Apply == nil {
 		return false
 	}
+	if player.Skills == nil {
+		player.Skills = make(map[string]int)
+	}
+	player.Skills[id]++
+	return true
+}
+
+func Cast(id string, player *utils.Player) bool {
+	it, ok := Skills[id]
+	if !ok || it.Apply == nil {
+		return false
+	}
 	it.Apply(player)
 	return true
 }
