@@ -7,6 +7,7 @@ type Player struct {
 	Money     int
 	MaxHealth int
 	Health    int
-	Skills    string
+	Skills    map[string]int
 	Inventory map[string]int
+	Equipment map[string]int
 }
