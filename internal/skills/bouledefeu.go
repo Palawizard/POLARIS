@@ -4,6 +4,6 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
-func effectCoupDePoint(p *utils.Player) {
+func effectBouleDeFeu(p *utils.Player) {
 
 }

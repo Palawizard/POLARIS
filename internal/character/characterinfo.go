@@ -12,7 +12,7 @@ func InitCharacter(name string, class string, level int, maxhealth int, health i
 		Level:     level,
 		MaxHealth: maxhealth,
 		Health:    health,
-		skills:    skills,
+		Skills:    skills,
 		Inventory: inventory,
 	}
 }
@@ -25,8 +25,8 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Class: ", player.Class)
 	fmt.Println("Level: ", player.Level)
 	fmt.Printf("Health: %d/%d\n\n", player.Health, player.MaxHealth)
-	fmt.Println("Skills: ", player.skills)
-	
+	fmt.Println("Skills: ", player.Skills)
+
 	fmt.Println("1. Retour")
 	var choice int
 	fmt.Scan(&choice)
