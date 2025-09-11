@@ -6,6 +6,9 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
+// AccessInventory displays the player's inventory and allows them to use an
+// object or shop. It will return true if the player chooses to shop, and false
+// otherwise.
 func AccessInventory(player *utils.Player) bool {
 	utils.Clearscreen()
 	fmt.Println("Inventory")
@@ -36,6 +39,8 @@ func AccessInventory(player *utils.Player) bool {
 	}
 }
 
+// AddInventory adds the given item to the player's inventory, incrementing its
+// count by 1. If the player's inventory is currently nil, it will be initialized.
 func AddInventory(player *utils.Player, item string) {
 	if player == nil || item == "" {
 		return
@@ -47,6 +52,8 @@ func AddInventory(player *utils.Player, item string) {
 	fmt.Println(item, "added to inventory.")
 }
 
+// RemoveInventory removes one instance of the given item from the player's
+// inventory.
 func RemoveInventory(player *utils.Player, item string) {
 	if player == nil || item == "" || player.Inventory == nil {
 		return
@@ -63,6 +70,14 @@ func RemoveInventory(player *utils.Player, item string) {
 	}
 }
 
+// useItemMenu displays the player's usable objects and allows them to use one.
+// It will print out the player's usable objects, and then prompt them to enter
+// the number of the object they wish to use. If the player enters a number that
+// is not in the range of the options, or if they do not have the object, it will
+// simply return. If the player chooses to use the object, it will be removed
+// from their inventory, and the Apply function of the object will be called on
+// the player. After the object is used, the player will be prompted to enter
+// "1" to return.
 func useItemMenu(p *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("Use an object\n")
@@ -110,6 +125,9 @@ func useItemMenu(p *utils.Player) {
 	fmt.Scan(&_tmp)
 }
 
+// CheckInvSize returns true if the given player's inventory has less than 10
+// items, and false otherwise. If the player's inventory is full, it will print
+// a message to the console.
 func CheckInvSize(player *utils.Player) bool {
 	if len(player.Inventory) >= 10 {
 		fmt.Println("Your inventory is full.")
