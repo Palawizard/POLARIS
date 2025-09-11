@@ -24,11 +24,16 @@ var Items = map[string]Item{
 	},
 }
 
+// GetItem returns an Item from the given id string.
+// If the Item doesn't exist, it returns an empty Item and false.
 func GetItem(id string) (Item, bool) {
 	it, ok := Items[id]
 	return it, ok
 }
 
+// ApplyItem applies the given item to the player.
+// If the item doesn't exist or its Apply func is nil, it returns false.
+// Otherwise, it applies the item and returns true.
 func ApplyItem(id string, p *utils.Player) bool {
 	it, ok := Items[id]
 	if !ok || it.Apply == nil {

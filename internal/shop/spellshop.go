@@ -8,6 +8,15 @@ import (
 	"time"
 )
 
+// Spellshop is a menu allowing the player to buy a spellbook. It will
+// display the player's current coins, and then display a list of spells
+// available for purchase. The player is prompted to enter the number of the
+// spell they wish to purchase. If the player enters a number that is not
+// in the range of the options, or if they do not have enough coins, it will
+// print out an error message and then loop back to the start of the menu.
+// If the player chooses to purchase a spell, it will be added to their
+// spellbook and the cost will be deducted from their coins. After the
+// spell is purchased, the player will be prompted to enter "1" to return.
 func Spellshop(player *utils.Player) {
 	lastMsg := ""
 	for {

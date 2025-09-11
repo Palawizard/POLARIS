@@ -6,11 +6,17 @@ import (
 	"strings"
 )
 
+// InitCharacter initializes the player by calling the CharacterCreation function.
+// It returns the fully initialized utils.Player.
 func InitCharacter() utils.Player {
 	p1 := CharacterCreation()
 	return p1
 }
 
+// CharacterCreation is a function that initializes a character by asking the user
+// for a name and a class. It then returns a fully initialized utils.Player.
+//
+// It will not return until a valid name and class have been entered.
 func CharacterCreation() utils.Player {
 	utils.Clearscreen()
 	namegood := false
@@ -74,6 +80,9 @@ func CharacterCreation() utils.Player {
 	}
 }
 
+// DisplayInfo displays the player's character information, including their
+// name, class, level, money, health, skills, and equipment. It will then
+// prompt the player to enter "1" to return to the previous menu.
 func DisplayInfo(player *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("Character Info\n")

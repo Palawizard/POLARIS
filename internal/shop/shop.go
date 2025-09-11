@@ -5,6 +5,13 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
+// Shop is a menu allowing the player to access the different shops.
+// It will display the player's current coins, and then display a list of shops
+// available for purchase. The player is prompted to enter the number of the
+// shop they wish to access. If the player enters a number that is not in the
+// range of the options, it will simply loop back to the start of the menu.
+// If the player chooses to access a shop, it will be run in a loop until the
+// player chooses to return.
 func Shop(player *utils.Player) {
 	for {
 		utils.Clearscreen()

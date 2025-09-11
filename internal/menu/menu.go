@@ -7,6 +7,11 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
+// ShowMenu is the main menu for the game. It displays a menu with three
+// options: "Character Info", "Inventory", and "Quit". If the player chooses
+// "Character Info", it displays the player's character info. If the player
+// chooses "Inventory", it displays the player's inventory and allows them to
+// shop. If the player chooses "Quit", the function will return.
 func ShowMenu(player *utils.Player) {
 	for {
 		utils.Clearscreen()

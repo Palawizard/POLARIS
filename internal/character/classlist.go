@@ -32,6 +32,8 @@ var Classes = map[string]Class{
 	},
 }
 
+// GetClass returns a Class from the given id string.
+// If the Class doesn't exist, it returns the "Template" Class.
 func GetClass(id string) Class {
 	if c, ok := Classes[id]; ok {
 		return c
@@ -39,8 +41,11 @@ func GetClass(id string) Class {
 	return Classes["Template"]
 }
 
+// ClassLabel returns the label of the given class id.
+// If the class doesn't exist, it returns an empty string.
 func ClassLabel(id string) string { return GetClass(id).Label }
 
+// Classlist returns a comma-separated string of all the Class IDs available in the Classes map.
 func Classlist() string {
 	var list []string
 	for _, c := range Classes {
