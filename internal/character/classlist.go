@@ -12,11 +12,23 @@ type Class struct {
 }
 
 var Classes = map[string]Class{
-	"Template": {
-		ID:    "Template",
-		Label: "Template",
-		HP:    10,
-		MAXHP: 10,
+	"Humain": {
+		ID:    "Humain",
+		Label: "Humain",
+		HP:    50,
+		MAXHP: 100,
+	},
+	"Elfe": {
+		ID:    "Elfe",
+		Label: "Humain",
+		HP:    40,
+		MAXHP: 80,
+	},
+	"Nains": {
+		ID:    "Elfe",
+		Label: "Humain",
+		HP:    60,
+		MAXHP: 120,
 	},
 }
 
