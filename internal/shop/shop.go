@@ -18,7 +18,7 @@ func Shop(player *utils.Player) {
 		fmt.Println("Shop")
 		fmt.Print("\n\n")
 		fmt.Println("<=== Welcome to the Shop ===>")
-		fmt.Println("1. Potion Shop")
+		fmt.Println("1. Item Shop")
 		fmt.Println("2. Spell Shop")
 		fmt.Println("3. Equipment Shop")
 		fmt.Println("4. Return")

@@ -21,7 +21,7 @@ func Potionshop(player *utils.Player) {
 	lastMsg := ""
 	for {
 		utils.Clearscreen()
-		fmt.Println("<=== Potion Shop ===>")
+		fmt.Println("<=== Item Shop ===>")
 		fmt.Printf("Coins: %d\n\n", player.Money)
 
 		get := func(k string) int {
