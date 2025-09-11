@@ -1,6 +1,8 @@
 package character
 
-import "strings"
+import (
+	"strings"
+)
 
 type Class struct {
 	ID    string

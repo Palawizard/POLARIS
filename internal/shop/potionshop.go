@@ -29,6 +29,10 @@ func Potionshop(player *utils.Player) {
 
 	switch choice {
 	case 1:
+		if !character.CheckInvSize(player) {
+			time.Sleep(2 * time.Second)
+			return
+		}
 		if player.Money < 3 {
 			fmt.Println("Vous n'avez pas assez d'argent")
 			time.Sleep(2 * time.Second)
@@ -40,6 +44,10 @@ func Potionshop(player *utils.Player) {
 		time.Sleep(2 * time.Second)
 
 	case 2:
+		if !character.CheckInvSize(player) {
+			time.Sleep(2 * time.Second)
+			return
+		}
 		if player.Money < 6 {
 			fmt.Println("Vous n'avez pas assez d'argent")
 			time.Sleep(2 * time.Second)
