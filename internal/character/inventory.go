@@ -109,3 +109,11 @@ func useItemMenu(p *utils.Player) {
 	var _tmp int
 	fmt.Scan(&_tmp)
 }
+
+func CheckInvSize(player *utils.Player) bool {
+	if len(player.Inventory) >= 10 {
+		fmt.Println("Votre inventaire est plein.")
+		return false
+	}
+	return true
+}
