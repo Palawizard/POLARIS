@@ -24,3 +24,11 @@ func GetClass(id string) Class {
 }
 
 func ClassLabel(id string) string { return GetClass(id).Label }
+
+func Classlist() []string {
+	var list []string
+	for _, c := range Classes {
+		list = append(list, c.ID)
+	}
+	return list
+}

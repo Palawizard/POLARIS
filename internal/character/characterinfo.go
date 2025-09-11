@@ -25,7 +25,7 @@ func DisplayInfo(player *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("Character Info\n")
 	fmt.Println("Name:  ", player.Name)
-	fmt.Println("Class: ", ClassLabel(player.Class)) // <- label humain
+	fmt.Println("Class: ", ClassLabel(player.Class))
 	fmt.Println("Level: ", player.Level)
 	fmt.Printf("Health: %d/%d\n\n", player.Health, player.MaxHealth)
 	fmt.Println("Skills:", player.Skills)
