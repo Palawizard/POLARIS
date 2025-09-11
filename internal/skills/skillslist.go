@@ -11,15 +11,15 @@ type Skill struct {
 }
 
 var Skills = map[string]Skill{
-	"Coup de point": {
-		ID:    "Coup de point",
-		Label: "Coup de point",
-		Apply: effectCoupDePoint,
+	"Punch": {
+		ID:    "Punch",
+		Label: "Punch",
+		Apply: effectPunch,
 	},
-	"Boule de feu": {
-		ID:    "Boule de feu",
-		Label: "Boule de feu",
-		Apply: effectBouleDeFeu,
+	"Fire Ball": {
+		ID:    "Fire Ball",
+		Label: "Fire Ball",
+		Apply: effectFireball,
 	},
 }
 

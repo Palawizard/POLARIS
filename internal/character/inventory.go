@@ -11,16 +11,16 @@ func AccessInventory(player *utils.Player) bool {
 	fmt.Println("Inventory")
 	fmt.Print("\n")
 	if len(player.Inventory) == 0 {
-		fmt.Println("(vide)")
+		fmt.Println("(empty)")
 	} else {
 		for key, value := range player.Inventory {
 			fmt.Println(key, ": ", value)
 		}
 	}
 	fmt.Print("\n")
-	fmt.Println("1. Retour")
-	fmt.Println("2. Utiliser un objet")
-	fmt.Println("3. Marchand")
+	fmt.Println("1. Return")
+	fmt.Println("2. Use an object")
+	fmt.Println("3. Shop")
 
 	var choice int
 	fmt.Scan(&choice)
@@ -65,7 +65,7 @@ func RemoveInventory(player *utils.Player, item string) {
 
 func useItemMenu(p *utils.Player) {
 	utils.Clearscreen()
-	fmt.Println("Utiliser un objet\n")
+	fmt.Println("Use an object\n")
 
 	type option struct{ id string }
 	var opts []option
@@ -78,8 +78,8 @@ func useItemMenu(p *utils.Player) {
 	}
 
 	if len(opts) == 0 {
-		fmt.Println("Aucun objet utilisable.")
-		fmt.Println("\n1. Retour")
+		fmt.Println("No usable objects")
+		fmt.Println("\n1. Return")
 		var _tmp int
 		fmt.Scan(&_tmp)
 		return
@@ -89,7 +89,7 @@ func useItemMenu(p *utils.Player) {
 		it, _ := objects.GetItem(o.id)
 		fmt.Printf("%d. %s (x%d)\n", i+1, it.Label, p.Inventory[o.id])
 	}
-	fmt.Println("0. Annuler")
+	fmt.Println("0. Cancel")
 
 	var idx int
 	fmt.Scan(&idx)
@@ -100,19 +100,19 @@ func useItemMenu(p *utils.Player) {
 	id := opts[idx-1].id
 
 	if ok := objects.ApplyItem(id, p); !ok {
-		fmt.Println("Impossible d'utiliser cet objet.")
+		fmt.Println("You can't use this object.")
 	} else {
 		RemoveInventory(p, id)
 	}
 
-	fmt.Println("\n1. Retour")
+	fmt.Println("\n1. Return")
 	var _tmp int
 	fmt.Scan(&_tmp)
 }
 
 func CheckInvSize(player *utils.Player) bool {
 	if len(player.Inventory) >= 10 {
-		fmt.Println("Votre inventaire est plein.")
+		fmt.Println("Your inventory is full.")
 		return false
 	}
 	return true

@@ -11,31 +11,31 @@ type Equipment struct {
 }
 
 var Equipments = map[string]Equipment{
-	"Fourrure de loup": {
-		ID:      "Fourrure de loup",
-		Name:    "Fourrure de loup",
-		Type:    "Fourrure",
+	"Wolf Fur": {
+		ID:      "Wolf Fur",
+		Name:    "Wolf Fur",
+		Type:    "Fur",
 		Price:   4,
 		Defense: 0,
 	},
-	"Peau de Troll": {
-		ID:      "Peau de Troll",
-		Name:    "Peau de Troll",
-		Type:    "Peau",
+	"Troll Skin": {
+		ID:      "Troll Skin",
+		Name:    "Troll Skin",
+		Type:    "Skin",
 		Price:   7,
 		Defense: 0,
 	},
-	"Cuir de Sanglier": {
-		ID:      "Cuir de Sanglier",
-		Name:    "Cuir de Sanglier",
-		Type:    "Cuir",
+	"Boar Leather": {
+		ID:      "Boar Leather",
+		Name:    "Boar Leather",
+		Type:    "Leather",
 		Price:   3,
 		Defense: 0,
 	},
-	"Plume de Corbeau": {
-		ID:      "Plume de Corbeau",
-		Name:    "Plume de Corbeau",
-		Type:    "Plume",
+	"Crow Feather": {
+		ID:      "Crow Feather",
+		Name:    "Crow Feather",
+		Type:    "Feather",
 		Price:   1,
 		Defense: 0,
 	},

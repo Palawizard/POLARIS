@@ -10,11 +10,11 @@ func Shop(player *utils.Player) {
 		utils.Clearscreen()
 		fmt.Println("Shop")
 		fmt.Print("\n\n")
-		fmt.Println("<=== Bienvenue chez le marchand ===>")
-		fmt.Println("1. Shop de potions")
-		fmt.Println("2. Shop de sort")
-		fmt.Println("3. Shop d'équipement")
-		fmt.Println("4. Retour")
+		fmt.Println("<=== Welcome to the Shop ===>")
+		fmt.Println("1. Potion Shop")
+		fmt.Println("2. Spell Shop")
+		fmt.Println("3. Equipment Shop")
+		fmt.Println("4. Return")
 
 		var choice int
 		fmt.Scan(&choice)

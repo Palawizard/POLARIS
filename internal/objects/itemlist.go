@@ -12,13 +12,13 @@ type Item struct {
 var Items = map[string]Item{
 	"Potion": {
 		ID:    "Potion",
-		Label: "Potion de vie",
+		Label: "Healing Potion",
 		Price: 0,
 		Apply: effectHealthPotion,
 	},
 	"Poison": {
 		ID:    "Poison",
-		Label: "Potion de poison",
+		Label: "Potion of poison",
 		Price: 10,
 		Apply: effectPoisonPotion,
 	},
