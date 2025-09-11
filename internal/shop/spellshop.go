@@ -2,6 +2,7 @@ package shop
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
 	"time"
@@ -24,6 +25,10 @@ func Spellshop(player *utils.Player) {
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
+		if !character.CheckInvSize(player) {
+			time.Sleep(2 * time.Second)
+			return
+		}
 		if player.Money < 25 {
 			fmt.Println("Vous n'avez pas assez d'argent")
 			time.Sleep(2 * time.Second)
