@@ -3,12 +3,60 @@ package character
 import (
 	"fmt"
 	"projet-red_POLARIS/utils"
+	"strings"
 )
 
-func InitCharacter(name string, classID string, level int, skills string, inventory map[string]int) utils.Player {
+func InitCharacter() utils.Player {
+	p1 := CharacterCreation()
+	return p1
+}
+
+func CharacterCreation() utils.Player {
+	namegood := false
+	classgood := false
+	var name string
+	fmt.Println("What is your name?")
+	for namegood == false {
+		fmt.Scan(&name)
+		rsn := []rune(name)
+		for _, v := range rsn {
+			if v < 'A' || (v > 'Z' && v < 'a') || v > 'z' {
+				fmt.Println("Please enter a valid name")
+				break
+			}
+		}
+		namegood = true
+	}
+	lowername := strings.ToLower(name)
+	rsln := []rune(lowername)
+	newname := ""
+	for i := 0; i < len(rsln); i++ {
+		if i == 0 {
+			newname += strings.ToUpper(string(rsln[i]))
+			continue
+		}
+		newname += string(rsln[i])
+	}
+	name = newname
+
+	fmt.Println("What class do you want to choose ? You can choose between : ")
+	fmt.Println(Classlist())
+	var classID string
+	for classgood == false {
+		fmt.Scan(&classID)
+		if _, ok := Classes[classID]; ok {
+			classgood = true
+		} else {
+			fmt.Println("Please enter a valid class")
+		}
+	}
+
 	cls := GetClass(classID)
 	maxhealth := cls.MAXHP
 	health := cls.HP
+	level := 1
+	skills := "Coup de point"
+	inventory := map[string]int{"Potion": 3}
 
 	return utils.Player{
 		Name:      name,
