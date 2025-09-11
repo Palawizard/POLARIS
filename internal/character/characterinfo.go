@@ -6,6 +6,7 @@ import (
 )
 
 func InitCharacter(name string, class string, level int, maxhealth int, health int, skills string, inventory map[string]int) utils.Player {
+
 	return utils.Player{
 		Name:      name,
 		Class:     class,
@@ -15,6 +16,16 @@ func InitCharacter(name string, class string, level int, maxhealth int, health i
 		Skills:    skills,
 		Inventory: inventory,
 	}
+}
+
+func CharacterCreation() utils.Player {
+	utils.Clearscreen()
+	fmt.Println("What is your name?")
+	var name string
+	fmt.Scan(&name)
+	fmt.Println("What class do you want to chose?")
+	var class string
+	fmt.Scan(&class)
 }
 
 func DisplayInfo(player *utils.Player) {
