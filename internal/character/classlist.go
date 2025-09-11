@@ -1,5 +1,7 @@
 package character
 
+import "strings"
+
 type Class struct {
 	ID    string
 	Label string
@@ -25,10 +27,11 @@ func GetClass(id string) Class {
 
 func ClassLabel(id string) string { return GetClass(id).Label }
 
-func Classlist() []string {
+func Classlist() string {
 	var list []string
 	for _, c := range Classes {
 		list = append(list, c.ID)
 	}
-	return list
+	result := strings.Join(list, ", ")
+	return result
 }

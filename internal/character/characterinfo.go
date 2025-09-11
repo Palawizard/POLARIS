@@ -3,6 +3,7 @@ package character
 import (
 	"fmt"
 	"projet-red_POLARIS/utils"
+	"strings"
 )
 
 func InitCharacter() utils.Player {
@@ -11,12 +12,44 @@ func InitCharacter() utils.Player {
 }
 
 func CharacterCreation() utils.Player {
-	fmt.Println("What is your name?")
+	namegood := false
+	classgood := false
 	var name string
-	fmt.Scan(&name)
-	fmt.Println("What class do you want to choose ?")
+	fmt.Println("What is your name?")
+	for namegood == false {
+		fmt.Scan(&name)
+		rsn := []rune(name)
+		for _, v := range rsn {
+			if v < 'A' || (v > 'Z' && v < 'a') || v > 'z' {
+				fmt.Println("Please enter a valid name")
+				break
+			}
+		}
+		namegood = true
+	}
+	lowername := strings.ToLower(name)
+	rsln := []rune(lowername)
+	newname := ""
+	for i := 0; i < len(rsln); i++ {
+		if i == 0 {
+			newname += strings.ToUpper(string(rsln[i]))
+			continue
+		}
+		newname += string(rsln[i])
+	}
+	name = newname
+
+	fmt.Println("What class do you want to choose ? You can choose between : ")
+	fmt.Println(Classlist())
 	var classID string
-	fmt.Scan(&classID)
+	for classgood == false {
+		fmt.Scan(&classID)
+		if _, ok := Classes[classID]; ok {
+			classgood = true
+		} else {
+			fmt.Println("Please enter a valid class")
+		}
+	}
 
 	cls := GetClass(classID)
 	maxhealth := cls.MAXHP
