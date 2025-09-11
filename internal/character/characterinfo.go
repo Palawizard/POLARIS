@@ -5,10 +5,25 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
-func InitCharacter(name string, classID string, level int, skills string, inventory map[string]int) utils.Player {
+func InitCharacter() utils.Player {
+	p1 := CharacterCreation()
+	return p1
+}
+
+func CharacterCreation() utils.Player {
+	fmt.Println("What is your name?")
+	var name string
+	fmt.Scan(&name)
+	fmt.Println("What class do you want to choose ?")
+	var classID string
+	fmt.Scan(&classID)
+
 	cls := GetClass(classID)
 	maxhealth := cls.MAXHP
 	health := cls.HP
+	level := 1
+	skills := "Coup de point"
+	inventory := map[string]int{"Potion": 3}
 
 	return utils.Player{
 		Name:      name,

@@ -6,6 +6,6 @@ import (
 )
 
 func InitGame() {
-	c1 := character.InitCharacter("GagaLionlion", "Template", 1, "Coup de point", map[string]int{"Potion": 3})
+	c1 := character.InitCharacter()
 	menu.ShowMenu(&c1)
 }
