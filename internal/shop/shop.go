@@ -20,8 +20,7 @@ func Shop(player *utils.Player) {
 		fmt.Println("<=== Welcome to the Shop ===>")
 		fmt.Println("1. Item Shop")
 		fmt.Println("2. Spell Shop")
-		fmt.Println("3. Equipment Shop")
-		fmt.Println("4. Return")
+		fmt.Println("3. Return")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -31,8 +30,6 @@ func Shop(player *utils.Player) {
 		case 2:
 			Spellshop(player)
 		case 3:
-			EquipementShop(player)
-		case 4:
 			return
 		}
 	}

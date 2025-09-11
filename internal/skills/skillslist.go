@@ -7,6 +7,7 @@ import (
 type Skill struct {
 	ID    string
 	Label string
+	Price int
 	Apply func(*utils.Player)
 }
 
@@ -14,11 +15,13 @@ var Skills = map[string]Skill{
 	"Punch": {
 		ID:    "Punch",
 		Label: "Punch",
+		Price: 0,
 		Apply: effectPunch,
 	},
 	"Fire Ball": {
 		ID:    "Fire Ball",
 		Label: "Fire Ball",
+		Price: 25,
 		Apply: effectFireball,
 	},
 }

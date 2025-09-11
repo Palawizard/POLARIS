@@ -3,6 +3,7 @@ package menu
 import (
 	"fmt"
 	"projet-red_POLARIS/internal/character"
+	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/internal/shop"
 	"projet-red_POLARIS/utils"
 )
@@ -19,7 +20,8 @@ func ShowMenu(player *utils.Player) {
 		fmt.Print("\n")
 		fmt.Println("1. Character Info")
 		fmt.Println("2. Inventory")
-		fmt.Println("3. Quit")
+		fmt.Println("3. Black-Smith")
+		fmt.Println("4. Quit")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -36,6 +38,8 @@ func ShowMenu(player *utils.Player) {
 				break
 			}
 		case 3:
+			equipement.BlackSmith(player)
+		case 4:
 			return
 		}
 	}
