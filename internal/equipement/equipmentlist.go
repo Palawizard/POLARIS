@@ -45,10 +45,22 @@ func GetEquipment(id string) Equipment {
 	return Equipments[id]
 }
 
-func AddEquipment(id string, player *utils.Player) bool {
-	_, ok := Equipments[id]
-	if !ok {
-		return false
+func AddEquipment(name string, p *utils.Player) {
+	if p.Equipment == nil {
+		p.Equipment = make(map[string]int)
 	}
-	return true
+	p.Equipment[name]++
+}
+
+func RemoveEquipment(name string, p *utils.Player) {
+	if p.Equipment == nil {
+		return
+	}
+	if q, ok := p.Equipment[name]; ok {
+		if q <= 1 {
+			delete(p.Equipment, name)
+		} else {
+			p.Equipment[name] = q - 1
+		}
+	}
 }

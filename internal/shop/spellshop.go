@@ -10,7 +10,14 @@ import (
 func Spellshop(player *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("<=== Shop de sorts ===>")
-	fmt.Println("1. Livre de Sort: Boule de feu (25$)")
+	fmt.Printf("Argent: %d$\n\n", player.Money)
+
+	ownedFire := 0
+	if player.Skills != nil {
+		ownedFire = player.Skills["Boule de feu"]
+	}
+
+	fmt.Printf("1. Livre de Sort: Boule de feu (25$)  [possédé: x%d]\n", ownedFire)
 	fmt.Println("2. Retour")
 
 	var choice int
@@ -23,8 +30,11 @@ func Spellshop(player *utils.Player) {
 			return
 		}
 		player.Money -= 25
-		skills.SpellBook("Boule de feu", player)
-		fmt.Println("Vous recevez 1 Livre de Sort: Boule de feu, total :", player.Skills["Boule de feu"])
+		if skills.SpellBook("Boule de feu", player) {
+			fmt.Println("Vous recevez 1 Livre de Sort: Boule de feu, total :", player.Skills["Boule de feu"])
+		} else {
+			fmt.Println("Achat impossible.")
+		}
 		time.Sleep(2 * time.Second)
 	case 2:
 		return
