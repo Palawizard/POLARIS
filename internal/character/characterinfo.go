@@ -5,13 +5,14 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
-func InitCharacter(name string, class string, level int, maxhealth int, health int, inventory map[string]int) utils.Player {
+func InitCharacter(name string, class string, level int, maxhealth int, health int, skills string, inventory map[string]int) utils.Player {
 	return utils.Player{
 		Name:      name,
 		Class:     class,
 		Level:     level,
 		MaxHealth: maxhealth,
 		Health:    health,
+		skills:    skills,
 		Inventory: inventory,
 	}
 }
@@ -24,7 +25,8 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Class: ", player.Class)
 	fmt.Println("Level: ", player.Level)
 	fmt.Printf("Health: %d/%d\n\n", player.Health, player.MaxHealth)
-
+	fmt.Println("Skills: ", player.skills)
+	
 	fmt.Println("1. Retour")
 	var choice int
 	fmt.Scan(&choice)
