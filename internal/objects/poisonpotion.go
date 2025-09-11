@@ -16,4 +16,6 @@ func effectPoisonPotion(p *utils.Player) {
 	p.Health -= 10
 	fmt.Println("Ouch! You lost 10 hp ! You now have ", p.Health, " hp left.")
 	time.Sleep(1 * time.Second)
+	if utils.IsDead(p) {
+	}
 }

@@ -23,8 +23,12 @@ func ShowMenu(player *utils.Player) {
 		case 1:
 			character.DisplayInfo(player)
 		case 2:
-			if character.AccessInventory(player) {
-				shop.Shop(player)
+			for {
+				if character.AccessInventory(player) {
+					shop.Shop(player)
+					continue
+				}
+				break
 			}
 		case 3:
 			return

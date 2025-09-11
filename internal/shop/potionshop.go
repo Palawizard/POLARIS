@@ -8,57 +8,66 @@ import (
 )
 
 func Potionshop(player *utils.Player) {
-	utils.Clearscreen()
-	fmt.Println("<=== Shop de potions ===>")
-	fmt.Printf("Argent: %d$\n\n", player.Money)
+	lastMsg := ""
+	for {
+		utils.Clearscreen()
+		fmt.Println("<=== Shop de potions ===>")
+		fmt.Printf("Argent: %d$\n\n", player.Money)
 
-	// compteur sécurisé
-	get := func(k string) int {
-		if player.Inventory == nil {
-			return 0
+		get := func(k string) int {
+			if player.Inventory == nil {
+				return 0
+			}
+			return player.Inventory[k]
 		}
-		return player.Inventory[k]
-	}
 
-	fmt.Printf("1. Potion de heal (3$)     [x%d]\n", get("Potion"))
-	fmt.Printf("2. Potion de poison (6$)   [x%d]\n", get("Poison"))
-	fmt.Println("3. Retour")
+		fmt.Printf("1. Potion de heal (3$)     [x%d]\n", get("Potion"))
+		fmt.Printf("2. Potion de poison (6$)   [x%d]\n", get("Poison"))
+		fmt.Println("3. Retour")
 
-	var choice int
-	fmt.Scan(&choice)
+		if lastMsg != "" {
+			fmt.Println()
+			fmt.Println(lastMsg)
+		}
 
-	switch choice {
-	case 1:
-		if !character.CheckInvSize(player) {
-			time.Sleep(2 * time.Second)
+		var choice int
+		fmt.Scan(&choice)
+
+		switch choice {
+		case 1:
+			if !character.CheckInvSize(player) {
+				lastMsg = "Votre inventaire est plein."
+				time.Sleep(1 * time.Second)
+				continue
+			}
+			if player.Money < 3 {
+				lastMsg = "Vous n'avez pas assez d'argent"
+				time.Sleep(1 * time.Second)
+				continue
+			}
+			player.Money -= 3
+			character.AddInventory(player, "Potion")
+			lastMsg = fmt.Sprintf("Vous recevez 1 potion de heal, total : %d", player.Inventory["Potion"])
+			time.Sleep(1 * time.Second)
+
+		case 2:
+			if !character.CheckInvSize(player) {
+				lastMsg = "Votre inventaire est plein."
+				time.Sleep(1 * time.Second)
+				continue
+			}
+			if player.Money < 6 {
+				lastMsg = "Vous n'avez pas assez d'argent"
+				time.Sleep(1 * time.Second)
+				continue
+			}
+			player.Money -= 6
+			character.AddInventory(player, "Poison")
+			lastMsg = fmt.Sprintf("Vous recevez 1 potion de poison, total : %d", player.Inventory["Poison"])
+			time.Sleep(1 * time.Second)
+
+		case 3:
 			return
 		}
-		if player.Money < 3 {
-			fmt.Println("Vous n'avez pas assez d'argent")
-			time.Sleep(2 * time.Second)
-			return
-		}
-		player.Money -= 3
-		character.AddInventory(player, "Potion")
-		fmt.Println("Vous recevez 1 potion de heal, total :", player.Inventory["Potion"])
-		time.Sleep(2 * time.Second)
-
-	case 2:
-		if !character.CheckInvSize(player) {
-			time.Sleep(2 * time.Second)
-			return
-		}
-		if player.Money < 6 {
-			fmt.Println("Vous n'avez pas assez d'argent")
-			time.Sleep(2 * time.Second)
-			return
-		}
-		player.Money -= 6
-		character.AddInventory(player, "Poison")
-		fmt.Println("Vous recevez 1 potion de poison, total :", player.Inventory["Poison"])
-		time.Sleep(2 * time.Second)
-
-	case 3:
-		return
 	}
 }
