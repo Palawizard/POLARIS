@@ -11,8 +11,8 @@ func Potionshop(player *utils.Player) {
 	lastMsg := ""
 	for {
 		utils.Clearscreen()
-		fmt.Println("<=== Shop de potions ===>")
-		fmt.Printf("Argent: %d$\n\n", player.Money)
+		fmt.Println("<=== Potion Shop ===>")
+		fmt.Printf("Coins: %d\n\n", player.Money)
 
 		get := func(k string) int {
 			if player.Inventory == nil {
@@ -21,9 +21,9 @@ func Potionshop(player *utils.Player) {
 			return player.Inventory[k]
 		}
 
-		fmt.Printf("1. Potion de heal (3$)     [x%d]\n", get("Potion"))
-		fmt.Printf("2. Potion de poison (6$)   [x%d]\n", get("Poison"))
-		fmt.Println("3. Retour")
+		fmt.Printf("1. Healing Potion (3 coins)     [x%d]\n", get("Potion"))
+		fmt.Printf("2. Poisoning Potion (6 coins)   [x%d]\n", get("Poison"))
+		fmt.Println("3. Return")
 
 		if lastMsg != "" {
 			fmt.Println()
@@ -36,34 +36,34 @@ func Potionshop(player *utils.Player) {
 		switch choice {
 		case 1:
 			if !character.CheckInvSize(player) {
-				lastMsg = "Votre inventaire est plein."
+				lastMsg = "Your inventory is full."
 				time.Sleep(1 * time.Second)
 				continue
 			}
 			if player.Money < 3 {
-				lastMsg = "Vous n'avez pas assez d'argent"
+				lastMsg = "You do no have enough money."
 				time.Sleep(1 * time.Second)
 				continue
 			}
 			player.Money -= 3
 			character.AddInventory(player, "Potion")
-			lastMsg = fmt.Sprintf("Vous recevez 1 potion de heal, total : %d", player.Inventory["Potion"])
+			lastMsg = fmt.Sprintf("You received 1 Healing Potion, total : %d", player.Inventory["Potion"])
 			time.Sleep(1 * time.Second)
 
 		case 2:
 			if !character.CheckInvSize(player) {
-				lastMsg = "Votre inventaire est plein."
+				lastMsg = "Your inventory is full."
 				time.Sleep(1 * time.Second)
 				continue
 			}
 			if player.Money < 6 {
-				lastMsg = "Vous n'avez pas assez d'argent"
+				lastMsg = "You do no have enough money."
 				time.Sleep(1 * time.Second)
 				continue
 			}
 			player.Money -= 6
 			character.AddInventory(player, "Poison")
-			lastMsg = fmt.Sprintf("Vous recevez 1 potion de poison, total : %d", player.Inventory["Poison"])
+			lastMsg = fmt.Sprintf("You received 1 Poisoning Potion, total : %d", player.Inventory["Poison"])
 			time.Sleep(1 * time.Second)
 
 		case 3:
