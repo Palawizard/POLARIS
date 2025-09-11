@@ -12,6 +12,7 @@ func InitCharacter() utils.Player {
 }
 
 func CharacterCreation() utils.Player {
+	utils.Clearscreen()
 	namegood := false
 	classgood := false
 	var name string
