@@ -20,13 +20,13 @@ var Classes = map[string]Class{
 	},
 	"Elfe": {
 		ID:    "Elfe",
-		Label: "Humain",
+		Label: "Elfe",
 		HP:    40,
 		MAXHP: 80,
 	},
-	"Nains": {
-		ID:    "Elfe",
-		Label: "Humain",
+	"Nain": {
+		ID:    "Nain",
+		Label: "Nain",
 		HP:    60,
 		MAXHP: 120,
 	},
