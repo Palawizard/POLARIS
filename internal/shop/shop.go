@@ -3,6 +3,7 @@ package shop
 import (
 	"fmt"
 	"projet-red_POLARIS/internal/character"
+	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
 	"time"
 )
@@ -14,7 +15,8 @@ func Shop(player *utils.Player) {
 	fmt.Println("=== Bienvenue chez le marchand ===")
 	fmt.Println("1. Potion de vie (GRATUITE)")
 	fmt.Println("2. Potion de poison (10$)")
-	fmt.Println("3. Retour")
+	fmt.Println("3. Livre de Sort: Boule de feu")
+	fmt.Println("4. Retour")
 
 	var choice int
 	fmt.Scan(&choice)
@@ -28,6 +30,10 @@ func Shop(player *utils.Player) {
 		fmt.Println("Vous recevez 1 Potion de poison. Total :", player.Inventory["Poison"])
 		time.Sleep(2 * time.Second)
 	case 3:
+		skills.SpellBook("Boule de feu", player)
+		fmt.Println("Vous recevez 1 Livre de Sort: Boule de feu. Total :", player.Inventory["Boule de feu"])
+		time.Sleep(2 * time.Second)
+	case 4:
 		return
 	}
 }

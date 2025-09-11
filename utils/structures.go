@@ -6,5 +6,6 @@ type Player struct {
 	Level     int
 	MaxHealth int
 	Health    int
+	Skills    string
 	Inventory map[string]int
 }
