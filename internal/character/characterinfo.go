@@ -56,7 +56,8 @@ func CharacterCreation() utils.Player {
 	health := cls.HP
 	level := 1
 	money := 100
-	skills := "Coup de point"
+	skills := map[string]int{"Coup de point": 1}
+	equipment := map[string]int{}
 	inventory := map[string]int{"Potion": 3}
 
 	return utils.Player{
@@ -67,6 +68,7 @@ func CharacterCreation() utils.Player {
 		MaxHealth: maxhealth,
 		Health:    health,
 		Skills:    skills,
+		Equipment: equipment,
 		Inventory: inventory,
 	}
 }
@@ -80,6 +82,7 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Money: ", player.Money)
 	fmt.Printf("Health: %d/%d\n\n", player.Health, player.MaxHealth)
 	fmt.Println("Skills:", player.Skills)
+	fmt.Println("Equipment:", player.Equipment)
 
 	fmt.Println("\n1. Retour")
 	var choice int
