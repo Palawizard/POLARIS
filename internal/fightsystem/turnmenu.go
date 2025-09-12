@@ -5,6 +5,7 @@ import (
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/internal/objects"
+	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
 	"sort"
 	"time"
@@ -18,8 +19,9 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println("Turn", turn)
 		fmt.Println("It's your turn!\n")
 		fmt.Println("1. Attack")
-		fmt.Println("2. Inventory")
-		fmt.Println("3. Return to menu")
+		fmt.Println("2. Skills")
+		fmt.Println("3. Inventory")
+		fmt.Println("4. Return to menu")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -38,6 +40,50 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			return false
 
 		case 2:
+			type sopt struct{ id string }
+			var sopts []sopt
+			for id, qty := range player.Skills {
+				if qty > 0 {
+					if sk, ok := skills.Skills[id]; ok && sk.Apply != nil {
+						_ = sk
+						sopts = append(sopts, sopt{id: id})
+					}
+				}
+			}
+
+			utils.Clearscreen()
+			fmt.Println("Skills\n")
+			if len(sopts) == 0 {
+				fmt.Println("(none)")
+				fmt.Println("\n1. Return")
+				var _tmp int
+				fmt.Scan(&_tmp)
+				continue
+			}
+
+			sort.Slice(sopts, func(i, j int) bool {
+				return skills.Skills[sopts[i].id].Label < skills.Skills[sopts[j].id].Label
+			})
+			for i, o := range sopts {
+				sk := skills.Skills[o.id]
+				fmt.Printf("%d. %s (x%d)\n", i+1, sk.Label, player.Skills[o.id])
+			}
+			fmt.Println("0. Cancel")
+
+			var sidx int
+			fmt.Scan(&sidx)
+			if sidx == 0 {
+				continue
+			}
+			if sidx < 0 || sidx > len(sopts) {
+				continue
+			}
+			sel := sopts[sidx-1].id
+			skills.Cast(sel, player, monster)
+			time.Sleep(2 * time.Second)
+			return false
+
+		case 3:
 			type opt struct{ id string }
 			var opts []opt
 			for id, qty := range player.Inventory {
@@ -88,7 +134,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			time.Sleep(2 * time.Second)
 			return false
 
-		case 3:
+		case 4:
 			return true
 
 		default:
