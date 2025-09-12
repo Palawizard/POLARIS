@@ -37,4 +37,5 @@ func Inventoryshop(player *utils.Player) {
 		case 2:
 			return
 		}
+	}
 }
