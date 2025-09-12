@@ -10,4 +10,5 @@ type Player struct {
 	Skills    map[string]int
 	Inventory map[string]int
 	Equipment map[string]int
+	Equipped  map[string]string
 }

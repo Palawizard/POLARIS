@@ -2,24 +2,91 @@ package character
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/internal/objects"
+	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
+	"sort"
 )
 
-// AccessInventory displays the player's inventory and allows them to use an
-// object or shop. It will return true if the player chooses to shop, and false
-// otherwise.
 func AccessInventory(player *utils.Player) bool {
 	utils.Clearscreen()
-	fmt.Println("Inventory")
-	fmt.Print("\n")
+	fmt.Println("Inventory\n")
+
+	fmt.Println("Items:")
 	if len(player.Inventory) == 0 {
-		fmt.Println("(empty)")
+		fmt.Println(" (none)")
 	} else {
-		for key, value := range player.Inventory {
-			fmt.Println(key, ": ", value)
+		type kv struct {
+			label string
+			qty   int
+		}
+		var list []kv
+		for id, qty := range player.Inventory {
+			lbl := id
+			if it, ok := objects.Items[id]; ok && it.Label != "" {
+				lbl = it.Label
+			}
+			list = append(list, kv{label: lbl, qty: qty})
+		}
+		sort.Slice(list, func(i, j int) bool { return list[i].label < list[j].label })
+		for _, e := range list {
+			fmt.Printf(" - %s x%d\n", e.label, e.qty)
 		}
 	}
+
+	fmt.Println("\nSkills:")
+	if len(player.Skills) == 0 {
+		fmt.Println(" (none)")
+	} else {
+		type kv struct {
+			label string
+			qty   int
+		}
+		var list []kv
+		for id, qty := range player.Skills {
+			lbl := id
+			if s, ok := skills.Skills[id]; ok && s.Label != "" {
+				lbl = s.Label
+			}
+			list = append(list, kv{label: lbl, qty: qty})
+		}
+		sort.Slice(list, func(i, j int) bool { return list[i].label < list[j].label })
+		for _, e := range list {
+			fmt.Printf(" - %s x%d\n", e.label, e.qty)
+		}
+	}
+
+	fmt.Println("\nEquipment:")
+	if len(player.Equipment) == 0 {
+		fmt.Println(" (none)")
+	} else {
+		type kv struct {
+			name, slot string
+			def, qty   int
+			eq         bool
+		}
+		var list []kv
+		for id, qty := range player.Equipment {
+			e := equipement.GetEquipment(id)
+			eq := player.Equipped != nil && player.Equipped[e.Type] == id
+			list = append(list, kv{name: e.Name, slot: e.Type, def: e.Defense, qty: qty, eq: eq})
+		}
+		sort.Slice(list, func(i, j int) bool {
+			if list[i].slot == list[j].slot {
+				return list[i].name < list[j].name
+			}
+			return list[i].slot < list[j].slot
+		})
+		for _, e := range list {
+			tag := ""
+			if e.eq {
+				tag = " [equipped]"
+			}
+			fmt.Printf(" - %s [%s] +%d (x%d)%s\n", e.name, e.slot, e.def, e.qty, tag)
+		}
+	}
+
 	fmt.Print("\n")
 	fmt.Println("1. Return")
 	fmt.Println("2. Use an object")
@@ -39,8 +106,6 @@ func AccessInventory(player *utils.Player) bool {
 	}
 }
 
-// AddInventory adds the given item to the player's inventory, incrementing its
-// count by 1. If the player's inventory is currently nil, it will be initialized.
 func AddInventory(player *utils.Player, item string) {
 	if player == nil || item == "" {
 		return
@@ -52,8 +117,6 @@ func AddInventory(player *utils.Player, item string) {
 	fmt.Println(item, "added to inventory.")
 }
 
-// RemoveInventory removes one instance of the given item from the player's
-// inventory.
 func RemoveInventory(player *utils.Player, item string) {
 	if player == nil || item == "" || player.Inventory == nil {
 		return
@@ -70,24 +133,26 @@ func RemoveInventory(player *utils.Player, item string) {
 	}
 }
 
-// useItemMenu displays the player's usable objects and allows them to use one.
-// It will print out the player's usable objects, and then prompt them to enter
-// the number of the object they wish to use. If the player enters a number that
-// is not in the range of the options, or if they do not have the object, it will
-// simply return. If the player chooses to use the object, it will be removed
-// from their inventory, and the Apply function of the object will be called on
-// the player. After the object is used, the player will be prompted to enter
-// "1" to return.
 func useItemMenu(p *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("Use an object\n")
 
-	type option struct{ id string }
+	type option struct {
+		id   string
+		kind string
+	}
 	var opts []option
 	for id, qty := range p.Inventory {
 		if qty > 0 {
 			if _, ok := objects.GetItem(id); ok {
-				opts = append(opts, option{id: id})
+				opts = append(opts, option{id: id, kind: "item"})
+			}
+		}
+	}
+	for id, qty := range p.Equipment {
+		if qty > 0 {
+			if _, ok := equipement.Equipments[id]; ok {
+				opts = append(opts, option{id: id, kind: "equip"})
 			}
 		}
 	}
@@ -101,8 +166,17 @@ func useItemMenu(p *utils.Player) {
 	}
 
 	for i, o := range opts {
-		it, _ := objects.GetItem(o.id)
-		fmt.Printf("%d. %s (x%d)\n", i+1, it.Label, p.Inventory[o.id])
+		if o.kind == "item" {
+			it, _ := objects.GetItem(o.id)
+			fmt.Printf("%d. %s (x%d)\n", i+1, it.Label, p.Inventory[o.id])
+		} else {
+			eq := equipement.Equipments[o.id]
+			tag := ""
+			if p.Equipped != nil && p.Equipped[eq.Type] == o.id {
+				tag = " [equipped]"
+			}
+			fmt.Printf("%d. %s [%s] (x%d)%s\n", i+1, eq.Name, eq.Type, p.Equipment[o.id], tag)
+		}
 	}
 	fmt.Println("0. Cancel")
 
@@ -112,12 +186,37 @@ func useItemMenu(p *utils.Player) {
 		return
 	}
 
-	id := opts[idx-1].id
-
-	if ok := objects.ApplyItem(id, p); !ok {
-		fmt.Println("You can't use this object.")
+	ch := opts[idx-1]
+	if ch.kind == "item" {
+		if ok := objects.ApplyItem(ch.id, p); !ok {
+			fmt.Println("You can't use this object.")
+		} else {
+			RemoveInventory(p, ch.id)
+		}
 	} else {
-		RemoveInventory(p, id)
+		slot := equipement.SlotOf(ch.id)
+		cur := ""
+		if p.Equipped != nil {
+			cur = p.Equipped[slot]
+		}
+		if cur == ch.id {
+			if equipement.UnequipSlot(p, slot) {
+				fmt.Printf("Unequipped %s\n", ch.id)
+			} else {
+				fmt.Println("You can't unequip this.")
+			}
+		} else {
+			prev := cur
+			if equipement.Equip(p, ch.id) {
+				if prev != "" {
+					fmt.Printf("Equipped %s, replaced %s\n", ch.id, prev)
+				} else {
+					fmt.Printf("Equipped %s\n", ch.id)
+				}
+			} else {
+				fmt.Println("You can't equip this.")
+			}
+		}
 	}
 
 	fmt.Println("\n1. Return")
@@ -125,9 +224,6 @@ func useItemMenu(p *utils.Player) {
 	fmt.Scan(&_tmp)
 }
 
-// CheckInvSize returns true if the given player's inventory has less than 10
-// items, and false otherwise. If the player's inventory is full, it will print
-// a message to the console.
 func CheckInvSize(player *utils.Player) bool {
 	if len(player.Inventory) >= 10 {
 		fmt.Println("Your inventory is full.")

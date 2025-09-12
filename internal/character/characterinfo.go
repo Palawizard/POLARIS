@@ -2,6 +2,7 @@ package character
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/utils"
 	"strings"
 )
@@ -13,10 +14,6 @@ func InitCharacter() utils.Player {
 	return p1
 }
 
-// CharacterCreation is a function that initializes a character by asking the user
-// for a name and a class. It then returns a fully initialized utils.Player.
-//
-// It will not return until a valid name and class have been entered.
 func CharacterCreation() utils.Player {
 	utils.Clearscreen()
 	namegood := false
@@ -77,24 +74,42 @@ func CharacterCreation() utils.Player {
 		Skills:    skills,
 		Equipment: equipment,
 		Inventory: inventory,
+		Equipped:  map[string]string{},
 	}
 }
 
-// DisplayInfo displays the player's character information, including their
-// name, class, level, money, health, skills, and equipment. It will then
-// prompt the player to enter "1" to return to the previous menu.
 func DisplayInfo(player *utils.Player) {
 	utils.Clearscreen()
 	fmt.Println("Character Info\n")
 	fmt.Println("Name:  ", player.Name)
 	fmt.Println("Class: ", ClassLabel(player.Class))
 	fmt.Println("Level: ", player.Level)
-	fmt.Println("Coins: ", player.Money)
-	fmt.Printf("Health: %d/%d\n\n", player.Health, player.MaxHealth)
-	fmt.Println("Skills:", player.Skills)
-	fmt.Println("Equipment:", player.Equipment)
+	fmt.Println("Money: ", player.Money)
 
-	fmt.Println("\n1. Return")
+	armorBonus := equipement.EquippedBonus(player)
+	fmt.Printf("Health: %d/%d (+%d max HP from armor)\n\n", player.Health, player.MaxHealth, armorBonus)
+
+	fmt.Println("Equipped:")
+	head := "(none)"
+	body := "(none)"
+	feet := "(none)"
+	if id := player.Equipped["Head"]; id != "" {
+		e := equipement.GetEquipment(id)
+		head = fmt.Sprintf("%s (+%d)", e.Name, e.Defense)
+	}
+	if id := player.Equipped["Body"]; id != "" {
+		e := equipement.GetEquipment(id)
+		body = fmt.Sprintf("%s (+%d)", e.Name, e.Defense)
+	}
+	if id := player.Equipped["Feet"]; id != "" {
+		e := equipement.GetEquipment(id)
+		feet = fmt.Sprintf("%s (+%d)", e.Name, e.Defense)
+	}
+	fmt.Println(" Head:", head)
+	fmt.Println(" Body:", body)
+	fmt.Println(" Feet:", feet)
+
+	fmt.Println("\n1. Retour")
 	var choice int
 	fmt.Scan(&choice)
 }
