@@ -3,16 +3,18 @@ package fightsystem
 import (
 	"fmt"
 	"projet-red_POLARIS/internal/character"
+	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/utils"
 	"sort"
 	"time"
 )
 
-func TurnMenu(player *utils.Player, monster *utils.Monster, turn int) bool {
+func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 	for {
 		utils.Clearscreen()
-		fmt.Println(monster.Name, "attacks you ! HP:", monster.Health, "/", monster.MaxHealth)
+		fmt.Println(monster.Name, "HP:", monster.Health, "/", monster.MaxHealth)
+		fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
 		fmt.Println("Turn", turn)
 		fmt.Println("It's your turn!\n")
 		fmt.Println("1. Attack")
@@ -24,14 +26,14 @@ func TurnMenu(player *utils.Player, monster *utils.Monster, turn int) bool {
 
 		switch choice {
 		case 1:
-			dmg := 5
+			dmg := 5.0
 			monster.Health -= dmg
 			if monster.Health < 0 {
 				monster.Health = 0
 			}
 			fmt.Printf("%s uses Basic Attack\n", player.Name)
-			fmt.Printf("%s takes %d damage\n", monster.Name, dmg)
-			fmt.Printf("%s HP: %d / %d\n", monster.Name, monster.Health, monster.MaxHealth)
+			fmt.Printf("%s takes %.0f damage\n", monster.Name, dmg)
+			fmt.Printf("%s HP: %.0f / %.0f\n", monster.Name, monster.Health, monster.MaxHealth)
 			time.Sleep(2 * time.Second)
 			return false
 

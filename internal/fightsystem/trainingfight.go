@@ -2,6 +2,7 @@ package fightsystem
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/utils"
 	"time"
@@ -16,6 +17,7 @@ func TrainingFight(player *utils.Player) {
 		}
 		if goblin.Health <= 0 {
 			fmt.Println("You have defeated the goblin.")
+			character.AddEXP(player, goblin.EXPtogive)
 			time.Sleep(3 * time.Second)
 			return
 		}
@@ -35,6 +37,7 @@ func TrainingFight(player *utils.Player) {
 		}
 		if goblin.Health <= 0 {
 			fmt.Println("You have defeated the goblin.")
+			character.AddEXP(player, goblin.EXPtogive)
 			time.Sleep(3 * time.Second)
 			return
 		}

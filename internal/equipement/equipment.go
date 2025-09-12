@@ -45,11 +45,11 @@ func Equip(p *utils.Player, id string) bool {
 	return true
 }
 
-func EquippedBonus(p *utils.Player) int {
+func EquippedBonus(p *utils.Player) float64 {
 	if p == nil || p.Equipped == nil {
 		return 0
 	}
-	b := 0
+	b := 0.0
 	for _, id := range p.Equipped {
 		b += BonusOf(id)
 	}

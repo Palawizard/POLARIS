@@ -1,14 +1,15 @@
 package skills
 
 import (
+	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/utils"
 )
 
 type Skill struct {
 	ID    string
 	Label string
-	Price int
-	Apply func(*utils.Player)
+	Price float64
+	Apply func(*utils.Player, *monsters.Monster)
 }
 
 var Skills = map[string]Skill{
@@ -45,11 +46,11 @@ func SpellBook(id string, player *utils.Player) bool {
 // Cast casts the given skill
 // If the skill doesn't exist or its Apply func is nil, it returns false.
 // Otherwise, it casts the skill and returns true.
-func Cast(id string, player *utils.Player) bool {
+func Cast(id string, player *utils.Player, monster *monsters.Monster) bool {
 	it, ok := Skills[id]
 	if !ok || it.Apply == nil {
 		return false
 	}
-	it.Apply(player)
+	it.Apply(player, monster)
 	return true
 }

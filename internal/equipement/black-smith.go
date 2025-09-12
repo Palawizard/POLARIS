@@ -20,7 +20,7 @@ func BlackSmith(player *utils.Player) {
 	for {
 		utils.Clearscreen()
 		fmt.Println("<=== Black-Smith ===>")
-		fmt.Printf("Coins: %d\n\n", player.Money)
+		fmt.Printf("Coins: %.0f\n\n", player.Money)
 		fmt.Println("Crafting requires resources:")
 
 		catalog := make([]string, 0, len(Equipments))
@@ -33,7 +33,7 @@ func BlackSmith(player *utils.Player) {
 
 		for i, id := range catalog {
 			eq := Equipments[id]
-			fmt.Printf("%d. %s (%d coins)\n", i+1, eq.Name, eq.Price)
+			fmt.Printf("%d. %s (%.0f coins)\n", i+1, eq.Name, eq.Price)
 			req := Recipes[id]
 			keys := make([]string, 0, len(req))
 			for k := range req {

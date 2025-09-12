@@ -63,14 +63,21 @@ func AccessInventory(player *utils.Player) bool {
 	} else {
 		type kv struct {
 			name, slot string
-			def, qty   int
+			def        float64
+			qty        int
 			eq         bool
 		}
 		var list []kv
 		for id, qty := range player.Equipment {
 			e := equipement.GetEquipment(id)
 			eq := player.Equipped != nil && player.Equipped[e.Type] == id
-			list = append(list, kv{name: e.Name, slot: e.Type, def: e.Defense, qty: qty, eq: eq})
+			list = append(list, kv{
+				name: e.Name,
+				slot: e.Type,
+				def:  e.Defense,
+				qty:  qty,
+				eq:   eq,
+			})
 		}
 		sort.Slice(list, func(i, j int) bool {
 			if list[i].slot == list[j].slot {
@@ -83,7 +90,7 @@ func AccessInventory(player *utils.Player) bool {
 			if e.eq {
 				tag = " [equipped]"
 			}
-			fmt.Printf(" - %s [%s] +%d (x%d)%s\n", e.name, e.slot, e.def, e.qty, tag)
+			fmt.Printf(" - %s [%s] +%.0f (x%d)%s\n", e.name, e.slot, e.def, e.qty, tag)
 		}
 	}
 

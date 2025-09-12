@@ -22,7 +22,7 @@ func Itemshop(player *utils.Player) {
 	for {
 		utils.Clearscreen()
 		fmt.Println("<=== Item Shop ===>")
-		fmt.Printf("Coins: %d\n\n", player.Money)
+		fmt.Printf("Coins: %.0f\n\n", player.Money)
 
 		catalog := make([]string, 0, len(objects.Items))
 		for id := range objects.Items {
@@ -41,7 +41,7 @@ func Itemshop(player *utils.Player) {
 
 		for i, id := range catalog {
 			it := objects.Items[id]
-			fmt.Printf("%d. %s (%d coins)     [x%d]\n", i+1, it.Label, it.Price, getInv(id))
+			fmt.Printf("%d. %s (%.0f coins)     [x%d]\n", i+1, it.Label, it.Price, getInv(id))
 		}
 		fmt.Printf("%d. Return\n", len(catalog)+1)
 

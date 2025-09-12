@@ -7,8 +7,8 @@ import (
 type Class struct {
 	ID    string
 	Label string
-	HP    int
-	MAXHP int
+	HP    float64
+	MAXHP float64
 }
 
 var Classes = map[string]Class{
