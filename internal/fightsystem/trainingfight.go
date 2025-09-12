@@ -10,12 +10,11 @@ import (
 
 func TrainingFight(player *utils.Player) {
 	turn := 1
-	goblin := monsters.InitGoblin()
+	goblin := monsters.New("Goblin")
 	firstturn := true
 	for {
 		if player.Initiative < goblin.Initiative && firstturn {
-			monsters.GoblinPattern(player, goblin, turn)
-			turn++
+			monsters.AttackPattern(player, goblin, turn)
 			firstturn = false
 
 			if utils.IsDead(player) {
@@ -25,6 +24,9 @@ func TrainingFight(player *utils.Player) {
 			}
 			if goblin.Health <= 0 {
 				fmt.Println("You have defeated the goblin.")
+				player.Money += goblin.Coinstogive
+				fmt.Println("You received", goblin.Coinstogive, "coins.")
+				time.Sleep(1 * time.Second)
 				character.AddEXP(player, goblin.EXPtogive)
 				time.Sleep(3 * time.Second)
 				return
@@ -35,6 +37,9 @@ func TrainingFight(player *utils.Player) {
 		}
 		if goblin.Health <= 0 {
 			fmt.Println("You have defeated the goblin.")
+			player.Money += goblin.Coinstogive
+			fmt.Println("You received", goblin.Coinstogive, "coins.")
+			time.Sleep(1 * time.Second)
 			character.AddEXP(player, goblin.EXPtogive)
 			time.Sleep(3 * time.Second)
 			return
@@ -45,7 +50,7 @@ func TrainingFight(player *utils.Player) {
 			return
 		}
 
-		monsters.GoblinPattern(player, goblin, turn)
+		monsters.AttackPattern(player, goblin, turn)
 		turn++
 
 		if utils.IsDead(player) {
@@ -55,6 +60,9 @@ func TrainingFight(player *utils.Player) {
 		}
 		if goblin.Health <= 0 {
 			fmt.Println("You have defeated the goblin.")
+			player.Money += goblin.Coinstogive
+			fmt.Println("You received", goblin.Coinstogive, "coins.")
+			time.Sleep(1 * time.Second)
 			character.AddEXP(player, goblin.EXPtogive)
 			time.Sleep(3 * time.Second)
 			return

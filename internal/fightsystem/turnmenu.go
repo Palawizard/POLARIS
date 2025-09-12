@@ -18,28 +18,15 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
 		fmt.Println("Turn", turn)
 		fmt.Println("It's your turn!\n")
-		fmt.Println("1. Attack")
-		fmt.Println("2. Skills")
-		fmt.Println("3. Inventory")
-		fmt.Println("4. Return to menu")
+		fmt.Println("1. Skills")
+		fmt.Println("2. Inventory")
+		fmt.Println("3. Return to menu")
 
 		var choice int
 		fmt.Scan(&choice)
 
 		switch choice {
 		case 1:
-			dmg := 5.0
-			monster.Health -= dmg
-			if monster.Health < 0 {
-				monster.Health = 0
-			}
-			fmt.Printf("%s uses Basic Attack\n", player.Name)
-			fmt.Printf("%s takes %.0f damage\n", monster.Name, dmg)
-			fmt.Printf("%s HP: %.0f / %.0f\n", monster.Name, monster.Health, monster.MaxHealth)
-			time.Sleep(2 * time.Second)
-			return false
-
-		case 2:
 			type sopt struct{ id string }
 			var sopts []sopt
 			for id, qty := range player.Skills {
@@ -83,7 +70,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			time.Sleep(2 * time.Second)
 			return false
 
-		case 3:
+		case 2:
 			type opt struct{ id string }
 			var opts []opt
 			for id, qty := range player.Inventory {
@@ -134,7 +121,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			time.Sleep(2 * time.Second)
 			return false
 
-		case 4:
+		case 3:
 			return true
 
 		default:

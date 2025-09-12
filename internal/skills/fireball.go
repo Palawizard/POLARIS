@@ -18,4 +18,5 @@ func effectFireball(p *utils.Player, m *monsters.Monster) {
 	fmt.Printf("%s casts Fire Ball\n", p.Name)
 	fmt.Printf("%s takes %.0f damage\n", m.Name, dmg)
 	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)
+	p.Skills["Fire Ball"]--
 }
