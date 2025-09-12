@@ -89,6 +89,7 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Class: ", ClassLabel(player.Class))
 	fmt.Println("Level: ", player.Level)
 	fmt.Println("Money: ", player.Money)
+	fmt.Println("Max Inventory Size: ", player.InventoryMax)
 
 	armorBonus := equipement.EquippedBonus(player)
 	fmt.Printf("Health: %d/%d (+%d max HP from armor)\n\n", player.Health, player.MaxHealth, armorBonus)
