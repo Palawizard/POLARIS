@@ -20,7 +20,7 @@ func InitGoblin() utils.Monster {
 	}
 }
 
-func GoblinPattern(player *utils.Player, monster utils.Monster, turn int) {
+func GoblinPattern(player *utils.Player, monster utils.Monster, turn int) bool {
 	if turn%3 == 0 {
 		fmt.Println("The goblin attacks you!")
 		time.Sleep(2 * time.Second)
@@ -32,7 +32,7 @@ func GoblinPattern(player *utils.Player, monster utils.Monster, turn int) {
 		if utils.IsDead(player) {
 			fmt.Println("You have been defeated by the goblin.")
 			time.Sleep(3 * time.Second)
-			return
+			return true
 		}
 		fmt.Println("Your HP is now at", player.Health, "/", player.MaxHealth, "hp.")
 		time.Sleep(2 * time.Second)
@@ -45,9 +45,10 @@ func GoblinPattern(player *utils.Player, monster utils.Monster, turn int) {
 		if utils.IsDead(player) {
 			fmt.Println("You have been defeated by the goblin.")
 			time.Sleep(3 * time.Second)
-			return
+			return true
 		}
 		fmt.Println("Your HP is now at", player.Health, "/", player.MaxHealth, "hp.")
 		time.Sleep(2 * time.Second)
 	}
+	return true
 }
