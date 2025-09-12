@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/equipement"
+	"projet-red_POLARIS/internal/fightsystem"
 	"projet-red_POLARIS/internal/shop"
 	"projet-red_POLARIS/utils"
 )
@@ -21,7 +22,8 @@ func ShowMenu(player *utils.Player) {
 		fmt.Println("1. Character Info")
 		fmt.Println("2. Inventory")
 		fmt.Println("3. Black-Smith")
-		fmt.Println("4. Quit")
+		fmt.Println("4. Training Fight")
+		fmt.Println("5. Quit")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -40,6 +42,8 @@ func ShowMenu(player *utils.Player) {
 		case 3:
 			equipement.BlackSmith(player)
 		case 4:
+			fightsystem.TrainingFight(player)
+		case 5:
 			return
 		}
 	}

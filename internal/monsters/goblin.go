@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-func InitGoblin() utils.Monster {
+func InitGoblin() *utils.Monster {
 	name := "Goblin"
 	atk := 5
 	hp := 40
 	maxhp := 40
 
-	return utils.Monster{
+	return &utils.Monster{
 		Name:      name,
 		Health:    hp,
 		MaxHealth: maxhp,
@@ -20,8 +20,9 @@ func InitGoblin() utils.Monster {
 	}
 }
 
-func GoblinPattern(player *utils.Player, monster utils.Monster, turn int) {
+func GoblinPattern(player *utils.Player, monster *utils.Monster, turn int) bool {
 	if turn%3 == 0 {
+		utils.Clearscreen()
 		fmt.Println("The goblin attacks you!")
 		time.Sleep(2 * time.Second)
 		player.Health -= monster.ATK * 2
@@ -30,24 +31,26 @@ func GoblinPattern(player *utils.Player, monster utils.Monster, turn int) {
 		fmt.Println("Ouch ! The goblin dealt", monster.ATK, "damage to", player.Name, "!")
 		time.Sleep(1 * time.Second)
 		if utils.IsDead(player) {
-			fmt.Println("You have been defeated by the goblin.")
+			fmt.Println("\nYou have been defeated by the goblin.")
 			time.Sleep(3 * time.Second)
-			return
+			return true
 		}
-		fmt.Println("Your HP is now at", player.Health, "/", player.MaxHealth, "hp.")
+		fmt.Println("\nYour HP is now at", player.Health, "/", player.MaxHealth, "hp.")
 		time.Sleep(2 * time.Second)
 	} else {
+		utils.Clearscreen()
 		fmt.Println("The goblin attacks you!")
 		time.Sleep(2 * time.Second)
 		player.Health -= monster.ATK
 		fmt.Println("Ouch ! The goblin dealt", monster.ATK, "damage to", player.Name, "!")
 		time.Sleep(1 * time.Second)
 		if utils.IsDead(player) {
-			fmt.Println("You have been defeated by the goblin.")
+			fmt.Println("\nYou have been defeated by the goblin.")
 			time.Sleep(3 * time.Second)
-			return
+			return true
 		}
-		fmt.Println("Your HP is now at", player.Health, "/", player.MaxHealth, "hp.")
+		fmt.Println("\nYour HP is now at", player.Health, "/", player.MaxHealth, "hp.")
 		time.Sleep(2 * time.Second)
 	}
+	return true
 }
