@@ -225,9 +225,21 @@ func useItemMenu(p *utils.Player) {
 }
 
 func CheckInvSize(player *utils.Player) bool {
-	if len(player.Inventory) >= 10 {
+	if len(player.Inventory) >= player.InventoryMax {
 		fmt.Println("Your inventory is full.")
 		return false
 	}
+	return true
+}
+
+func UpgradeInventorySlot(player *utils.Player) bool {
+	if player.InventoryUpgradesUsed >= 3 {
+		fmt.Println("You can't upgrade your inventory anymore!")
+		return false
+	}
+
+	player.InventoryMax += 10
+	player.InventoryUpgradesUsed++
+	fmt.Println("Your inventory capacity has increased by 10!")
 	return true
 }
