@@ -15,4 +15,5 @@ type Player struct {
 	InventoryUpgradesUsed int
 	Equipment             map[string]int
 	Equipped              map[string]string
+	Initiative            float64
 }
