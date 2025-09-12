@@ -14,3 +14,10 @@ type Player struct {
 	Equipment             map[string]int
 	Equipped              map[string]string
 }
+
+type Monster struct {
+	Name      string
+	Health    int
+	MaxHealth int
+	ATK       int
+}
