@@ -9,22 +9,21 @@ import (
 	"time"
 )
 
-func TurnMenu(player *utils.Player, monster *utils.Monster) bool {
+func TurnMenu(player *utils.Player, monster *utils.Monster, turn int) bool {
 	for {
 		utils.Clearscreen()
+		fmt.Println(monster.Name, "attacks you ! HP:", monster.Health, "/", monster.MaxHealth)
+		fmt.Println("Turn", turn)
 		fmt.Println("It's your turn!\n")
-		fmt.Println("1. Menu")
-		fmt.Println("2. Attack")
-		fmt.Println("3. Inventory")
+		fmt.Println("1. Attack")
+		fmt.Println("2. Inventory")
+		fmt.Println("3. Return to menu")
 
 		var choice int
 		fmt.Scan(&choice)
 
 		switch choice {
 		case 1:
-			return true
-
-		case 2:
 			dmg := 5
 			monster.Health -= dmg
 			if monster.Health < 0 {
@@ -36,7 +35,7 @@ func TurnMenu(player *utils.Player, monster *utils.Monster) bool {
 			time.Sleep(2 * time.Second)
 			return false
 
-		case 3:
+		case 2:
 			type opt struct{ id string }
 			var opts []opt
 			for id, qty := range player.Inventory {
@@ -86,6 +85,9 @@ func TurnMenu(player *utils.Player, monster *utils.Monster) bool {
 			}
 			time.Sleep(2 * time.Second)
 			return false
+
+		case 3:
+			return true
 
 		default:
 			continue
