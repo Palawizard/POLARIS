@@ -6,8 +6,8 @@ type Equipment struct {
 	ID      string
 	Name    string
 	Type    string
-	Price   int
-	Defense int
+	Price   float64
+	Defense float64
 }
 
 var Equipments = map[string]Equipment{
@@ -44,7 +44,7 @@ func RemoveEquipment(name string, p *utils.Player) {
 	}
 }
 
-func BonusOf(id string) int {
+func BonusOf(id string) float64 {
 	if e, ok := Equipments[id]; ok {
 		return e.Defense
 	}

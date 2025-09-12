@@ -5,7 +5,7 @@ import "projet-red_POLARIS/utils"
 type Item struct {
 	ID    string
 	Label string
-	Price int
+	Price float64
 	Apply func(*utils.Player)
 }
 

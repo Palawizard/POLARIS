@@ -23,7 +23,7 @@ func Spellshop(player *utils.Player) {
 	for {
 		utils.Clearscreen()
 		fmt.Println("<=== Spell Shop ===>")
-		fmt.Printf("Coins: %d\n\n", player.Money)
+		fmt.Printf("Coins: %.0f\n\n", player.Money)
 
 		catalog := make([]string, 0, len(skills.Skills))
 		for id, s := range skills.Skills {
@@ -41,7 +41,7 @@ func Spellshop(player *utils.Player) {
 			if player.Skills != nil {
 				owned = player.Skills[id]
 			}
-			fmt.Printf("%d. Spellbook: %s (%d coins)  [owned: x%d]\n", i+1, s.Label, s.Price, owned)
+			fmt.Printf("%d. Spellbook: %s (%.0f coins)  [owned: x%d]\n", i+1, s.Label, s.Price, owned)
 		}
 		fmt.Printf("%d. Return\n", len(catalog)+1)
 
