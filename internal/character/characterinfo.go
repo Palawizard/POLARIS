@@ -63,18 +63,22 @@ func CharacterCreation() utils.Player {
 	skills := map[string]int{"Punch": 1}
 	equipment := map[string]int{}
 	inventory := map[string]int{"Potion": 3}
+	inventorymax := 10
+	inventoryupgradesused := 0
 
 	return utils.Player{
-		Name:      name,
-		Class:     classID,
-		Level:     level,
-		Money:     money,
-		MaxHealth: maxhealth,
-		Health:    health,
-		Skills:    skills,
-		Equipment: equipment,
-		Inventory: inventory,
-		Equipped:  map[string]string{},
+		Name:                  name,
+		Class:                 classID,
+		Level:                 level,
+		Money:                 money,
+		MaxHealth:             maxhealth,
+		Health:                health,
+		Skills:                skills,
+		Equipment:             equipment,
+		Inventory:             inventory,
+		InventoryMax:          inventorymax,
+		InventoryUpgradesUsed: inventoryupgradesused,
+		Equipped:              map[string]string{},
 	}
 }
 
@@ -85,6 +89,7 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Class: ", ClassLabel(player.Class))
 	fmt.Println("Level: ", player.Level)
 	fmt.Println("Money: ", player.Money)
+	fmt.Println("Max Inventory Size: ", player.InventoryMax)
 
 	armorBonus := equipement.EquippedBonus(player)
 	fmt.Printf("Health: %d/%d (+%d max HP from armor)\n\n", player.Health, player.MaxHealth, armorBonus)
