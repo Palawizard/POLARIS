@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-func InitGoblin() utils.Monster {
+func InitGoblin() *utils.Monster {
 	name := "Goblin"
 	atk := 5
 	hp := 40
 	maxhp := 40
 
-	return utils.Monster{
+	return &utils.Monster{
 		Name:      name,
 		Health:    hp,
 		MaxHealth: maxhp,
@@ -20,7 +20,7 @@ func InitGoblin() utils.Monster {
 	}
 }
 
-func GoblinPattern(player *utils.Player, monster utils.Monster, turn int) bool {
+func GoblinPattern(player *utils.Player, monster *utils.Monster, turn int) bool {
 	if turn%3 == 0 {
 		fmt.Println("The goblin attacks you!")
 		time.Sleep(2 * time.Second)
