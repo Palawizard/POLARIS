@@ -2,7 +2,9 @@ package shop
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/utils"
+	"time"
 )
 
 // Shop is a menu allowing the player to access the different shops.
@@ -20,7 +22,7 @@ func Shop(player *utils.Player) {
 		fmt.Println("<=== Welcome to the Shop ===>")
 		fmt.Println("1. Item Shop")
 		fmt.Println("2. Spell Shop")
-		fmt.Println("3. Inventory Shop")
+		fmt.Println("3. Upgrade Inventory (30 coins)")
 		fmt.Println("4. Return")
 
 		var choice int
@@ -31,7 +33,19 @@ func Shop(player *utils.Player) {
 		case 2:
 			Spellshop(player)
 		case 3:
-			Inventoryshop(player)
+			if player.Money >= 30 {
+				if character.UpgradeInventorySlot(player) {
+					player.Money -= 30
+					fmt.Println("Inventory slot upgraded.")
+				} else {
+					fmt.Println("Upgrade limit reached!")
+				}
+				time.Sleep(1 * time.Second)
+				continue
+			}
+			fmt.Println("You do not have enough coins.")
+			time.Sleep(1 * time.Second)
+			continue
 		case 4:
 			return
 		}
