@@ -106,12 +106,27 @@ func AccessInventory(player *utils.Player) bool {
 	}
 }
 
+func invCount(p *utils.Player) int {
+	if p == nil || p.Inventory == nil {
+		return 0
+	}
+	total := 0
+	for _, q := range p.Inventory {
+		total += q
+	}
+	return total
+}
+
 func AddInventory(player *utils.Player, item string) {
 	if player == nil || item == "" {
 		return
 	}
 	if player.Inventory == nil {
 		player.Inventory = make(map[string]int)
+	}
+	if invCount(player) >= player.InventoryMax {
+		fmt.Println("Your inventory is full.")
+		return
 	}
 	player.Inventory[item]++
 	fmt.Println(item, "added to inventory.")
@@ -225,7 +240,7 @@ func useItemMenu(p *utils.Player) {
 }
 
 func CheckInvSize(player *utils.Player) bool {
-	if len(player.Inventory) >= player.InventoryMax {
+	if invCount(player) >= player.InventoryMax {
 		fmt.Println("Your inventory is full.")
 		return false
 	}
