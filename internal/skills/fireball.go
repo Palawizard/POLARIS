@@ -7,6 +7,7 @@ import (
 )
 
 func effectFireball(p *utils.Player, m *monsters.Monster) {
+	turn := utils.GetTurn()
 	if m == nil {
 		return
 	}
@@ -15,6 +16,10 @@ func effectFireball(p *utils.Player, m *monsters.Monster) {
 	if m.Health < 0 {
 		m.Health = 0
 	}
+	utils.Clearscreen()
+	fmt.Println("Turn", turn)
+	monsters.PrintHeader(m)
+	fmt.Println("\n")
 	fmt.Printf("%s casts Fire Ball\n", p.Name)
 	fmt.Printf("%s takes %.0f damage\n", m.Name, dmg)
 	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)

@@ -39,8 +39,8 @@ var Monsters = map[string]Monster{
            \ \__/\__/ /
          ___\ \|--|/ /___
        /     \      /     \
-      /       '----'       \,
-              GOBLIN`,
+      /       '----'       \
+              `,
 	},
 }
 
@@ -51,7 +51,7 @@ func PrintHeader(m *Monster) {
 	if m.Art != "" {
 		fmt.Println(m.Art)
 	}
-	fmt.Printf("%s HP: %.0f / %.0f\n\n", m.Name, m.Health, m.MaxHealth)
+	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)
 }
 
 func New(id string) *Monster {
