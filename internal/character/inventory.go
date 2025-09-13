@@ -95,18 +95,18 @@ func AccessInventory(player *utils.Player) bool {
 	}
 
 	fmt.Print("\n")
-	fmt.Println("1. Return")
-	fmt.Println("2. Use an object")
-	fmt.Println("3. Shop")
+	fmt.Println("1. Use an object")
+	fmt.Println("2. Shop")
+	fmt.Println("3. Return")
 
 	var choice int
 	fmt.Scan(&choice)
 
 	switch choice {
-	case 2:
+	case 1:
 		useItemMenu(player)
 		return false
-	case 3:
+	case 2:
 		return true
 	default:
 		return false
