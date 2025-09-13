@@ -2,6 +2,7 @@ package fightsystem
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/internal/objects"
@@ -133,6 +134,8 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			return false
 
 		case 3:
+			audiosystem.StopMusic()
+
 			return true
 
 		default:
