@@ -14,7 +14,7 @@ import (
 func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 	for {
 		utils.Clearscreen()
-		fmt.Println(monster.Name, "HP:", monster.Health, "/", monster.MaxHealth)
+		monsters.PrintHeader(monster)
 		fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
 		fmt.Println("Turn", turn)
 		fmt.Println("It's your turn!\n")

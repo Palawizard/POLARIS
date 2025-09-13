@@ -8,6 +8,7 @@ import (
 
 func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	utils.Clearscreen()
+	PrintHeader(monster)
 
 	msg := monster.AttackMsg
 	if msg == "" {

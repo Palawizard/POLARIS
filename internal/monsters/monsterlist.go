@@ -1,5 +1,7 @@
 package monsters
 
+import "fmt"
+
 type Monster struct {
 	Name           string
 	Health         float64
@@ -11,6 +13,7 @@ type Monster struct {
 	AttackMsg      string
 	CritEvery      int
 	CritMultiplier float64
+	Art            string
 }
 
 var Monsters = map[string]Monster{
@@ -25,7 +28,30 @@ var Monsters = map[string]Monster{
 		AttackMsg:      "The goblin attacks you!",
 		CritEvery:      3,
 		CritMultiplier: 2,
+		Art: `
+             ,      ,
+            /(.-""-.)\
+        |\  \/      \/  /|
+        | \ / =.  .= \ / |
+        \( \   o\/o   / )/
+         \_, '-/  \-' ,_/
+           /   \__/   \
+           \ \__/\__/ /
+         ___\ \|--|/ /___
+       /     \      /     \
+      /       '----'       \,
+              GOBLIN`,
 	},
+}
+
+func PrintHeader(m *Monster) {
+	if m == nil {
+		return
+	}
+	if m.Art != "" {
+		fmt.Println(m.Art)
+	}
+	fmt.Printf("%s HP: %.0f / %.0f\n\n", m.Name, m.Health, m.MaxHealth)
 }
 
 func New(id string) *Monster {
