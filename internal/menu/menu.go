@@ -17,7 +17,7 @@ import (
 func ShowMenu(player *utils.Player) {
 	for {
 		utils.Clearscreen()
-		fmt.Println("Menu")
+		fmt.Println("Main Menu")
 		fmt.Print("\n")
 		fmt.Println("1. Character Info")
 		fmt.Println("2. Inventory")
