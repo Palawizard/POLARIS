@@ -2,6 +2,8 @@ package shop
 
 import (
 	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/utils"
@@ -9,14 +11,6 @@ import (
 	"time"
 )
 
-// Itemshop displays the player's coins, and a list of items they can purchase
-// with their coins. The player is prompted to enter the number of the item
-// they wish to purchase. If the player enters a number that is not in the
-// range of the options, or if they do not have enough money, it will print
-// an error message and loop back to the start of the menu. If the player
-// chooses to purchase an item, it will be added to their inventory, and the
-// cost will be subtracted from their money. After the item is purchased, the
-// player will be prompted to enter "1" to return to the previous menu.
 func Itemshop(player *utils.Player) {
 	lastMsg := ""
 	for {
@@ -52,12 +46,14 @@ func Itemshop(player *utils.Player) {
 
 		var choice int
 		fmt.Scan(&choice)
+		_ = audiosystem.PlaySFXCached("select")
 
 		if choice == len(catalog)+1 {
 			return
 		}
 		if choice < 1 || choice > len(catalog) {
 			lastMsg = "Invalid choice."
+			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
@@ -67,11 +63,13 @@ func Itemshop(player *utils.Player) {
 
 		if !character.CheckInvSize(player) {
 			lastMsg = "Your inventory is full."
+			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
 		if player.Money < it.Price {
 			lastMsg = "You do not have enough money."
+			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
@@ -79,6 +77,7 @@ func Itemshop(player *utils.Player) {
 		player.Money -= it.Price
 		character.AddInventory(player, id)
 		lastMsg = fmt.Sprintf("You received 1 %s, total : %d", it.Label, player.Inventory[id])
+		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
 		time.Sleep(1 * time.Second)
 	}
 }

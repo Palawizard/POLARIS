@@ -2,6 +2,7 @@ package character
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/utils"
 	"strings"
@@ -21,14 +22,25 @@ func CharacterCreation() utils.Player {
 	classgood := false
 	var name string
 	fmt.Println("What is your name?")
-	for namegood == false {
+	for !namegood {
 		fmt.Scan(&name)
-		rsn := []rune(name)
-		for _, v := range rsn {
-			if v < 'A' || (v > 'Z' && v < 'a') || v > 'z' {
-				fmt.Println("Please enter a valid name")
-				break
+		_ = audiosystem.PlaySFXCached("select")
+
+		valid := true
+		if len(name) == 0 {
+			valid = false
+		} else {
+			for _, v := range name {
+				if v < 'A' || (v > 'Z' && v < 'a') || v > 'z' {
+					valid = false
+					break
+				}
 			}
+		}
+
+		if !valid {
+			fmt.Println("Please enter a valid name")
+			continue
 		}
 		namegood = true
 	}
@@ -49,6 +61,7 @@ func CharacterCreation() utils.Player {
 	var classID string
 	for classgood == false {
 		fmt.Scan(&classID)
+		_ = audiosystem.PlaySFXCached("select")
 		if _, ok := Classes[classID]; ok {
 			classgood = true
 		} else {
@@ -125,6 +138,7 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("\n1. Retour")
 	var choice int
 	fmt.Scan(&choice)
+	_ = audiosystem.PlaySFXCached("select")
 }
 
 func AddEXP(player *utils.Player, exp float64) {

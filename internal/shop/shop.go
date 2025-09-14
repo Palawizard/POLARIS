@@ -2,6 +2,8 @@ package shop
 
 import (
 	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/utils"
 	"time"
@@ -27,6 +29,7 @@ func Shop(player *utils.Player) {
 
 		var choice int
 		fmt.Scan(&choice)
+		_ = audiosystem.PlaySFXCached("select")
 		switch choice {
 		case 1:
 			Itemshop(player)
@@ -37,14 +40,18 @@ func Shop(player *utils.Player) {
 				if character.UpgradeInventorySlot(player) {
 					player.Money -= 30
 					fmt.Println("Inventory slot upgraded.")
+					_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
+					time.Sleep(2 * time.Second)
 				} else {
 					fmt.Println("Upgrade limit reached!")
+					_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+					time.Sleep(2 * time.Second)
 				}
-				time.Sleep(1 * time.Second)
 				continue
 			}
 			fmt.Println("You do not have enough coins.")
-			time.Sleep(1 * time.Second)
+			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			time.Sleep(2 * time.Second)
 			continue
 		case 4:
 			return

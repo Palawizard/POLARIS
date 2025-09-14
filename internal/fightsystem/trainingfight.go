@@ -15,6 +15,9 @@ func TrainingFight(player *utils.Player) {
 	goblin := monsters.New("Goblin")
 	firstturn := true
 
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "fightstart.mp3"))
+	time.Sleep(1 * time.Second)
+
 	//Plays the fight music
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
@@ -37,6 +40,16 @@ func TrainingFight(player *utils.Player) {
 			}
 			if goblin.Health <= 0 {
 				fmt.Println("You have defeated the goblin.")
+
+				//Plays the win music
+				if err := audiosystem.Init(); err != nil {
+					fmt.Println("audio init error:", err)
+				}
+				musicPath := filepath.Join("internal", "audiosystem", "music", "win.mp3")
+				if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
+					fmt.Println("play loop error:", err)
+				}
+
 				player.Money += goblin.Coinstogive
 				fmt.Println("You received", goblin.Coinstogive, "coins.")
 				time.Sleep(1 * time.Second)
@@ -52,6 +65,16 @@ func TrainingFight(player *utils.Player) {
 		}
 		if goblin.Health <= 0 {
 			fmt.Println("You have defeated the goblin.")
+
+			//Plays the win music
+			if err := audiosystem.Init(); err != nil {
+				fmt.Println("audio init error:", err)
+			}
+			musicPath := filepath.Join("internal", "audiosystem", "music", "win.mp3")
+			if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
+				fmt.Println("play loop error:", err)
+			}
+
 			player.Money += goblin.Coinstogive
 			fmt.Println("You received", goblin.Coinstogive, "coins.")
 			time.Sleep(1 * time.Second)
@@ -78,6 +101,16 @@ func TrainingFight(player *utils.Player) {
 		}
 		if goblin.Health <= 0 {
 			fmt.Println("You have defeated the goblin.")
+
+			//Plays the win music
+			if err := audiosystem.Init(); err != nil {
+				fmt.Println("audio init error:", err)
+			}
+			musicPath := filepath.Join("internal", "audiosystem", "music", "win.mp3")
+			if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
+				fmt.Println("play loop error:", err)
+			}
+
 			player.Money += goblin.Coinstogive
 			fmt.Println("You received", goblin.Coinstogive, "coins.")
 			time.Sleep(1 * time.Second)

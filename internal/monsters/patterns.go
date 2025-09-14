@@ -2,6 +2,8 @@ package monsters
 
 import (
 	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/utils"
 	"time"
 )
@@ -19,6 +21,7 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	}
 	fmt.Println(msg)
 	time.Sleep(2 * time.Second)
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "enemyatk.mp3"))
 
 	dmg := monster.ATK
 	if monster.CritEvery > 0 && turn%monster.CritEvery == 0 {

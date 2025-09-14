@@ -40,6 +40,7 @@ func ShowMenu(player *utils.Player) {
 
 		var choice int
 		fmt.Scan(&choice)
+		_ = audiosystem.PlaySFXCached("select")
 
 		switch choice {
 		case 1:

@@ -1,9 +1,11 @@
 package audiosystem
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
+	"sync"
 	"time"
 
 	"github.com/faiface/beep"
@@ -14,19 +16,22 @@ import (
 )
 
 var (
-	inited   bool
-	baseSR   = beep.SampleRate(44100)
-	bgCtrl   *beep.Ctrl
-	bgCloser io.Closer
+	inited    bool
+	baseSR    = beep.SampleRate(44100)
+	bgCtrl    *beep.Ctrl
+	bgCloser  io.Closer
+	mu        sync.RWMutex
+	sfxCache  = map[string]*beep.Buffer{}
+	sfxFmt    = beep.Format{}
+	masterVol = -1.0
+	sfxVol    = 0.0
 )
-
-const masterVol = -1.7
 
 func Init() error {
 	if inited {
 		return nil
 	}
-	if err := speaker.Init(baseSR, baseSR.N(time.Second/10)); err != nil {
+	if err := speaker.Init(baseSR, baseSR.N(50*time.Millisecond)); err != nil {
 		return err
 	}
 	inited = true
@@ -38,8 +43,7 @@ func decode(path string) (beep.StreamSeekCloser, beep.Format, io.Closer, error) 
 	if err != nil {
 		return nil, beep.Format{}, nil, err
 	}
-	ext := filepath.Ext(path)
-	switch ext {
+	switch ext := filepath.Ext(path); ext {
 	case ".wav", ".WAV":
 		s, format, err := wav.Decode(f)
 		if err != nil {
@@ -56,7 +60,7 @@ func decode(path string) (beep.StreamSeekCloser, beep.Format, io.Closer, error) 
 		return s, format, s, nil
 	default:
 		_ = f.Close()
-		return nil, beep.Format{}, nil, err
+		return nil, beep.Format{}, nil, fmt.Errorf("unsupported audio type: %s", ext)
 	}
 }
 
@@ -67,18 +71,63 @@ func resampleToBase(streamer beep.Streamer, format beep.Format) beep.Streamer {
 	return beep.Resample(4, format.SampleRate, baseSR, streamer)
 }
 
-func PlaySFX(path string) error {
+func PreloadSFX(id, path string) error {
 	if err := Init(); err != nil {
 		return err
 	}
+	mu.RLock()
+	if _, ok := sfxCache[id]; ok {
+		mu.RUnlock()
+		return nil
+	}
+	mu.RUnlock()
+
 	stream, format, closer, err := decode(path)
 	if err != nil {
 		return err
 	}
+	defer closer.Close()
+
 	rs := resampleToBase(stream, format)
-	vol := &effects.Volume{Streamer: rs, Base: 2, Volume: masterVol}
-	speaker.Play(beep.Seq(vol, beep.Callback(func() { _ = closer.Close() })))
+
+	bufFmt := beep.Format{
+		SampleRate:  baseSR,
+		NumChannels: format.NumChannels,
+		Precision:   format.Precision,
+	}
+	buf := beep.NewBuffer(bufFmt)
+	buf.Append(rs)
+
+	mu.Lock()
+	sfxCache[id] = buf
+	if sfxFmt.SampleRate == 0 {
+		sfxFmt = bufFmt
+	}
+	mu.Unlock()
 	return nil
+}
+
+func PlaySFXCached(id string) error {
+	if err := Init(); err != nil {
+		return err
+	}
+	mu.RLock()
+	buf, ok := sfxCache[id]
+	mu.RUnlock()
+	if !ok {
+		return fmt.Errorf("sfx not preloaded: %s", id)
+	}
+	stream := buf.Streamer(0, buf.Len())
+	vol := &effects.Volume{Streamer: stream, Base: 2, Volume: sfxVol}
+	speaker.Play(vol)
+	return nil
+}
+
+func PlaySFX(path string) error {
+	if err := PreloadSFX(path, path); err != nil {
+		return err
+	}
+	return PlaySFXCached(path)
 }
 
 func PlayMusicLoop(path string) error {

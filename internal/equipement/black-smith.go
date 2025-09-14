@@ -2,6 +2,8 @@ package equipement
 
 import (
 	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/utils"
 	"sort"
 	"strings"
@@ -53,6 +55,7 @@ func BlackSmith(player *utils.Player) {
 
 		var choice int
 		fmt.Scan(&choice)
+		_ = audiosystem.PlaySFXCached("select")
 
 		if choice == len(catalog)+1 {
 			return
@@ -60,6 +63,7 @@ func BlackSmith(player *utils.Player) {
 		if choice < 1 || choice > len(catalog) {
 			lastMsg = "Invalid choice."
 			time.Sleep(1 * time.Second)
+			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -70,6 +74,7 @@ func BlackSmith(player *utils.Player) {
 		if player.Money < price {
 			lastMsg = "You do not have enough coins."
 			time.Sleep(1 * time.Second)
+			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -87,6 +92,7 @@ func BlackSmith(player *utils.Player) {
 			sort.Strings(missing)
 			lastMsg = "Missing: " + strings.Join(missing, ", ")
 			time.Sleep(1 * time.Second)
+			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -100,5 +106,6 @@ func BlackSmith(player *utils.Player) {
 		AddEquipment(id, player)
 		lastMsg = fmt.Sprintf("Crafted %s. Owned: x%d", id, player.Equipment[id])
 		time.Sleep(1 * time.Second)
+		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
 	}
 }

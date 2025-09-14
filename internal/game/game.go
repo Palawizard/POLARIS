@@ -106,6 +106,8 @@ func InitGame() {
 
 	_, _ = bufio.NewReader(os.Stdin).ReadString('\n')
 
+	_ = audiosystem.PlaySFXCached("select")
+
 	c1 := character.InitCharacter()
 
 	utils.Clearscreen()
