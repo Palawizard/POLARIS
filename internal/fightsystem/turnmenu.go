@@ -25,7 +25,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println("3. Return to menu")
 
 		var choice int
-		fmt.Scan(&choice)
+		fmt.Scanln(&choice)
 		_ = audiosystem.PlaySFXCached("select")
 
 		switch choice {
@@ -52,7 +52,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				fmt.Println("(none)")
 				fmt.Println("\n1. Return")
 				var _tmp int
-				fmt.Scan(&_tmp)
+				fmt.Scanln(&_tmp)
 				_ = audiosystem.PlaySFXCached("select")
 				continue
 			}
@@ -67,7 +67,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("0. Cancel")
 
 			var sidx int
-			fmt.Scan(&sidx)
+			fmt.Scanln(&sidx)
 			_ = audiosystem.PlaySFXCached("select")
 			if sidx == 0 {
 				continue
@@ -103,7 +103,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				fmt.Println("(none)")
 				fmt.Println("\n1. Return")
 				var _tmp int
-				fmt.Scan(&_tmp)
+				fmt.Scanln(&_tmp)
 				_ = audiosystem.PlaySFXCached("select")
 				continue
 			}
@@ -118,7 +118,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("0. Cancel")
 
 			var idx int
-			fmt.Scan(&idx)
+			fmt.Scanln(&idx)
 			_ = audiosystem.PlaySFXCached("select")
 			if idx == 0 {
 				continue

@@ -45,7 +45,7 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	if utils.IsDead(player) {
 		fmt.Printf("\nYou have been defeated by the %s.\n", monster.Name)
 		time.Sleep(3 * time.Second)
-		return true
+		return false
 	}
 
 	fmt.Printf("\nYour HP is now %.0f / %.0f hp.\n", player.Health, player.MaxHealth)

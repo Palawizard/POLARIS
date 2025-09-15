@@ -42,6 +42,81 @@ var Monsters = map[string]Monster{
       /       '----'       \
               `,
 	},
+	"Flower": {
+		Name:           "Flower",
+		Health:         10,
+		MaxHealth:      10,
+		ATK:            1,
+		EXPtogive:      5,
+		Coinstogive:    5,
+		Initiative:     1,
+		AttackMsg:      "The flower attacks you!",
+		CritEvery:      3,
+		CritMultiplier: 1.5,
+		Art: `
+              .--.
+            .'_\/_'.
+            '. /\ .'
+              "||"
+               || /\
+            /\ ||//\)
+           (/\\||/
+        ______\||/_______
+`,
+	},
+	"Skeleton": {
+		Name:           "Skeleton",
+		Health:         20,
+		MaxHealth:      20,
+		ATK:            13,
+		EXPtogive:      20,
+		Coinstogive:    20,
+		Initiative:     4,
+		AttackMsg:      "The skeleton attacks you!",
+		CritEvery:      3,
+		CritMultiplier: 2,
+		Art: `
+              .-.
+             (o.o)
+              |=|
+             __|__
+           //.=|=.\\
+          // .=|=. \\
+          \\ .=|=. //
+           \\(_=_)//
+            (:| |:)
+             || ||
+             () ()
+             || ||
+             || ||
+            ==' '==
+`,
+	},
+	"Boss Potato": {
+		Name:           "Boss Potato",
+		Health:         50,
+		MaxHealth:      50,
+		ATK:            15,
+		EXPtogive:      50,
+		Coinstogive:    50,
+		Initiative:     10,
+		AttackMsg:      "The Boss Potato attacks you!",
+		CritEvery:      3,
+		CritMultiplier: 2,
+		Art: `
+
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠚⠛⠉⠉⠉⠳⢦⡀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⠁⠀⠀⠀⠀⠀⠀⠀⢹⡄⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣟⣿⠀⠀⠀⠀⠀⠀⠀⠀⠈⣷⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡟⠘⠉⠱⣿⠀⠀⠀⠀⢠⣶⡄⣿⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⠀⠀⠀⠉⠙⠃⠀⠀⠀⢸⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢸⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡇⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣾⣤⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣷⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣿⣤⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⠀⠶⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣶⣇⣰⡄⠀⠀⠀⠀⢀⣠⣾⡿⠏⠀⢤⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠿⠿⠿⠿⡿⢿⡛⡩⠤⠴⠒⠛⠁`,
+	},
 }
 
 func PrintHeader(m *Monster) {
