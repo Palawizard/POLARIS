@@ -48,6 +48,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Skills\n")
+			fmt.Println("Mana:", player.Mana, "/", player.MaxMana)
 			if len(sopts) == 0 {
 				fmt.Println("(none)")
 				fmt.Println("\n1. Return")
