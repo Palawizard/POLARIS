@@ -62,7 +62,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			})
 			for i, o := range sopts {
 				sk := skills.Skills[o.id]
-				fmt.Printf("%d. %s (x%d)\n", i+1, sk.Label, player.Skills[o.id])
+				fmt.Printf("%d. %s (x%d, Mana: %.0f)\n", i+1, sk.Label, player.Skills[o.id], sk.ManaCost)
 			}
 			fmt.Println("0. Cancel")
 
@@ -76,7 +76,13 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				continue
 			}
 			sel := sopts[sidx-1].id
-			skills.Cast(sel, player, monster)
+			sk := skills.Skills[sel]
+			if player.Mana >= sk.ManaCost {
+				player.Mana -= sk.ManaCost
+				skills.Cast(sel, player, monster)
+			} else {
+				fmt.Println("Pas assez de mana !")
+			}
 			time.Sleep(2 * time.Second)
 			character.ManaRegen(player, turn)
 			return false
