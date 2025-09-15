@@ -72,13 +72,7 @@ func AccessInventory(player *utils.Player) bool {
 		for id, qty := range player.Equipment {
 			e := equipement.GetEquipment(id)
 			eq := player.Equipped != nil && player.Equipped[e.Type] == id
-			list = append(list, kv{
-				name: e.Name,
-				slot: e.Type,
-				def:  e.Defense,
-				qty:  qty,
-				eq:   eq,
-			})
+			list = append(list, kv{name: e.Name, slot: e.Type, def: e.Defense, qty: qty, eq: eq})
 		}
 		sort.Slice(list, func(i, j int) bool {
 			if list[i].slot == list[j].slot {
@@ -97,8 +91,7 @@ func AccessInventory(player *utils.Player) bool {
 
 	fmt.Print("\n")
 	fmt.Println("1. Use an object")
-	fmt.Println("2. Shop")
-	fmt.Println("3. Return")
+	fmt.Println("2. Return")
 
 	var choice int
 	fmt.Scan(&choice)
@@ -108,8 +101,6 @@ func AccessInventory(player *utils.Player) bool {
 	case 1:
 		useItemMenu(player)
 		return false
-	case 2:
-		return true
 	default:
 		return false
 	}

@@ -11,14 +11,7 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
-// ShowMenu is the main menu for the game. It displays a menu with three
-// options: "Character Info", "Inventory", and "Quit". If the player chooses
-// "Character Info", it displays the player's character info. If the player
-// chooses "Inventory", it displays the player's inventory and allows them to
-// shop. If the player chooses "Quit", the function will return.
 func ShowMenu(player *utils.Player) {
-
-	//Plays the menu music
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
@@ -34,9 +27,10 @@ func ShowMenu(player *utils.Player) {
 		fmt.Print("\n")
 		fmt.Println("1. Character Info")
 		fmt.Println("2. Inventory")
-		fmt.Println("3. Black-Smith")
-		fmt.Println("4. Training Fight")
-		fmt.Println("5. Quit")
+		fmt.Println("3. Shop")
+		fmt.Println("4. Black-Smith")
+		fmt.Println("5. Training Fight")
+		fmt.Println("6. Quit")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -46,25 +40,18 @@ func ShowMenu(player *utils.Player) {
 		case 1:
 			character.DisplayInfo(player)
 		case 2:
-			for {
-				if character.AccessInventory(player) {
-					shop.Shop(player)
-					continue
-				}
-				break
-			}
+			character.AccessInventory(player)
 		case 3:
-			equipement.BlackSmith(player)
+			shop.Shop(player)
 		case 4:
+			equipement.BlackSmith(player)
+		case 5:
 			audiosystem.StopMusic()
 			fightsystem.TrainingFight(player)
-
-			//relance la musique si sortie de combat
 			if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 				fmt.Println("play loop error:", err)
 			}
-
-		case 5:
+		case 6:
 			return
 		}
 	}
