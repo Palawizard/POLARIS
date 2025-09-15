@@ -29,3 +29,8 @@ func ManaRegen(player *utils.Player, turn int) {
 		fmt.Printf("%s récupère %.0f mana (%.0f/%.0f)\n", player.Name, regen, player.Mana, player.MaxMana)
 	}
 }
+
+var SkillManaCost = map[string]float64{
+	"Fireball": 20,
+	"Punch":    0,
+}

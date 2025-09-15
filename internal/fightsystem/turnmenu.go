@@ -76,9 +76,9 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				continue
 			}
 			sel := sopts[sidx-1].id
-			sk := skills.Skills[sel]
-			if player.Mana >= sk.ManaCost {
-				player.Mana -= sk.ManaCost
+			cost := character.SkillManaCost[sel]
+			if player.Mana >= cost {
+				player.Mana -= cost
 				skills.Cast(sel, player, monster)
 			} else {
 				fmt.Println("Pas assez de mana !")
