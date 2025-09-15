@@ -2,6 +2,7 @@ package character
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/internal/skills"
@@ -101,6 +102,7 @@ func AccessInventory(player *utils.Player) bool {
 
 	var choice int
 	fmt.Scan(&choice)
+	_ = audiosystem.PlaySFXCached("select")
 
 	switch choice {
 	case 1:
@@ -184,6 +186,7 @@ func useItemMenu(p *utils.Player) {
 		fmt.Println("\n1. Return")
 		var _tmp int
 		fmt.Scan(&_tmp)
+		_ = audiosystem.PlaySFXCached("select")
 		return
 	}
 
@@ -204,6 +207,7 @@ func useItemMenu(p *utils.Player) {
 
 	var idx int
 	fmt.Scan(&idx)
+	_ = audiosystem.PlaySFXCached("select")
 	if idx <= 0 || idx > len(opts) {
 		return
 	}
@@ -244,6 +248,7 @@ func useItemMenu(p *utils.Player) {
 	fmt.Println("\n1. Return")
 	var _tmp int
 	fmt.Scan(&_tmp)
+	_ = audiosystem.PlaySFXCached("select")
 }
 
 func CheckInvSize(player *utils.Player) bool {

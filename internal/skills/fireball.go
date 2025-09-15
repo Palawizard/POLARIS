@@ -2,6 +2,8 @@ package skills
 
 import (
 	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/utils"
 )
@@ -17,6 +19,7 @@ func effectFireball(p *utils.Player, m *monsters.Monster) {
 		m.Health = 0
 	}
 	utils.Clearscreen()
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "fire.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")

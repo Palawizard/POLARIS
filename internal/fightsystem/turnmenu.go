@@ -2,6 +2,7 @@ package fightsystem
 
 import (
 	"fmt"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/internal/objects"
@@ -25,6 +26,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 		var choice int
 		fmt.Scan(&choice)
+		_ = audiosystem.PlaySFXCached("select")
 
 		switch choice {
 		case 1:
@@ -51,6 +53,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				fmt.Println("\n1. Return")
 				var _tmp int
 				fmt.Scan(&_tmp)
+				_ = audiosystem.PlaySFXCached("select")
 				continue
 			}
 
@@ -65,6 +68,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 			var sidx int
 			fmt.Scan(&sidx)
+			_ = audiosystem.PlaySFXCached("select")
 			if sidx == 0 {
 				continue
 			}
@@ -100,6 +104,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				fmt.Println("\n1. Return")
 				var _tmp int
 				fmt.Scan(&_tmp)
+				_ = audiosystem.PlaySFXCached("select")
 				continue
 			}
 
@@ -114,6 +119,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 			var idx int
 			fmt.Scan(&idx)
+			_ = audiosystem.PlaySFXCached("select")
 			if idx == 0 {
 				continue
 			}
@@ -133,6 +139,8 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			return false
 
 		case 3:
+			audiosystem.StopMusic()
+
 			return true
 
 		default:
