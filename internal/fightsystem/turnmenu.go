@@ -62,19 +62,18 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			})
 			for i, o := range sopts {
 				sk := skills.Skills[o.id]
-				fmt.Printf("%d. %s (x%d, Mana: %.0f)\n", i+1, sk.Label, player.Skills[o.id], sk.ManaCost)
+				cost := character.SkillManaCost[o.id]
+				fmt.Printf("%d. %s (x%d, Mana: %.0f)\n", i+1, sk.Label, player.Skills[o.id], cost)
 			}
 			fmt.Println("0. Cancel")
 
 			var sidx int
 			fmt.Scan(&sidx)
 			_ = audiosystem.PlaySFXCached("select")
-			if sidx == 0 {
+			if sidx == 0 || sidx < 0 || sidx > len(sopts) {
 				continue
 			}
-			if sidx < 0 || sidx > len(sopts) {
-				continue
-			}
+
 			sel := sopts[sidx-1].id
 			cost := character.SkillManaCost[sel]
 			if player.Mana >= cost {
@@ -126,10 +125,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			var idx int
 			fmt.Scan(&idx)
 			_ = audiosystem.PlaySFXCached("select")
-			if idx == 0 {
-				continue
-			}
-			if idx < 0 || idx > len(opts) {
+			if idx == 0 || idx < 0 || idx > len(opts) {
 				continue
 			}
 
