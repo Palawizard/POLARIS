@@ -9,6 +9,8 @@ type Player struct {
 	Money                 float64
 	MaxHealth             float64
 	Health                float64
+	Mana                  float64
+	MaxMana               float64
 	Skills                map[string]int
 	Inventory             map[string]int
 	InventoryMax          int

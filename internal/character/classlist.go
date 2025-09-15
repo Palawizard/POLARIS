@@ -8,6 +8,7 @@ type Class struct {
 	ID    string
 	Label string
 	HP    float64
+	MANA  float64
 	MAXHP float64
 }
 
@@ -16,18 +17,21 @@ var Classes = map[string]Class{
 		ID:    "Human",
 		Label: "Human",
 		HP:    50,
+		MANA:  40,
 		MAXHP: 100,
 	},
 	"Elf": {
 		ID:    "Elf",
 		Label: "Elf",
 		HP:    40,
+		MANA:  80,
 		MAXHP: 80,
 	},
 	"Dwarf": {
 		ID:    "Dwarf",
 		Label: "Dwarf",
 		HP:    60,
+		MANA:  20,
 		MAXHP: 120,
 	},
 }

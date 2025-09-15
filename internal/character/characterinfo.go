@@ -72,11 +72,13 @@ func CharacterCreation() utils.Player {
 	cls := GetClass(classID)
 	maxhealth := cls.MAXHP
 	health := cls.HP
-	exp := 99.0
+	exp := 0.0
 	expToNextLevel := 100.0
 	level := 1
 	money := 100.0
 	initiative := 3.0
+	mana := cls.MANA
+	maxmana := cls.MANA
 	skills := map[string]int{"Punch": 1}
 	equipment := map[string]int{}
 	inventory := map[string]int{"Potion": 3}
@@ -92,6 +94,8 @@ func CharacterCreation() utils.Player {
 		Money:                 money,
 		MaxHealth:             maxhealth,
 		Health:                health,
+		MaxMana:               maxmana,
+		Mana:                  mana,
 		Skills:                skills,
 		Equipment:             equipment,
 		Inventory:             inventory,
@@ -110,6 +114,7 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Level: ", player.Level)
 	fmt.Printf("EXP: %.0f / %.0f\n", player.EXP, player.EXPToNextLevel)
 	fmt.Println("Money: ", player.Money)
+	fmt.Println("Mana: ", player.Mana)
 	fmt.Println("Max Inventory Size: ", player.InventoryMax)
 
 	armorBonus := equipement.EquippedBonus(player)

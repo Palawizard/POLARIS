@@ -13,7 +13,7 @@ func effectFireball(p *utils.Player, m *monsters.Monster) {
 	if m == nil {
 		return
 	}
-	dmg := 18.0
+	dmg := 20.0
 	m.Health -= dmg
 	if m.Health < 0 {
 		m.Health = 0
