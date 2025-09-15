@@ -35,7 +35,6 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			for id, qty := range player.Skills {
 				if qty > 0 {
 					if sk, ok := skills.Skills[id]; ok && sk.Apply != nil {
-						_ = sk
 						sopts = append(sopts, sopt{id: id})
 					}
 				}
@@ -79,6 +78,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			sel := sopts[sidx-1].id
 			skills.Cast(sel, player, monster)
 			time.Sleep(2 * time.Second)
+			character.ManaRegen(player, turn)
 			return false
 
 		case 2:
@@ -87,7 +87,6 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			for id, qty := range player.Inventory {
 				if qty > 0 {
 					if it, ok := objects.Items[id]; ok && it.Apply != nil {
-						_ = it
 						opts = append(opts, opt{id: id})
 					}
 				}
@@ -137,11 +136,11 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				fmt.Println("Nothing happens.")
 			}
 			time.Sleep(2 * time.Second)
+			character.ManaRegen(player, turn)
 			return false
 
 		case 3:
 			audiosystem.StopMusic()
-
 			return true
 
 		default:
