@@ -2,8 +2,6 @@ package objects
 
 import (
 	"fmt"
-	"path/filepath"
-	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/utils"
 )
 
@@ -11,10 +9,12 @@ import (
 // MaxHealth if necessary. It then prints a message to the console
 // indicating the new health value.
 func effectHealthPotion(p *utils.Player) {
-	p.Health += 50
+	const gain = 50.0
+	before := p.Health
+	p.Health += gain
 	if p.Health > p.MaxHealth {
 		p.Health = p.MaxHealth
 	}
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
-	fmt.Println("You gained 50 hp ! You now have", p.Health, "hp.")
+	actual := p.Health - before
+	fmt.Printf("You gained %.0f hp ! You now have %.0f hp.\n", actual, p.Health)
 }

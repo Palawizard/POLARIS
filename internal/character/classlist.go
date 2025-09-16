@@ -15,7 +15,7 @@ var Classes = map[string]Class{
 	"Human": {
 		ID:    "Human",
 		Label: "Human",
-		HP:    1,
+		HP:    50,
 		MAXHP: 100,
 	},
 	"Elf": {

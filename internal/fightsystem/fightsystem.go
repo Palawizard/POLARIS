@@ -5,12 +5,14 @@ import (
 	"path/filepath"
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/character"
+	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/internal/monsters"
+	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/utils"
 	"time"
 )
 
-func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (bool, bool) {
+func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (won bool, exit bool) {
 	turn := 1
 	firstTurn := true
 
@@ -36,21 +38,17 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (bool, b
 
 	for {
 		if player.Initiative < enemy.Initiative && firstTurn {
-			if ok := monsters.AttackPattern(player, enemy, turn); !ok {
-				audiosystem.StopMusic()
-				return false, true
-			}
+			monsters.AttackPattern(player, enemy, turn)
 			firstTurn = false
 
-			if enemy.Health <= 0 {
-				fmt.Println("You won!")
-				audiosystem.StopMusic()
-				_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "music", "win.mp3"))
-				player.Money += enemy.Coinstogive
-				fmt.Println("You received", enemy.Coinstogive, "coins.")
-				time.Sleep(1 * time.Second)
-				character.AddEXP(player, enemy.EXPtogive)
+			if utils.IsDead(player) {
+				fmt.Println("You have been defeated.")
 				time.Sleep(3 * time.Second)
+				audiosystem.StopMusic()
+				return false, false
+			}
+			if enemy.Health <= 0 {
+				grantVictoryRewards(player, enemy)
 				return true, false
 			}
 		}
@@ -61,33 +59,51 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (bool, b
 		}
 
 		if enemy.Health <= 0 {
-			fmt.Println("You won!")
-			audiosystem.StopMusic()
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "music", "win.mp3"))
-			player.Money += enemy.Coinstogive
-			fmt.Println("You received", enemy.Coinstogive, "coins.")
-			time.Sleep(1 * time.Second)
-			character.AddEXP(player, enemy.EXPtogive)
-			time.Sleep(3 * time.Second)
+			grantVictoryRewards(player, enemy)
 			return true, false
 		}
-
-		if ok := monsters.AttackPattern(player, enemy, turn); !ok {
+		if utils.IsDead(player) {
+			fmt.Println("You have been defeated.")
+			time.Sleep(3 * time.Second)
 			audiosystem.StopMusic()
-			return false, true
+			return false, false
 		}
+
+		monsters.AttackPattern(player, enemy, turn)
 		turn++
 
-		if enemy.Health <= 0 {
-			fmt.Println("You won!")
-			audiosystem.StopMusic()
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "music", "win.mp3"))
-			player.Money += enemy.Coinstogive
-			fmt.Println("You received", enemy.Coinstogive, "coins.")
-			time.Sleep(1 * time.Second)
-			character.AddEXP(player, enemy.EXPtogive)
+		if utils.IsDead(player) {
+			fmt.Println("You have been defeated.")
 			time.Sleep(3 * time.Second)
+			audiosystem.StopMusic()
+			return false, false
+		}
+		if enemy.Health <= 0 {
+			grantVictoryRewards(player, enemy)
 			return true, false
 		}
+	}
+}
+
+func grantVictoryRewards(player *utils.Player, enemy *monsters.Monster) {
+	fmt.Println("You won!")
+	audiosystem.StopMusic()
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "music", "win.mp3"))
+
+	player.Money += enemy.Coinstogive
+	fmt.Println("You received", enemy.Coinstogive, "coins.")
+	time.Sleep(1 * time.Second)
+	character.AddEXP(player, enemy.EXPtogive)
+
+	if enemy.Loot != "" {
+		id := enemy.Loot
+		if it, ok := objects.GetItem(id); ok {
+			character.AddInventory(player, id)
+			fmt.Println("You found", it.Label+".")
+		} else if e, ok := equipement.Equipments[id]; ok {
+			equipement.AddEquipment(id, player)
+			fmt.Println("You obtained", e.Name+".")
+		}
+		time.Sleep(4 * time.Second)
 	}
 }

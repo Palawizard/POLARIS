@@ -18,7 +18,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println("Turn", turn)
 		utils.SendTurn(turn)
 		monsters.PrintHeader(monster)
-		fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
+		fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
 		fmt.Println("It's your turn!\n")
 		fmt.Println("1. Skills")
 		fmt.Println("2. Inventory")
@@ -45,7 +45,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
+			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Skills\n")
 			if len(sopts) == 0 {
@@ -96,7 +96,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
+			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Inventory (usable)\n")
 			if len(opts) == 0 {
@@ -140,7 +140,6 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 		case 3:
 			audiosystem.StopMusic()
-
 			return true
 
 		default:

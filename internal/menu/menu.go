@@ -32,7 +32,8 @@ func ShowMenu(player *utils.Player) {
 		fmt.Println("4. Shop")
 		fmt.Println("5. Black-Smith")
 		fmt.Println("6. Training Fight")
-		fmt.Println("7. Quit")
+		fmt.Println("7. Qui sont-ils ?")
+		fmt.Println("8. Quit")
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -60,7 +61,20 @@ func ShowMenu(player *utils.Player) {
 				fmt.Println("play loop error:", err)
 			}
 		case 7:
+			showHiddenArtists()
+		case 8:
 			return
 		}
 	}
+}
+
+func showHiddenArtists() {
+	utils.Clearscreen()
+	fmt.Println("Artistes cachés :")
+	fmt.Println(" - ABBA (partie 2)")
+	fmt.Println(" - Steven Spielberg (partie 3)")
+	fmt.Println("\n1. Retour")
+	var _tmp int
+	fmt.Scanln(&_tmp)
+	_ = audiosystem.PlaySFXCached("select")
 }

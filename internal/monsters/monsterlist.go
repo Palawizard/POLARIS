@@ -13,6 +13,7 @@ type Monster struct {
 	AttackMsg      string
 	CritEvery      int
 	CritMultiplier float64
+	Loot           string
 	Art            string
 }
 
@@ -28,6 +29,7 @@ var Monsters = map[string]Monster{
 		AttackMsg:      "The goblin attacks you!",
 		CritEvery:      3,
 		CritMultiplier: 2,
+		Loot:           "Boar Leather",
 		Art: `
              ,      ,
             /(.-""-.)\
@@ -53,6 +55,7 @@ var Monsters = map[string]Monster{
 		AttackMsg:      "The flower attacks you!",
 		CritEvery:      3,
 		CritMultiplier: 1.5,
+		Loot:           "Crow Feather",
 		Art: `
               .--.
             .'_\/_'.
@@ -75,6 +78,7 @@ var Monsters = map[string]Monster{
 		AttackMsg:      "The skeleton attacks you!",
 		CritEvery:      3,
 		CritMultiplier: 1.8,
+		Loot:           "Potion",
 		Art: `
               .-.
              (o.o)
@@ -103,6 +107,7 @@ var Monsters = map[string]Monster{
 		AttackMsg:      "The Boss Potato attacks you!",
 		CritEvery:      3,
 		CritMultiplier: 2,
+		Loot:           "Poison",
 		Art: `
 
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠚⠛⠉⠉⠉⠳⢦⡀⠀
