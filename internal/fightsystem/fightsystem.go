@@ -20,6 +20,9 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (won boo
 	sfx := "fightstart.mp3"
 	delay := 1368 * time.Millisecond
 	music := "fight.mp3"
+	if enemy.Name == "Annoying Dog" {
+		music = "dog.mp3"
+	}
 	if boss {
 		sfx = "bossstart.mp3"
 		delay = 5840 * time.Millisecond
