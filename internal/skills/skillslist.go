@@ -22,7 +22,7 @@ var Skills = map[string]Skill{
 	"Fire Ball": {
 		ID:    "Fire Ball",
 		Label: "Fire Ball",
-		Price: 25,
+		Price: 20,
 		Apply: effectFireball,
 	},
 }

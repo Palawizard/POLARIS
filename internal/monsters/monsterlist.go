@@ -6,7 +6,7 @@ type Monster struct {
 	Name           string
 	Health         float64
 	MaxHealth      float64
-	ATK            float64
+	MaxATK         float64
 	EXPtogive      float64
 	Coinstogive    float64
 	Initiative     float64
@@ -19,11 +19,11 @@ type Monster struct {
 var Monsters = map[string]Monster{
 	"Goblin": {
 		Name:           "Goblin",
-		Health:         40,
-		MaxHealth:      40,
-		ATK:            5,
-		EXPtogive:      10,
-		Coinstogive:    10,
+		Health:         35,
+		MaxHealth:      35,
+		MaxATK:         4,
+		EXPtogive:      12,
+		Coinstogive:    12,
 		Initiative:     5,
 		AttackMsg:      "The goblin attacks you!",
 		CritEvery:      3,
@@ -44,11 +44,11 @@ var Monsters = map[string]Monster{
 	},
 	"Flower": {
 		Name:           "Flower",
-		Health:         10,
-		MaxHealth:      10,
-		ATK:            1,
-		EXPtogive:      5,
-		Coinstogive:    5,
+		Health:         12,
+		MaxHealth:      12,
+		MaxATK:         1.2,
+		EXPtogive:      6,
+		Coinstogive:    6,
 		Initiative:     1,
 		AttackMsg:      "The flower attacks you!",
 		CritEvery:      3,
@@ -66,15 +66,15 @@ var Monsters = map[string]Monster{
 	},
 	"Skeleton": {
 		Name:           "Skeleton",
-		Health:         20,
-		MaxHealth:      20,
-		ATK:            13,
-		EXPtogive:      20,
-		Coinstogive:    20,
+		Health:         30,
+		MaxHealth:      30,
+		MaxATK:         8,
+		EXPtogive:      22,
+		Coinstogive:    22,
 		Initiative:     4,
 		AttackMsg:      "The skeleton attacks you!",
 		CritEvery:      3,
-		CritMultiplier: 2,
+		CritMultiplier: 1.8,
 		Art: `
               .-.
              (o.o)
@@ -94,12 +94,12 @@ var Monsters = map[string]Monster{
 	},
 	"Boss Potato": {
 		Name:           "Boss Potato",
-		Health:         50,
-		MaxHealth:      50,
-		ATK:            15,
-		EXPtogive:      50,
-		Coinstogive:    50,
-		Initiative:     10,
+		Health:         75,
+		MaxHealth:      75,
+		MaxATK:         12,
+		EXPtogive:      60,
+		Coinstogive:    60,
+		Initiative:     9,
 		AttackMsg:      "The Boss Potato attacks you!",
 		CritEvery:      3,
 		CritMultiplier: 2,

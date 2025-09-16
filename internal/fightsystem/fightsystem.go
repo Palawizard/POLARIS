@@ -15,11 +15,11 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (bool, b
 	firstTurn := true
 
 	sfx := "fightstart.mp3"
-	delay := time.Second
+	delay := 1368 * time.Millisecond
 	music := "fight.mp3"
 	if boss {
 		sfx = "bossstart.mp3"
-		delay = 5 * time.Second
+		delay = 5840 * time.Millisecond
 		music = "bossbattle.mp3"
 	}
 

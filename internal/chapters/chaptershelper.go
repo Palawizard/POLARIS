@@ -8,12 +8,6 @@ import (
 
 var currentChapter = 1
 
-type chapterFunc func(*utils.Player) bool
-
-var registry = map[int]chapterFunc{
-	1: StartChapter1,
-}
-
 func StartNextChapter(player *utils.Player) {
 	switch currentChapter {
 	case 1:

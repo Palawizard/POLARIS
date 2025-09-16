@@ -72,11 +72,11 @@ func CharacterCreation() utils.Player {
 	cls := GetClass(classID)
 	maxhealth := cls.MAXHP
 	health := cls.HP
-	exp := 99.0
-	expToNextLevel := 100.0
+	exp := 0.0
+	expToNextLevel := 80.0
 	level := 1
-	money := 100.0
-	initiative := 3.0
+	money := 0.0
+	initiative := 4.0
 	skills := map[string]int{"Punch": 1}
 	equipment := map[string]int{}
 	inventory := map[string]int{"Potion": 3}
@@ -148,9 +148,9 @@ func AddEXP(player *utils.Player, exp float64) {
 	for player.EXP >= player.EXPToNextLevel {
 		player.EXP -= player.EXPToNextLevel
 		player.Level++
-		player.EXPToNextLevel *= 1.2
-		player.MaxHealth += 10
-		player.Initiative += 3.0
+		player.EXPToNextLevel *= 1.15
+		player.MaxHealth += 15
+		player.Initiative += 2.0
 		utils.Clearscreen()
 		fmt.Println("Level up!")
 		time.Sleep(1 * time.Second)

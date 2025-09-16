@@ -11,9 +11,9 @@ type Equipment struct {
 }
 
 var Equipments = map[string]Equipment{
-	"Adventurer's Hat":   {ID: "Adventurer's Hat", Name: "Adventurer's Hat", Type: "Head", Price: 5, Defense: 10},
-	"Adventurer's Tunic": {ID: "Adventurer's Tunic", Name: "Adventurer's Tunic", Type: "Body", Price: 5, Defense: 25},
-	"Adventurer's Boots": {ID: "Adventurer's Boots", Name: "Adventurer's Boots", Type: "Feet", Price: 5, Defense: 15},
+	"Adventurer's Hat":   {ID: "Adventurer's Hat", Name: "Adventurer's Hat", Type: "Head", Price: 5, Defense: 6},
+	"Adventurer's Tunic": {ID: "Adventurer's Tunic", Name: "Adventurer's Tunic", Type: "Body", Price: 5, Defense: 18},
+	"Adventurer's Boots": {ID: "Adventurer's Boots", Name: "Adventurer's Boots", Type: "Feet", Price: 5, Defense: 12},
 }
 
 var Recipes = map[string]map[string]int{
@@ -29,19 +29,6 @@ func AddEquipment(name string, p *utils.Player) {
 		p.Equipment = make(map[string]int)
 	}
 	p.Equipment[name]++
-}
-
-func RemoveEquipment(name string, p *utils.Player) {
-	if p.Equipment == nil {
-		return
-	}
-	if q, ok := p.Equipment[name]; ok {
-		if q <= 1 {
-			delete(p.Equipment, name)
-		} else {
-			p.Equipment[name] = q - 1
-		}
-	}
 }
 
 func BonusOf(id string) float64 {
