@@ -16,7 +16,7 @@ var Items = map[string]Item{
 	"Troll Skin":   {ID: "Troll Skin", Label: "Troll Skin", Price: 7, Apply: nil},
 	"Boar Leather": {ID: "Boar Leather", Label: "Boar Leather", Price: 3, Apply: nil},
 	"Crow Feather": {ID: "Crow Feather", Label: "Crow Feather", Price: 1, Apply: nil},
-	"Chocolatine":  {ID: "Chocolatine", Label: "Chocolatine", Price: 100, Apply: effectChocolatine},
+	"Chocolatine":  {ID: "Chocolatine", Label: "Chocolatine", Price: 40, Apply: effectChocolatine},
 	"Bandage":      {ID: "Bandage", Label: "Bandage", Price: 2, Apply: effectBandage},
 	"Hi-Potion":    {ID: "Hi-Potion", Label: "Hi-Potion", Price: 8, Apply: effectHiPotion},
 	"Elixir":       {ID: "Elixir", Label: "Elixir", Price: 25, Apply: effectElixir},

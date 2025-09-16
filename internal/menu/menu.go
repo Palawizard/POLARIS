@@ -9,7 +9,9 @@ import (
 	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/internal/fightsystem"
 	"projet-red_POLARIS/internal/shop"
+	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
+	"time"
 )
 
 func ShowMenu(player *utils.Player) {
@@ -72,6 +74,16 @@ func ShowMenu(player *utils.Player) {
 			chapters.ChangeChapter(3)
 		case 994:
 			chapters.ChangeChapter(4)
+		case 25565:
+			utils.Clearscreen()
+			fmt.Println("Admin mode activated.")
+			time.Sleep(2 * time.Second)
+			player.MaxHealth = 999999
+			player.Health = 999999
+			for i := 0; i < 100; i++ {
+				skills.SpellBook("Meteor", player)
+			}
+
 		}
 	}
 }
