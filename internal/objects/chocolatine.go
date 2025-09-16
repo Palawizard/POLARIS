@@ -1,22 +1,20 @@
-package chapters
+package objects
 
 import (
-	"projet-red_POLARIS/internal/fightsystem"
-	"projet-red_POLARIS/internal/monsters"
+	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/utils"
+	"time"
 )
 
-func StartChapter1(player *utils.Player) bool {
+func effectChocolatine(p *utils.Player) {
+	temp := p.MaxHealth
+	p.Health = temp
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
 	utils.Clearscreen()
-	StartMusic()
-	texttoshow := "Goddess Polaris: No! Hey! Are you serious?! You’re peeing on my altar! >:|"
-	utils.ShowText(texttoshow)
-
-	utils.Clearscreen()
-	texttoshow = "How dare you defy the goddess of life and death? Cursed be you! You gross creep! As punishment, you must rekindle the sacred flame in all my temples!"
-	utils.ShowText(texttoshow)
-
-	utils.Clearscreen()
+	fmt.Println("You ate the chocolatine!")
+	time.Sleep(1 * time.Second)
 	utils.PrintASCII(`
                 ▒▓▓▓▓▓▓█▓█░                
            ░▓▓▒▓██▓██████████▓▒█           
@@ -47,51 +45,7 @@ func StartChapter1(player *utils.Player) bool {
 ▒▒▒░░▒▓░░░▒█▒▒█▒░░░▓▒████▓▓▓▓▓▓▓▓██▓▓▓▒▓▓▓▒
 ▒░░░▒▓▓▒░░░░▒▓▓█▓▒▒░░▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▓▒▓▒▓▒▓
 `)
-
-	texttoshow = "You look at the goddess like this"
-	utils.ShowText(texttoshow)
-
-	utils.Clearscreen()
-	texttoshow = "Goddess Polaris: Oh, I forgot to mention—you’ll have a few enemies to fight; otherwise it’d be too easy, owo."
-	utils.ShowText(texttoshow)
-
-	StopMusic()
-	flower := monsters.New("Flower")
-	if won, exit := fightsystem.RunFight(player, flower, false); exit || !won {
-		return false
-	}
-
-	utils.Clearscreen()
-	StartMusic()
-	texttoshow = "Goddess Polaris: Mmph! rolls eyes We’ll see if you handle what comes next just as well!"
-	utils.ShowText(texttoshow)
-
-	StopMusic()
-	skeleton := monsters.New("Skeleton")
-	if won, exit := fightsystem.RunFight(player, skeleton, false); exit || !won {
-		return false
-	}
-
-	utils.Clearscreen()
-	StartMusic()
-	texttoshow = "You near the temple… but a horrible monster, reeking of raclette, is guarding it…"
-	utils.ShowText(texttoshow)
-
-	StopMusic()
-	potato := monsters.New("Boss Potato")
-	if won, exit := fightsystem.RunFight(player, potato, true); exit || !won {
-		return false
-	}
-
-	StartWinningMusic()
-	utils.Clearscreen()
-	texttoshow = "You reach the goddess’s altar and light the sacred flame."
-	utils.ShowText(texttoshow)
-
-	utils.Clearscreen()
-	texttoshow = "You have 2 altars left to relight to regain the favor of Goddess Polaris."
-	utils.ShowText(texttoshow)
-	StopMusic()
-
-	return true
+	fmt.Println("\nYou look at the camera like this")
+	time.Sleep(2 * time.Second)
+	fmt.Printf("Your HP was MAXED OUT ! You now have %.0f hp.\n", p.Health)
 }

@@ -8,6 +8,7 @@ import (
 	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/internal/objects"
+	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
 	"time"
 )
@@ -37,16 +38,17 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (won boo
 	}
 
 	for {
-		if player.Initiative < enemy.Initiative && firstTurn {
-			monsters.AttackPattern(player, enemy, turn)
-			firstTurn = false
+		if player.Health <= 0 {
+			audiosystem.StopMusic()
+			return false, false
+		}
 
-			if utils.IsDead(player) {
-				fmt.Println("You have been defeated.")
-				time.Sleep(3 * time.Second)
+		if player.Initiative < enemy.Initiative && firstTurn {
+			if ok := monsters.AttackPattern(player, enemy, turn); !ok {
 				audiosystem.StopMusic()
 				return false, false
 			}
+			firstTurn = false
 			if enemy.Health <= 0 {
 				grantVictoryRewards(player, enemy)
 				return true, false
@@ -62,25 +64,24 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (won boo
 			grantVictoryRewards(player, enemy)
 			return true, false
 		}
-		if utils.IsDead(player) {
-			fmt.Println("You have been defeated.")
-			time.Sleep(3 * time.Second)
+		if player.Health <= 0 {
 			audiosystem.StopMusic()
 			return false, false
 		}
 
-		monsters.AttackPattern(player, enemy, turn)
+		if ok := monsters.AttackPattern(player, enemy, turn); !ok {
+			audiosystem.StopMusic()
+			return false, false
+		}
 		turn++
 
-		if utils.IsDead(player) {
-			fmt.Println("You have been defeated.")
-			time.Sleep(3 * time.Second)
-			audiosystem.StopMusic()
-			return false, false
-		}
 		if enemy.Health <= 0 {
 			grantVictoryRewards(player, enemy)
 			return true, false
+		}
+		if player.Health <= 0 {
+			audiosystem.StopMusic()
+			return false, false
 		}
 	}
 }
@@ -103,6 +104,9 @@ func grantVictoryRewards(player *utils.Player, enemy *monsters.Monster) {
 		} else if e, ok := equipement.Equipments[id]; ok {
 			equipement.AddEquipment(id, player)
 			fmt.Println("You obtained", e.Name+".")
+		} else if s, ok := skills.Skills[id]; ok {
+			skills.SpellBook(id, player)
+			fmt.Println("You obtained", s.ID+".")
 		}
 		time.Sleep(4 * time.Second)
 	}

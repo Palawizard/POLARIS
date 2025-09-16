@@ -6,41 +6,38 @@ import (
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/utils"
-	"time"
 )
 
-func effectPunch(p *utils.Player, m *monsters.Monster) {
-	turn := utils.GetTurn()
-
-	critical := false
-
-	randomint := rng.Intn(10)
-	if randomint == 0 {
-		critical = true
-	}
-
+func effectVampiricTouch(p *utils.Player, m *monsters.Monster) {
 	if m == nil {
 		return
 	}
-	dmg := 8.0
-	if critical {
-		dmg *= 1.5
-	}
+	turn := utils.GetTurn()
+	dmg := 14.0
+	heal := dmg * 0.5
 
 	m.Health -= dmg
 	if m.Health < 0 {
 		m.Health = 0
 	}
+
+	before := p.Health
+	p.Health += heal
+	if p.Health > p.MaxHealth {
+		p.Health = p.MaxHealth
+	}
+	gained := p.Health - before
+
 	utils.Clearscreen()
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "punch1.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")
-	fmt.Printf("%s uses Punch\n", p.Name)
-	if critical {
-		fmt.Println("Critical hit!")
-		time.Sleep(1 * time.Second)
-	}
+	fmt.Printf("%s uses Vampiric Touch\n", p.Name)
 	fmt.Printf("%s takes %.0f damage\n", m.Name, dmg)
+	fmt.Printf("%s absorbs %.0f HP\n", p.Name, gained)
 	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)
+
+	p.Skills["Vampiric Touch"]--
 }
