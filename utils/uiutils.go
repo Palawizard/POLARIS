@@ -1,9 +1,15 @@
 package utils
 
 import (
+	"bufio"
+	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"runtime"
+	"strings"
+	"time"
 )
 
 func Clearscreen() { // Pris sur internet
@@ -15,4 +21,50 @@ func Clearscreen() { // Pris sur internet
 	}
 	c.Stdout = os.Stdout
 	_ = c.Run()
+}
+
+func ShowText(text string) {
+	for _, r := range text {
+		fmt.Print(string(r))
+		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "text.wav"))
+		time.Sleep(20 * time.Millisecond)
+	}
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "text_end.wav"))
+	fmt.Print("\n\nPress Enter to continue...")
+	_, _ = bufio.NewReader(os.Stdin).ReadString('\n')
+}
+
+func PrintASCII(art string) {
+	lines := strings.Split(art, "\n")
+	if len(lines) > 0 && strings.TrimSpace(lines[0]) == "" {
+		lines = lines[1:]
+	}
+	if n := len(lines); n > 0 && strings.TrimSpace(lines[n-1]) == "" {
+		lines = lines[:n-1]
+	}
+	indent := -1
+	for _, l := range lines {
+		if strings.TrimSpace(l) == "" {
+			continue
+		}
+		n := 0
+		for _, r := range l {
+			if r == ' ' || r == '\t' {
+				n++
+			} else {
+				break
+			}
+		}
+		if indent == -1 || n < indent {
+			indent = n
+		}
+	}
+	if indent > 0 {
+		for i, l := range lines {
+			if len(l) >= indent {
+				lines[i] = l[indent:]
+			}
+		}
+	}
+	fmt.Println(strings.Join(lines, "\n"))
 }
