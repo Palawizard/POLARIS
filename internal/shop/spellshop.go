@@ -43,7 +43,8 @@ func Spellshop(player *utils.Player) {
 			if player.Skills != nil {
 				owned = player.Skills[id]
 			}
-			fmt.Printf("%d. Spellbook: %s (%.0f coins)  [owned: x%d]\n", i+1, s.Label, s.Price, owned)
+			fmt.Printf("%d. Spellbook: %s (%.0f coins, %.0f mana)  [owned: x%d]\n",
+				i+1, s.Label, s.Price, s.ManaCost, owned)
 		}
 		fmt.Printf("%d. Return\n", len(catalog)+1)
 
