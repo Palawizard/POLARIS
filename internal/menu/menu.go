@@ -83,7 +83,6 @@ func ShowMenu(player *utils.Player) {
 			for i := 0; i < 100; i++ {
 				skills.SpellBook("Meteor", player)
 			}
-
 		}
 	}
 }
