@@ -40,7 +40,7 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	}
 
 	player.Health -= dmg
-	if player.Health < 0 {
+	if player.Health < 1 {
 		player.Health = 0
 	}
 

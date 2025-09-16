@@ -64,6 +64,14 @@ func ShowMenu(player *utils.Player) {
 			showHiddenArtists()
 		case 8:
 			return
+		case 991:
+			chapters.ChangeChapter(1)
+		case 992:
+			chapters.ChangeChapter(2)
+		case 993:
+			chapters.ChangeChapter(3)
+		case 994:
+			chapters.ChangeChapter(4)
 		}
 	}
 }

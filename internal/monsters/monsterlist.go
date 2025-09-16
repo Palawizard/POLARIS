@@ -20,15 +20,15 @@ type Monster struct {
 var Monsters = map[string]Monster{
 	"Goblin": {
 		Name:           "Goblin",
-		Health:         35,
-		MaxHealth:      35,
-		MaxATK:         4,
-		EXPtogive:      12,
-		Coinstogive:    12,
-		Initiative:     5,
+		Health:         45,
+		MaxHealth:      45,
+		MaxATK:         9,
+		EXPtogive:      25,
+		Coinstogive:    18,
+		Initiative:     6,
 		AttackMsg:      "The goblin attacks you!",
-		CritEvery:      3,
-		CritMultiplier: 2,
+		CritEvery:      4,
+		CritMultiplier: 1.8,
 		Loot:           "Boar Leather",
 		Art: `
              ,      ,
@@ -121,6 +121,167 @@ var Monsters = map[string]Monster{
 ⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⠀⠶⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠇⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣶⣇⣰⡄⠀⠀⠀⠀⢀⣠⣾⡿⠏⠀⢤⡀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠿⠿⠿⠿⡿⢿⡛⡩⠤⠴⠒⠛⠁`,
+	},
+	"Chocoblast": {
+		Name:           "Chocoblast",
+		Health:         140,
+		MaxHealth:      140,
+		MaxATK:         22,
+		EXPtogive:      80,
+		Coinstogive:    60,
+		Initiative:     5,
+		AttackMsg:      "The Chocoblast attacks you!",
+		CritEvery:      3,
+		CritMultiplier: 2.2,
+		Loot:           "Chocolatine",
+		Art: `
+                       ░▒▒▒▒▒░░░                  
+                   ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░              
+               ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▒▒           
+            ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒         
+          ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░       
+         ▒░▓▓▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒░       
+        ░▒▒▒░░░░▓▒░▒▒▒▒▓▓▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░       
+        ▒░░░░▒▒▒░░░▓░░▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒         
+        ░▓▓░░▒░░▒▒▒░░▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░          
+         ░▒▓▓░░░▒░░▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒             
+           ░░░▓▓▓░▒░▒░░▒░▒▒▒▒▒▒▒▒▒░               
+             ░▓▓▓▓▒▒▓▒░▓░░▒▒▒▒▒                   
+                  ░░▒░░░░░░`,
+	},
+	"Slime": {
+		Name:           "Slime",
+		Health:         80,
+		MaxHealth:      80,
+		MaxATK:         14,
+		EXPtogive:      35,
+		Coinstogive:    28,
+		Initiative:     3,
+		AttackMsg:      "The Slime attacks you!",
+		CritEvery:      3,
+		CritMultiplier: 1.8,
+		Loot:           "Potion",
+		Art: `
+		⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⣤⣤⣤⣤⣤⣤⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀
+		⠀⠀⠀⢀⣠⣤⣤⣾⠟⠛⠛⠛⠛⠛⠛⠛⠻⣦⣤⣤⣄⠀⠀⠀⠀⠀
+		⠀⠀⣠⣾⡿⠟⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⠟⠿⣿⣦⣄⠀⠀⠀
+		⣠⣼⡿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀
+		⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣶⡄⠀
+		⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⡀⠀⠀⠀⣀⣀⠀⠀⠀⣿⣿⡇⠀
+		⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⣿⣿⠀⠀⠀⣯⣿⡇⠀
+		⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠿⠇⠀⠀⠀⠿⣿⠤⣤⣧⣧⣿⡇⡀
+		⠿⢿⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⡀⠀⠀⠀⠁⣠⣼⣿⠟⠃
+		⠀⠀⠿⢷⣄⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣁⣀⣀⣀⣤⣿⠿⠁⠀⠀
+		⠀⠀⠀⠘⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠁⠁`,
+	},
+	"Flame": {
+		Name:           "Flame",
+		Health:         90,
+		MaxHealth:      90,
+		MaxATK:         24,
+		EXPtogive:      55,
+		Coinstogive:    55,
+		Initiative:     8,
+		AttackMsg:      "The flame burns you !",
+		CritEvery:      5,
+		CritMultiplier: 2.0,
+		Loot:           "Fire Ball",
+		Art: `
+		   )
+		  ) \
+		 / ) (
+		 \(_)/  
+`,
+	},
+	"Annoying Dog": {
+		Name:           "Annoying Dog",
+		Health:         110,
+		MaxHealth:      110,
+		MaxATK:         28,
+		EXPtogive:      70,
+		Coinstogive:    70,
+		Initiative:     10,
+		AttackMsg:      "The annoying dog annoys you !",
+		CritEvery:      4,
+		CritMultiplier: 2.3,
+		Loot:           "Potion",
+		Art: `
+		░░░░░░░░░░░░░░░░░░░░
+		░▄▀▄▀▀▀▀▄▀▄░░░░░░░░░
+		░█░░░░░░░░▀▄░░░░░░▄░
+		█░░▀░░▀░░░░░▀▄▄░░█░█
+		█░▄░█▀░▄░░░░░░░▀▀░░█
+		█░░▀▀▀▀░░░░░░░░░░░░█
+		█░░░░░░░░░░░░░░░░░░█
+		█░░░░░░░░░░░░░░░░░░█
+		░█░░▄▄░░▄▄▄▄░░▄▄░░█░
+		░█░▄▀█░▄▀░░█░▄▀█░▄▀░
+		░░▀░░░▀░░░░░▀░░░▀░░░
+`,
+	},
+	"Flowers": {
+		Name:           "Flowers",
+		Health:         220,
+		MaxHealth:      220,
+		MaxATK:         45,
+		EXPtogive:      180,
+		Coinstogive:    180,
+		Initiative:     12,
+		AttackMsg:      "The flowers attack !",
+		CritEvery:      3,
+		CritMultiplier: 2.5,
+		Loot:           "Poison",
+		Art: `
+                    _
+                  _(_)_                          wWWWw   _
+      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_
+     @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)
+      @@@@  (___)     |/    Y    (_)@(_)  @@@@   \|/   (_)\
+       /      Y       \|    \|/    /(_)    \|      |/      |
+    \ |     \ |/       | / \ | /  \|/       |/    \|      \|/
+    \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|// 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`,
+	},
+	"Polaris": {
+		Name:           "Polaris",
+		Health:         380,
+		MaxHealth:      380,
+		MaxATK:         58,
+		EXPtogive:      360,
+		Coinstogive:    300,
+		Initiative:     13,
+		AttackMsg:      "Polaris rends reality around you!",
+		CritEvery:      3,
+		CritMultiplier: 2.5,
+		Loot:           "Chocolatine",
+		Art: `
+                 )
+               /  )
+              /  / )
+         -   /  / /
+            '  / / -
+           / _/ / /
+     _    / _/_, /          ,
+   + $$$ / _/_/_/          \       |
+ /- + $$/ _/_/_/      /
+ \ _ $$/'_/_/    .    ______   _
+		\ (  / ___,_____ _ _____,
+		|   (|/_,_,__ ________/
+    |.   |''_,_______)
+     \   (_
+      \  / |-._
+       \.' /|/ \_._
+       /_/   _/    /-'__
+         \     \'       \.___
+          '.   /,     |_/_   |._
+            \ / )   '.     '_/, )
+             (_(     -\_   /  \ \
+                \__      |-'   |/
+                  \._  /_/_
+                     \_/\' )
+                         \ |
+                         |/`,
 	},
 }
 

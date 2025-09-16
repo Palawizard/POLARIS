@@ -1,9 +1,13 @@
 package skills
 
 import (
+	"math/rand"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/utils"
+	"time"
 )
+
+var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 type Skill struct {
 	ID    string
@@ -13,18 +17,13 @@ type Skill struct {
 }
 
 var Skills = map[string]Skill{
-	"Punch": {
-		ID:    "Punch",
-		Label: "Punch",
-		Price: 0,
-		Apply: effectPunch,
-	},
-	"Fire Ball": {
-		ID:    "Fire Ball",
-		Label: "Fire Ball",
-		Price: 20,
-		Apply: effectFireball,
-	},
+	"Punch":          {ID: "Punch", Label: "Punch", Price: 0, Apply: effectPunch},
+	"Fire Ball":      {ID: "Fire Ball", Label: "Fire Ball", Price: 20, Apply: effectFireball},
+	"Heal":           {ID: "Heal", Label: "Heal", Price: 15, Apply: effectHeal},
+	"Lightning Bolt": {ID: "Lightning Bolt", Label: "Lightning Bolt", Price: 18, Apply: effectLightningBolt},
+	"Ice Shard":      {ID: "Ice Shard", Label: "Ice Shard", Price: 15, Apply: effectIceShard},
+	"Vampiric Touch": {ID: "Vampiric Touch", Label: "Vampiric Touch", Price: 22, Apply: effectVampiricTouch},
+	"Meteor":         {ID: "Meteor", Label: "Meteor", Price: 35, Apply: effectMeteor},
 }
 
 // SpellBook adds the given skill to the player's spellbook, incrementing its count by 1.
