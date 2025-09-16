@@ -18,14 +18,14 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println("Turn", turn)
 		utils.SendTurn(turn)
 		monsters.PrintHeader(monster)
-		fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
+		fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
 		fmt.Println("It's your turn!\n")
 		fmt.Println("1. Skills")
 		fmt.Println("2. Inventory")
 		fmt.Println("3. Return to menu")
 
 		var choice int
-		fmt.Scan(&choice)
+		fmt.Scanln(&choice)
 		_ = audiosystem.PlaySFXCached("select")
 
 		switch choice {
@@ -45,14 +45,14 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
+			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Skills\n")
 			if len(sopts) == 0 {
 				fmt.Println("(none)")
 				fmt.Println("\n1. Return")
 				var _tmp int
-				fmt.Scan(&_tmp)
+				fmt.Scanln(&_tmp)
 				_ = audiosystem.PlaySFXCached("select")
 				continue
 			}
@@ -67,7 +67,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("0. Cancel")
 
 			var sidx int
-			fmt.Scan(&sidx)
+			fmt.Scanln(&sidx)
 			_ = audiosystem.PlaySFXCached("select")
 			if sidx == 0 {
 				continue
@@ -96,14 +96,14 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Println(player.Name, "HP:", player.Health, "/", player.MaxHealth)
+			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Inventory (usable)\n")
 			if len(opts) == 0 {
 				fmt.Println("(none)")
 				fmt.Println("\n1. Return")
 				var _tmp int
-				fmt.Scan(&_tmp)
+				fmt.Scanln(&_tmp)
 				_ = audiosystem.PlaySFXCached("select")
 				continue
 			}
@@ -118,7 +118,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("0. Cancel")
 
 			var idx int
-			fmt.Scan(&idx)
+			fmt.Scanln(&idx)
 			_ = audiosystem.PlaySFXCached("select")
 			if idx == 0 {
 				continue
@@ -140,7 +140,6 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 		case 3:
 			audiosystem.StopMusic()
-
 			return true
 
 		default:

@@ -2,11 +2,14 @@ package monsters
 
 import (
 	"fmt"
+	"math/rand"
 	"path/filepath"
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/utils"
 	"time"
 )
+
+var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	utils.Clearscreen()
@@ -23,15 +26,17 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	time.Sleep(2 * time.Second)
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "enemyatk.mp3"))
 
-	dmg := monster.ATK
+	var dmg float64
 	if monster.CritEvery > 0 && turn%monster.CritEvery == 0 {
 		mult := monster.CritMultiplier
 		if mult <= 0 {
 			mult = 2
 		}
-		dmg *= mult
+		dmg = monster.MaxATK * mult
 		fmt.Println("Critical hit!")
 		time.Sleep(1 * time.Second)
+	} else {
+		dmg = monster.MaxATK * (0.5 + rng.Float64()*0.5)
 	}
 
 	player.Health -= dmg
@@ -45,7 +50,7 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	if utils.IsDead(player) {
 		fmt.Printf("\nYou have been defeated by the %s.\n", monster.Name)
 		time.Sleep(3 * time.Second)
-		return true
+		return false
 	}
 
 	fmt.Printf("\nYour HP is now %.0f / %.0f hp.\n", player.Health, player.MaxHealth)

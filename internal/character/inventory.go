@@ -94,7 +94,7 @@ func AccessInventory(player *utils.Player) bool {
 	fmt.Println("2. Return")
 
 	var choice int
-	fmt.Scan(&choice)
+	fmt.Scanln(&choice)
 	_ = audiosystem.PlaySFXCached("select")
 
 	switch choice {
@@ -176,7 +176,7 @@ func useItemMenu(p *utils.Player) {
 		fmt.Println("No usable objects")
 		fmt.Println("\n1. Return")
 		var _tmp int
-		fmt.Scan(&_tmp)
+		fmt.Scanln(&_tmp)
 		_ = audiosystem.PlaySFXCached("select")
 		return
 	}
@@ -197,7 +197,7 @@ func useItemMenu(p *utils.Player) {
 	fmt.Println("0. Cancel")
 
 	var idx int
-	fmt.Scan(&idx)
+	fmt.Scanln(&idx)
 	_ = audiosystem.PlaySFXCached("select")
 	if idx <= 0 || idx > len(opts) {
 		return
@@ -238,7 +238,7 @@ func useItemMenu(p *utils.Player) {
 
 	fmt.Println("\n1. Return")
 	var _tmp int
-	fmt.Scan(&_tmp)
+	fmt.Scanln(&_tmp)
 	_ = audiosystem.PlaySFXCached("select")
 }
 
