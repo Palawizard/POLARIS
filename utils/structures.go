@@ -16,4 +16,7 @@ type Player struct {
 	Equipment             map[string]int
 	Equipped              map[string]string
 	Initiative            float64
+	Mana                  float64
+	MaxMana               float64
+	ManaRegen             float64
 }

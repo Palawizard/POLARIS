@@ -80,6 +80,8 @@ func ShowMenu(player *utils.Player) {
 			time.Sleep(2 * time.Second)
 			player.MaxHealth = 999999
 			player.Health = 999999
+			player.MaxMana = 999999
+			player.Mana = 999999
 			for i := 0; i < 100; i++ {
 				skills.SpellBook("Meteor", player)
 			}

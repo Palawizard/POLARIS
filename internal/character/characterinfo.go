@@ -77,6 +77,19 @@ func CharacterCreation() utils.Player {
 	level := 1
 	money := 0.0
 	initiative := 4.0
+
+	maxMana := 30.0
+	mana := maxMana
+	manaRegen := 0.0
+	switch classID {
+	case "Dwarf":
+		manaRegen = 2.0
+	case "Human":
+		manaRegen = 5.0
+	case "Elf":
+		manaRegen = 7.0
+	}
+
 	skills := map[string]int{"Punch": 1}
 	equipment := map[string]int{}
 	inventory := map[string]int{"Potion": 3}
@@ -99,6 +112,9 @@ func CharacterCreation() utils.Player {
 		InventoryUpgradesUsed: inventoryupgradesused,
 		Equipped:              map[string]string{},
 		Initiative:            initiative,
+		Mana:                  mana,
+		MaxMana:               maxMana,
+		ManaRegen:             manaRegen,
 	}
 }
 
@@ -113,7 +129,8 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Max Inventory Size: ", player.InventoryMax)
 
 	armorBonus := equipement.EquippedBonus(player)
-	fmt.Printf("Health: %.0f/%.0f (+%.0f max HP from armor)\n\n", player.Health, player.MaxHealth, armorBonus)
+	fmt.Printf("Health: %.0f/%.0f (+%.0f max HP from armor)\n", player.Health, player.MaxHealth, armorBonus)
+	fmt.Printf("Mana:   %.0f/%.0f (+%.0f/turn)\n\n", player.Mana, player.MaxMana, player.ManaRegen)
 
 	fmt.Println("Equipped:")
 	head := "(none)"
@@ -151,6 +168,8 @@ func AddEXP(player *utils.Player, exp float64) {
 		player.EXPToNextLevel *= 1.15
 		player.MaxHealth += 15
 		player.Initiative += 2.0
+		player.MaxMana += 5
+		player.Mana = player.MaxMana
 		utils.Clearscreen()
 		fmt.Println("Level up!")
 		time.Sleep(1 * time.Second)
