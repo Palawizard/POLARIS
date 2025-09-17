@@ -25,7 +25,7 @@ func Shop(player *utils.Player) {
 		fmt.Println("1. Item Shop")
 		fmt.Println("2. Spell Shop")
 		fmt.Println("3. Upgrade Inventory (7 coins)")
-		fmt.Println("4. Return")
+		fmt.Println("0. Return")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -53,7 +53,7 @@ func Shop(player *utils.Player) {
 			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
 			time.Sleep(2 * time.Second)
 			continue
-		case 4:
+		case 0:
 			return
 		}
 	}

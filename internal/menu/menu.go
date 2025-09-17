@@ -35,7 +35,7 @@ func ShowMenu(player *utils.Player) {
 		fmt.Println("5. Black-Smith")
 		fmt.Println("6. Training Fight")
 		fmt.Println("7. Qui sont-ils ?")
-		fmt.Println("8. Quit")
+		fmt.Println("9. Quit")
 
 		var choice int
 		if _, err := fmt.Scanln(&choice); err != nil {
@@ -66,7 +66,7 @@ func ShowMenu(player *utils.Player) {
 			}
 		case 7:
 			showHiddenArtists()
-		case 8:
+		case 9:
 			return
 		case 991:
 			chapters.ChangeChapter(1)

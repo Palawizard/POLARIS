@@ -153,7 +153,7 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println(" Body:", body)
 	fmt.Println(" Feet:", feet)
 
-	fmt.Println("\n1. Retour")
+	fmt.Println("\n0. Return")
 	var choice int
 	fmt.Scan(&choice)
 	_ = audiosystem.PlaySFXCached("select")

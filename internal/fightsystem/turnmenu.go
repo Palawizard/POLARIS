@@ -30,7 +30,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println("It's your turn!\n")
 		fmt.Println("1. Skills")
 		fmt.Println("2. Inventory")
-		fmt.Println("3. Return to menu")
+		fmt.Println("0. Return to menu")
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -164,7 +164,7 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			time.Sleep(2 * time.Second)
 			return false
 
-		case 3:
+		case 0:
 			audiosystem.StopMusic()
 			return true
 
