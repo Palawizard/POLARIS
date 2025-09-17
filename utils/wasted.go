@@ -22,7 +22,11 @@ func IsDead(player *Player) bool {
 		if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 			fmt.Println("play loop error:", err)
 		}
-		time.Sleep(3 * time.Second)
+		time.Sleep(1 * time.Second)
+		fmt.Println("You should try again after getting the right equipment !")
+		time.Sleep(1 * time.Second)
+		fmt.Println("You can also farm the training fight to get stronger.")
+		time.Sleep(4 * time.Second)
 		return true
 	} else {
 		return false

@@ -61,6 +61,10 @@ func StartChapter3(player *utils.Player) bool {
 	utils.Clearscreen()
 	texttoshow = "You have 0 altars left to relight to regain the favor of Goddess Polaris."
 	utils.ShowText(texttoshow)
+
+	utils.Clearscreen()
+	texttoshow = "She's waiting for you..."
+	utils.ShowText(texttoshow)
 	StopMusic()
 
 	return true

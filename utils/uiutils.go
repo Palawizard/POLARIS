@@ -68,3 +68,37 @@ func PrintASCII(art string) {
 	}
 	fmt.Println(strings.Join(lines, "\n"))
 }
+
+func Shake(ms int, amp int) {
+	if ms <= 0 {
+		ms = 120
+	}
+	if amp < 1 {
+		amp = 1
+	}
+	frames := 3
+	step := time.Duration(ms/(frames*4)) * time.Millisecond
+
+	// Save cursor & hide
+	fmt.Print("\x1b7\x1b[?25l")
+	defer fmt.Print("\x1b8\x1b[?25h")
+
+	// Small jitter cycle + quick flash (DEC pvt mode 5) for a subtle impact feel.
+	for i := 0; i < frames; i++ {
+		for a := 0; a < amp; a++ {
+			fmt.Print("\x1b[1C") // right
+			time.Sleep(step)
+			fmt.Print("\x1b[1D") // left
+			time.Sleep(step)
+			fmt.Print("\x1b[1B") // down
+			time.Sleep(step)
+			fmt.Print("\x1b[1A") // up
+			time.Sleep(step / 2)
+
+			// tiny flash
+			fmt.Print("\x1b[?5h")
+			time.Sleep(step / 2)
+			fmt.Print("\x1b[?5l")
+		}
+	}
+}

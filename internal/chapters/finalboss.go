@@ -43,6 +43,14 @@ func StartFinalBoss(player *utils.Player) bool {
 	utils.ShowText(texttoshow)
 
 	utils.Clearscreen()
+	texttoshow = "If you want to play again or cheat, here's some commands usable in the menu :"
+	utils.ShowText(texttoshow)
+
+	utils.Clearscreen()
+	texttoshow = "991 : Chapter 1 | 992 : Chapter 2 | 993 : Chapter 3 | 994 : Final Boss | 25565 : Admin Mode"
+	utils.ShowText(texttoshow)
+
+	utils.Clearscreen()
 	texttoshow = "Thank you for playing Polaris !"
 	utils.ShowText(texttoshow)
 

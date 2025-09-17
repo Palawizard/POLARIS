@@ -15,13 +15,13 @@ var Equipments = map[string]Equipment{
 	"Adventurer's Tunic": {ID: "Adventurer's Tunic", Name: "Adventurer's Tunic", Type: "Body", Price: 5, Defense: 18},
 	"Adventurer's Boots": {ID: "Adventurer's Boots", Name: "Adventurer's Boots", Type: "Feet", Price: 5, Defense: 12},
 
-	"Leather Cap":   {ID: "Leather Cap", Name: "Leather Cap", Type: "Head", Price: 12, Defense: 16},
-	"Leather Armor": {ID: "Leather Armor", Name: "Leather Armor", Type: "Body", Price: 25, Defense: 40},
-	"Leather Boots": {ID: "Leather Boots", Name: "Leather Boots", Type: "Feet", Price: 16, Defense: 22},
+	"Leather Cap":   {ID: "Leather Cap", Name: "Leather Cap", Type: "Head", Price: 6, Defense: 16},
+	"Leather Armor": {ID: "Leather Armor", Name: "Leather Armor", Type: "Body", Price: 12, Defense: 40},
+	"Leather Boots": {ID: "Leather Boots", Name: "Leather Boots", Type: "Feet", Price: 8, Defense: 22},
 
-	"Iron Helm":    {ID: "Iron Helm", Name: "Iron Helm", Type: "Head", Price: 20, Defense: 24},
-	"Iron Plate":   {ID: "Iron Plate", Name: "Iron Plate", Type: "Body", Price: 40, Defense: 64},
-	"Iron Greaves": {ID: "Iron Greaves", Name: "Iron Greaves", Type: "Feet", Price: 28, Defense: 32},
+	"Iron Helm":    {ID: "Iron Helm", Name: "Iron Helm", Type: "Head", Price: 12, Defense: 24},
+	"Iron Plate":   {ID: "Iron Plate", Name: "Iron Plate", Type: "Body", Price: 22, Defense: 64},
+	"Iron Greaves": {ID: "Iron Greaves", Name: "Iron Greaves", Type: "Feet", Price: 14, Defense: 32},
 }
 
 var Recipes = map[string]map[string]int{
@@ -29,13 +29,13 @@ var Recipes = map[string]map[string]int{
 	"Adventurer's Tunic": {"Wolf Fur": 2, "Troll Skin": 1},
 	"Adventurer's Boots": {"Wolf Fur": 1, "Boar Leather": 1},
 
-	"Leather Cap":   {"Wolf Fur": 2, "Boar Leather": 2, "Crow Feather": 4},
-	"Leather Armor": {"Wolf Fur": 5, "Boar Leather": 5, "Troll Skin": 1, "Crow Feather": 3},
-	"Leather Boots": {"Wolf Fur": 3, "Boar Leather": 3, "Troll Skin": 1, "Crow Feather": 1},
+	"Leather Cap":   {"Wolf Fur": 1, "Boar Leather": 1, "Crow Feather": 2},
+	"Leather Armor": {"Wolf Fur": 3, "Boar Leather": 3, "Troll Skin": 1, "Crow Feather": 2},
+	"Leather Boots": {"Wolf Fur": 2, "Boar Leather": 2, "Crow Feather": 1},
 
-	"Iron Helm":    {"Troll Skin": 4, "Wolf Fur": 4, "Crow Feather": 6},
-	"Iron Plate":   {"Troll Skin": 10, "Wolf Fur": 8, "Boar Leather": 6},
-	"Iron Greaves": {"Troll Skin": 6, "Wolf Fur": 5, "Crow Feather": 10},
+	"Iron Helm":    {"Troll Skin": 2, "Wolf Fur": 2, "Crow Feather": 3},
+	"Iron Plate":   {"Troll Skin": 5, "Wolf Fur": 4, "Boar Leather": 3},
+	"Iron Greaves": {"Troll Skin": 3, "Wolf Fur": 3, "Crow Feather": 4},
 }
 
 func GetEquipment(id string) Equipment { return Equipments[id] }

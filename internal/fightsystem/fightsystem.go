@@ -28,6 +28,9 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (won boo
 		delay = 5840 * time.Millisecond
 		music = "bossbattle.mp3"
 	}
+	if enemy.Name == "Polaris" {
+		music = "finalboss.mp3"
+	}
 
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", sfx))
 	time.Sleep(delay)

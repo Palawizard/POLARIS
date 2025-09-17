@@ -16,28 +16,20 @@ func effectVampiricTouch(p *utils.Player, m *monsters.Monster) {
 	dmg := 14.0
 	heal := dmg * 0.5
 
-	m.Health -= dmg
-	if m.Health < 0 {
-		m.Health = 0
-	}
-
-	before := p.Health
-	p.Health += heal
-	if p.Health > p.MaxHealth {
-		p.Health = p.MaxHealth
-	}
-	gained := p.Health - before
+	applied := utils.ApplyDamage(&m.Health, dmg)
+	healed := utils.ApplyHeal(&p.Health, p.MaxHealth, heal)
 
 	utils.Clearscreen()
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "punch1.mp3"))
+	utils.Shake(50, 1)
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")
 	fmt.Printf("%s uses Vampiric Touch\n", p.Name)
-	fmt.Printf("%s takes %.0f damage\n", m.Name, dmg)
-	fmt.Printf("%s absorbs %.0f HP\n", p.Name, gained)
-	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)
+	fmt.Printf("%s takes %d damage\n", m.Name, applied)
+	fmt.Printf("%s absorbs %d HP\n", p.Name, healed)
+	fmt.Printf("%s HP: %s\n", m.Name, utils.HPString(m.Health, m.MaxHealth))
 
 	p.Skills["Vampiric Touch"]--
 }

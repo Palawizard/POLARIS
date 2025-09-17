@@ -24,7 +24,7 @@ func Shop(player *utils.Player) {
 		fmt.Println("<=== Welcome to the Shop ===>")
 		fmt.Println("1. Item Shop")
 		fmt.Println("2. Spell Shop")
-		fmt.Println("3. Upgrade Inventory (30 coins)")
+		fmt.Println("3. Upgrade Inventory (7 coins)")
 		fmt.Println("4. Return")
 
 		var choice int
@@ -36,9 +36,9 @@ func Shop(player *utils.Player) {
 		case 2:
 			Spellshop(player)
 		case 3:
-			if player.Money >= 30 {
+			if player.Money >= 7 {
 				if character.UpgradeInventorySlot(player) {
-					player.Money -= 30
+					player.Money -= 7
 					fmt.Println("Inventory slot upgraded.")
 					_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
 					time.Sleep(2 * time.Second)
