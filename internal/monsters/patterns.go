@@ -25,7 +25,7 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	fmt.Println(msg)
 	time.Sleep(2 * time.Second)
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "enemyatk.mp3"))
-	utils.Shake(50, 1)
+	utils.Flash(50, 1)
 
 	var dmg float64
 	crit := false

@@ -69,7 +69,7 @@ func PrintASCII(art string) {
 	fmt.Println(strings.Join(lines, "\n"))
 }
 
-func Shake(ms int, amp int) {
+func Flash(ms int, amp int) {
 	if ms <= 0 {
 		ms = 120
 	}

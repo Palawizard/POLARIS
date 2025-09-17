@@ -38,7 +38,7 @@ func ShowMenu(player *utils.Player) {
 		fmt.Println("8. Quit")
 
 		var choice int
-		if _, err := fmt.Scan(&choice); err != nil {
+		if _, err := fmt.Scanln(&choice); err != nil {
 			continue
 		}
 		_ = audiosystem.PlaySFXCached("select")
@@ -99,6 +99,6 @@ func showHiddenArtists() {
 	fmt.Println(" - Steven Spielberg (partie 3)")
 	fmt.Println("\n1. Retour")
 	var _tmp int
-	_, _ = fmt.Scan(&_tmp)
+	_, _ = fmt.Scanln(&_tmp)
 	_ = audiosystem.PlaySFXCached("select")
 }

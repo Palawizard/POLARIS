@@ -18,7 +18,6 @@ func effectIceShard(p *utils.Player, m *monsters.Monster) {
 
 	utils.Clearscreen()
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "sword.mp3"))
-	utils.Shake(50, 1)
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")
