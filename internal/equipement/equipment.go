@@ -1,6 +1,10 @@
 package equipement
 
-import "projet-red_POLARIS/utils"
+import (
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
+	"projet-red_POLARIS/utils"
+)
 
 func ensureEquipped(m *map[string]string) {
 	if *m == nil {
@@ -42,6 +46,7 @@ func Equip(p *utils.Player, id string) bool {
 	}
 	p.Equipped[slot] = id
 	p.MaxHealth += BonusOf(id)
+	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "equip.mp3"))
 	return true
 }
 

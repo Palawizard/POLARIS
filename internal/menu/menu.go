@@ -38,7 +38,9 @@ func ShowMenu(player *utils.Player) {
 		fmt.Println("8. Quit")
 
 		var choice int
-		fmt.Scanln(&choice)
+		if _, err := fmt.Scanln(&choice); err != nil {
+			continue
+		}
 		_ = audiosystem.PlaySFXCached("select")
 
 		switch choice {
@@ -82,6 +84,7 @@ func ShowMenu(player *utils.Player) {
 			player.Health = 999999
 			player.MaxMana = 999999
 			player.Mana = 999999
+			player.Money = 999999
 			for i := 0; i < 100; i++ {
 				skills.SpellBook("Meteor", player)
 			}
@@ -96,6 +99,6 @@ func showHiddenArtists() {
 	fmt.Println(" - Steven Spielberg (partie 3)")
 	fmt.Println("\n1. Retour")
 	var _tmp int
-	fmt.Scanln(&_tmp)
+	_, _ = fmt.Scanln(&_tmp)
 	_ = audiosystem.PlaySFXCached("select")
 }

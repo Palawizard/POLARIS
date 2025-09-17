@@ -14,7 +14,7 @@ func effectPunch(p *utils.Player, m *monsters.Monster) {
 
 	critical := false
 
-	randomint := rng.Intn(10)
+	randomint := rng.Intn(4)
 	if randomint == 0 {
 		critical = true
 	}
@@ -24,13 +24,13 @@ func effectPunch(p *utils.Player, m *monsters.Monster) {
 	}
 	dmg := 8.0
 	if critical {
-		dmg *= 1.5
+		dmg *= 2
 	}
 
-	m.Health -= dmg
-	if m.Health < 0 {
-		m.Health = 0
-	}
+	dmg = dmg * (1.0 + 0.2*float64(p.Level-1))
+
+	applied := utils.ApplyDamage(&m.Health, dmg)
+
 	utils.Clearscreen()
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "punch1.mp3"))
 	fmt.Println("Turn", turn)
@@ -41,6 +41,6 @@ func effectPunch(p *utils.Player, m *monsters.Monster) {
 		fmt.Println("Critical hit!")
 		time.Sleep(1 * time.Second)
 	}
-	fmt.Printf("%s takes %.0f damage\n", m.Name, dmg)
-	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)
+	fmt.Printf("%s takes %d damage\n", m.Name, applied)
+	fmt.Printf("%s HP: %s\n", m.Name, utils.HPString(m.Health, m.MaxHealth))
 }

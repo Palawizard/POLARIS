@@ -2,6 +2,7 @@ package character
 
 import (
 	"fmt"
+	"math"
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/equipement"
 	"projet-red_POLARIS/utils"
@@ -83,16 +84,16 @@ func CharacterCreation() utils.Player {
 	manaRegen := 0.0
 	switch classID {
 	case "Dwarf":
-		manaRegen = 2.0
+		manaRegen = 4.0
 	case "Human":
 		manaRegen = 5.0
 	case "Elf":
-		manaRegen = 7.0
+		manaRegen = 6.0
 	}
 
 	skills := map[string]int{"Punch": 1}
 	equipment := map[string]int{}
-	inventory := map[string]int{"Potion": 3}
+	inventory := map[string]int{"Potion": 2}
 	inventorymax := 10
 	inventoryupgradesused := 0
 
@@ -159,14 +160,16 @@ func DisplayInfo(player *utils.Player) {
 }
 
 func AddEXP(player *utils.Player, exp float64) {
+	exp = math.Round(exp)
 	player.EXP += exp
 	fmt.Println("You have gained", exp, "EXP.")
 	time.Sleep(1 * time.Second)
 	for player.EXP >= player.EXPToNextLevel {
 		player.EXP -= player.EXPToNextLevel
 		player.Level++
-		player.EXPToNextLevel *= 1.15
-		player.MaxHealth += 15
+		player.EXPToNextLevel = math.Round(player.EXPToNextLevel * 1.15)
+		player.MaxHealth = math.Round(player.MaxHealth + 15)
+		player.Health = player.MaxHealth
 		player.Initiative += 2.0
 		player.MaxMana += 5
 		player.Mana = player.MaxMana
@@ -175,7 +178,10 @@ func AddEXP(player *utils.Player, exp float64) {
 		time.Sleep(1 * time.Second)
 		fmt.Println("Your level is now", player.Level)
 		fmt.Println("Your max health is now", player.MaxHealth)
+		fmt.Println("Your were fully healed.")
+		fmt.Println("Your max mana is now", player.MaxMana)
 		fmt.Println("Your EXP to next level is now", player.EXPToNextLevel)
-		time.Sleep(3 * time.Second)
+		fmt.Println("You got stronger...")
+		time.Sleep(4 * time.Second)
 	}
 }

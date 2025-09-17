@@ -14,7 +14,6 @@ import (
 
 func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 	for {
-		// Regen mana at the start of player's turn
 		if player.Mana < player.MaxMana {
 			player.Mana += player.ManaRegen
 			if player.Mana > player.MaxMana {
@@ -26,8 +25,8 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println("Turn", turn)
 		utils.SendTurn(turn)
 		monsters.PrintHeader(monster)
-		fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
-		fmt.Printf("%s MP: %.0f / %.0f\n", player.Name, player.Mana, player.MaxMana)
+		fmt.Printf("%s HP: %s\n", player.Name, utils.HPString(player.Health, player.MaxHealth))
+		fmt.Printf("%s MP: %.0f/%.0f\n", player.Name, player.Mana, player.MaxMana)
 		fmt.Println("It's your turn!\n")
 		fmt.Println("1. Skills")
 		fmt.Println("2. Inventory")
@@ -54,8 +53,8 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
-			fmt.Printf("%s MP: %.0f / %.0f\n", player.Name, player.Mana, player.MaxMana)
+			fmt.Printf("%s HP: %s\n", player.Name, utils.HPString(player.Health, player.MaxHealth))
+			fmt.Printf("%s MP: %.0f/%.0f\n", player.Name, player.Mana, player.MaxMana)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Skills\n")
 			if len(sopts) == 0 {
@@ -122,8 +121,8 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
-			fmt.Printf("%s MP: %.0f / %.0f\n", player.Name, player.Mana, player.MaxMana)
+			fmt.Printf("%s HP: %s\n", player.Name, utils.HPString(player.Health, player.MaxHealth))
+			fmt.Printf("%s MP: %.0f/%.0f\n", player.Name, player.Mana, player.MaxMana)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Inventory (usable)\n")
 			if len(opts) == 0 {

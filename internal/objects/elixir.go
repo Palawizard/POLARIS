@@ -15,5 +15,5 @@ func effectElixir(p *utils.Player) {
 		actual = 0
 	}
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
-	fmt.Printf("Elixir consumed! Fully restored (+%.0f HP). (%.0f/%.0f)\n", actual, p.Health, p.MaxHealth)
+	fmt.Printf("Elixir consumed! Fully restored (+%.0f HP). %s\n", actual, utils.HPString(p.Health, p.MaxHealth))
 }

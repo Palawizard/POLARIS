@@ -14,10 +14,8 @@ func effectIceShard(p *utils.Player, m *monsters.Monster) {
 	}
 	turn := utils.GetTurn()
 	dmg := 14.0
-	m.Health -= dmg
-	if m.Health < 0 {
-		m.Health = 0
-	}
+	dmg = dmg * (1.0 + 0.2*float64(p.Level-1))
+	applied := utils.ApplyDamage(&m.Health, dmg)
 
 	utils.Clearscreen()
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "sword.mp3"))
@@ -25,8 +23,8 @@ func effectIceShard(p *utils.Player, m *monsters.Monster) {
 	monsters.PrintHeader(m)
 	fmt.Println("\n")
 	fmt.Printf("%s casts Ice Shard\n", p.Name)
-	fmt.Printf("%s takes %.0f damage\n", m.Name, dmg)
-	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)
+	fmt.Printf("%s takes %d damage\n", m.Name, applied)
+	fmt.Printf("%s HP: %s\n", m.Name, utils.HPString(m.Health, m.MaxHealth))
 
 	p.Skills["Ice Shard"]--
 }

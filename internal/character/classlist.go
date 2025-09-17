@@ -14,19 +14,19 @@ type Class struct {
 var Classes = map[string]Class{
 	"Human": {
 		ID:    "Human",
-		Label: "Human",
+		Label: "Human (Normal)",
 		HP:    50,
 		MAXHP: 100,
 	},
 	"Elf": {
 		ID:    "Elf",
-		Label: "Elf",
+		Label: "Elf (Hard)",
 		HP:    40,
 		MAXHP: 80,
 	},
 	"Dwarf": {
 		ID:    "Dwarf",
-		Label: "Dwarf",
+		Label: "Dwarf (Easy)",
 		HP:    60,
 		MAXHP: 120,
 	},
@@ -49,7 +49,7 @@ func ClassLabel(id string) string { return GetClass(id).Label }
 func Classlist() string {
 	var list []string
 	for _, c := range Classes {
-		list = append(list, c.ID)
+		list = append(list, c.Label)
 	}
 	result := strings.Join(list, ", ")
 	return result

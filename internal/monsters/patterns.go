@@ -25,9 +25,22 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 	fmt.Println(msg)
 	time.Sleep(2 * time.Second)
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "enemyatk.mp3"))
+	utils.Flash(50, 1)
 
 	var dmg float64
-	if monster.CritEvery > 0 && turn%monster.CritEvery == 0 {
+	crit := false
+	if monster.CritEvery > 0 {
+		base := 1.0 / float64(monster.CritEvery)
+		boost := float64(monster.SinceLastCrit) / float64(monster.CritEvery)
+		p := base * (1.0 + boost)
+		if p > 0.95 {
+			p = 0.95
+		}
+		if rng.Float64() < p || monster.SinceLastCrit >= monster.CritEvery*2 {
+			crit = true
+		}
+	}
+	if crit {
 		mult := monster.CritMultiplier
 		if mult <= 0 {
 			mult = 2
@@ -35,17 +48,16 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 		dmg = monster.MaxATK * mult
 		fmt.Println("Critical hit!")
 		time.Sleep(1 * time.Second)
+		monster.SinceLastCrit = 0
 	} else {
 		dmg = monster.MaxATK * (0.5 + rng.Float64()*0.5)
+		if monster.CritEvery > 0 {
+			monster.SinceLastCrit++
+		}
 	}
+	applied := utils.ApplyDamage(&player.Health, dmg)
 
-	player.Health -= dmg
-	if player.Health < 1 {
-		player.Health = 0
-	}
-
-	fmt.Printf("Ouch! %s deals %.0f damage to %s!\n", monster.Name, dmg, player.Name)
-	time.Sleep(1 * time.Second)
+	fmt.Printf("Ouch! %s deals %d damage to %s!\n", monster.Name, applied, player.Name)
 
 	if utils.IsDead(player) {
 		fmt.Printf("\nYou have been defeated by the %s.\n", monster.Name)
@@ -53,7 +65,7 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 		return false
 	}
 
-	fmt.Printf("\nYour HP is now %.0f / %.0f hp.\n", player.Health, player.MaxHealth)
+	fmt.Printf("\nYour HP is now %s hp.\n", utils.HPString(player.Health, player.MaxHealth))
 	time.Sleep(2 * time.Second)
 	return true
 }
