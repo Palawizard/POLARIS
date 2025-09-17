@@ -8,6 +8,7 @@ import (
 	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
 	"sort"
+	"strings"
 )
 
 func AccessInventory(player *utils.Player) bool {
@@ -158,24 +159,42 @@ func useItemMenu(p *utils.Player) {
 		fmt.Println("Use an object\n")
 
 		type option struct {
-			id   string
-			kind string
+			id    string
+			kind  string
+			label string
 		}
-		var opts []option
+
+		var itemOpts []option
+		var equipOpts []option
+
 		for id, qty := range p.Inventory {
 			if qty > 0 {
-				if _, ok := objects.GetItem(id); ok {
-					opts = append(opts, option{id: id, kind: "item"})
+				if it, ok := objects.GetItem(id); ok {
+					lbl := it.Label
+					if lbl == "" {
+						lbl = id
+					}
+					itemOpts = append(itemOpts, option{id: id, kind: "item", label: lbl})
 				}
 			}
 		}
+		sort.Slice(itemOpts, func(i, j int) bool {
+			return strings.ToLower(itemOpts[i].label) < strings.ToLower(itemOpts[j].label)
+		})
+
 		for id, qty := range p.Equipment {
 			if qty > 0 {
-				if _, ok := equipement.Equipments[id]; ok {
-					opts = append(opts, option{id: id, kind: "equip"})
+				if eq, ok := equipement.Equipments[id]; ok {
+					equipOpts = append(equipOpts, option{id: id, kind: "equip", label: eq.Name})
 				}
 			}
 		}
+		sort.Slice(equipOpts, func(i, j int) bool {
+			return strings.ToLower(equipOpts[i].label) < strings.ToLower(equipOpts[j].label)
+		})
+
+		opts := append([]option{}, itemOpts...)
+		opts = append(opts, equipOpts...)
 
 		if len(opts) == 0 {
 			fmt.Println("No usable objects")
@@ -188,15 +207,14 @@ func useItemMenu(p *utils.Player) {
 
 		for i, o := range opts {
 			if o.kind == "item" {
-				it, _ := objects.GetItem(o.id)
-				fmt.Printf("%d. %s (x%d)\n", i+1, it.Label, p.Inventory[o.id])
+				fmt.Printf("%d. %s (x%d)\n", i+1, o.label, p.Inventory[o.id])
 			} else {
 				eq := equipement.Equipments[o.id]
 				tag := ""
 				if p.Equipped != nil && p.Equipped[eq.Type] == o.id {
 					tag = " [equipped]"
 				}
-				fmt.Printf("%d. %s [%s] (x%d)%s\n", i+1, eq.Name, eq.Type, p.Equipment[o.id], tag)
+				fmt.Printf("%d. %s [%s] (x%d)%s\n", i+1, o.label, eq.Type, p.Equipment[o.id], tag)
 			}
 		}
 		fmt.Println("0. Return")
@@ -243,6 +261,7 @@ func useItemMenu(p *utils.Player) {
 				}
 			}
 		}
+
 		fmt.Println("\n1. Continue")
 		fmt.Println("0. Return")
 		var cont int

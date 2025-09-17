@@ -18,6 +18,7 @@ func effectLightningBolt(p *utils.Player, m *monsters.Monster) {
 	}
 	turn := utils.GetTurn()
 	dmg := 12.0 + _rngLightning.Float64()*16.0
+	dmg = dmg * (1.0 + 0.2*float64(p.Level-1))
 	applied := utils.ApplyDamage(&m.Health, dmg)
 
 	utils.Clearscreen()

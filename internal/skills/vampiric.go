@@ -14,6 +14,7 @@ func effectVampiricTouch(p *utils.Player, m *monsters.Monster) {
 	}
 	turn := utils.GetTurn()
 	dmg := 14.0
+	dmg = dmg * (1.0 + 0.2*float64(p.Level-1))
 	heal := dmg * 0.5
 
 	applied := utils.ApplyDamage(&m.Health, dmg)

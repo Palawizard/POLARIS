@@ -14,6 +14,7 @@ func effectMeteor(p *utils.Player, m *monsters.Monster) {
 	}
 	turn := utils.GetTurn()
 	dmg := 35.0
+	dmg = dmg * (1.0 + 0.2*float64(p.Level-1))
 
 	applied := utils.ApplyDamage(&m.Health, dmg)
 

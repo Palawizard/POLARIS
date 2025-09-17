@@ -14,6 +14,7 @@ func effectFireball(p *utils.Player, m *monsters.Monster) {
 		return
 	}
 	dmg := 18.0
+	dmg = dmg * (1.0 + 0.2*float64(p.Level-1))
 	applied := utils.ApplyDamage(&m.Health, dmg)
 	utils.Clearscreen()
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "fire.mp3"))
