@@ -1,5 +1,7 @@
 # Polaris — a tiny turn-based console RPG
 
+![Title](assets/readme/images/titlescreen.gif)
+
 A compact, text-driven RPG with chapters, turn-based combat, loot, crafting, spellbooks, and a light economy. Everything runs in the terminal, with sound effects and music via the `beep` audio stack.
 
 This README documents the game’s features, how to run it, and how the codebase is laid out.
@@ -51,6 +53,8 @@ That boots the title animation and music. Press **Enter** to start, then follow 
 ---
 
 ## Combat system
+
+![Combat](assets/readme/images/fight.png)
 
 Turn-based and deterministic in UI, with controlled randomness inside:
 
@@ -120,6 +124,8 @@ Buy spellbooks to gain skill charges (they stack). Mana is spent on cast.
 
 ## Equipment & crafting (black-smith)
 
+![Blacksmith](assets/readme/images/blacksmith.png)
+
 Three slots: **Head**, **Body**, **Feet**. Equipment increases **Max HP** (shown as “+MHP”). Equipping/unequipping correctly adjusts current Max HP and clamps current HP if necessary.
 
 **Sets available**
@@ -146,18 +152,21 @@ Each recipe costs coins + materials (from loot). Prices and recipes are balanced
 
 ### Item Shop
 
+![ItemShop](assets/readme/images/itemshop.png)
 * Items are listed alphabetically with current **owned count**.
 * Choose an item, then enter the **quantity** you want.
 * Capacity and funds are validated; you’ll get a helpful message if you don’t have enough coins or space.
 
 ### Spell Shop
 
+![SpellShop](assets/readme/images/spellshop.png)
 * Buy spellbooks. Each purchase adds one to your stack of that spell.
 * Shows **mana cost** and current owned count.
 * `0` returns.
 
 ### Sell
 
+![Sell](assets/readme/images/sell.png)
 * Sell **anything you own** (items, equipment, or spellbooks) at **50%** of the listed price.
 * Equipment currently equipped can’t be sold (unequip first).
 
@@ -219,4 +228,4 @@ main.go            // entry point: preload select SFX, start game
 	* Deltarune by Toby Fox
 	* Undetale by Toby Fox
 
-Have fun!
+# Have fun!
