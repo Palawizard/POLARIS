@@ -1,136 +1,105 @@
 package chapters
 
 import (
-	"fmt"
-	"path/filepath"
-	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/fightsystem"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/utils"
 )
 
-func StartMusic() {
-	if err := audiosystem.Init(); err != nil {
-		fmt.Println("audio init error:", err)
-	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", "chapters.mp3")
-	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
-		fmt.Println("play loop error:", err)
-	}
-}
-
-func StartWinningMusic() {
-	if err := audiosystem.Init(); err != nil {
-		fmt.Println("audio init error:", err)
-	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", "chapterwon.mp3")
-	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
-		fmt.Println("play loop error:", err)
-	}
-}
-
-func StopMusic() {
-	audiosystem.StopMusic()
-}
-
+// StartChapter1 runs the opening story beats and three sequential fights.
+// Returns false if the player loses or exits during any encounter.
 func StartChapter1(player *utils.Player) bool {
-	utils.Clearscreen()
+	utils.ClearScreen()
+
+	// Opening cutscene: music + intro lines
 	StartMusic()
-	texttoshow := "Goddess Polaris: No! Hey! Are you serious?! You’re peeing on my altar! >:|"
-	utils.ShowText(texttoshow)
+	textToShow := "Goddess Polaris: No! Hey! Are you serious?! You’re peeing on my altar! >:|"
+	utils.ShowText(textToShow)
 
-	utils.Clearscreen()
-	texttoshow = "How dare you defy the goddess of life and death? Cursed be you! You gross creep! As punishment, you must rekindle the sacred flame in all my temples!"
-	utils.ShowText(texttoshow)
+	utils.ClearScreen()
+	textToShow = "How dare you defy the goddess of life and death? Cursed be you! You gross creep! As punishment, you must rekindle the sacred flame in all my temples!"
+	utils.ShowText(textToShow)
 
-	utils.Clearscreen()
+	// Nicolas enft
+	utils.ClearScreen()
 	utils.PrintASCII(`
-
-                                .=*#=#%-+%##                               
-                            -+*%#%+%%@@@%@%@@@@%*:                         
-                        .*=*@%%@%@@%@%@@@@@@@@@@@@#=                       
-                       **+##@#@%@@@@@@@@@@@@@@@@##@  +                     
-                      *%%@*%#%%@@@@%%%%%%%%%@@@@@@@%-=                     
-                    =#=*#%*%#*+++=----=-==++**##%%@@@@@                    
-                   -%*#%%%*-:....::::----===++**##%@@@@*                   
-                   ++@%@*.   ..::::--:-----=+++***#@@@@@@                  
-                   ##%@%.     . ..-:----::===+*****#@@@@@                  
-                   *@@@:    . ..::--------==+**#***#@@@@@                  
-                    #**.   ..:-:::--=====++##@%@%@#*@@@@@+                 
-                    %#* ..+%*@@@*+++*+**####@#@@@@@@@@@@@=                 
-                    ##%*:=-+++***+=@@@@@@####*+***++*%@@@                  
-                    #* .:--.%@@@#*=:@-+@@%%%@@@@@@#++*#+                   
-                     *..--*-=%%#*=:@ .-*@%%%%%#######**@                   
-                     %    .:--==:. @ .=##@#%#####*****#@                   
-                     =@    ....:.@=  :=*##%@@@@@@@@%***@                   
-                     -:. . :-::--:. .---*##*#%####*****@                   
-                      +  ...::=++= .::-=+*#####********%                   
-                       . ..:--=+=-.-*-=+@++%##*********                    
-                       ..::=-===:.. .+**#%%##**+++***#@                    
-                       *..:::--:...=:+#++#%%##%*+++**#@                    
-                        =..::=--. ::--++******##*++*#@*                    
-                        *::..:*+:. .-=+***%%##**+++*%@*#*=                 
-                       :*+-.... ...:-==+*++*****%**#@@%%%%*++.             
-                       -%:*:+=:..:.:-==++*****#@%%@%#@%%@@@###+            
-                   =   +@  ##.-.:.  ..::=+*####%%@@**@@%@##%**#=           
-              .        -%. -+##--...=--==*#%%%%@@@#*#%@#%##%*#%*=          
-                   =    =+ .=@ #.=*-*-+***#%@@@@##**%%@#%*#@**%+++         
-           :  .:.       :+=.=+% .=@%#%%%@@@@@@**++*#%%%++*#+++#+++*=-      
-          .::::   .=*    :=*-+@+    ..-+*#+====++*###%*=+*===%+=+*#*+=-    
-         .--..   -=**=   . -+**@#:.....::---===+++*#*#-=*:==++==#***#-+    
-     .  .-=:    -+**+:     .:--*@@=::.:::----=++==+*.:-+:==%+=%#*+=++=+    
-    :   -+=.  .=+*#*-.    ..::+.:@@*=--::::::----=  .-.---#+=###=--===-    
-       .+*:  -:-*##+:    # :- . ::-+=+**=-::::*@     :-=#=-#**++=:::---    
-       :*+  +*::*##=.  . .%# .+==:#%*+=+@%@@@     . :-#=-#*+==+=-:.: -:    
-       -*- -##:-*#+:.  .. %@@#. : *=*:--+=      .:=*+-@*+======-::..: -    
-       -*- +##--##=::  ...@@ %+   +---+     :-:-**@@@@@----===--:.  ..=    
-      :-+:.*#%=:**--..  ...#:.#:  :+:-=+++=+== --*@@@@=-:---=-:-:          
-    :.=.-=+##%*.=++-:.  .:.@@%@-..==+--===-:::=-+ @@@:.:::-=-:..:     =
+                ▒▓▓▓▓▓▓█▓█░                
+           ░▓▓▒▓██▓██████████▓▒█           
+         ▓▓▓▓▓█████████████████░ ▓         
+        ░▓▓▓██▓█████████████████░          
+       ▓▒▓▓█▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓███████        
+      ▓▓█▓█▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓█████       
+     ░▓███▒░░░░▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓████▓      
+     ▒▓██▒░░░░▒░▒▒░▒▒▒▒▒▒▓▓▓▓▓▓▓█████      
+     ░███░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓█████      
+      ▓▓▓░░░▓▒▒█▓▒▓▒▓▓▓▓▓▓██████▓████      
+      ▓▓▓▒▓██████▓▓▒▓▓████▓▓▓▓▓▓▓▓███      
+     ░▓▒░▒▒▒▒▓▓█▓▓▒████▓▓████▓▓▓▓▓██▓      
+      ░▓▒▒▓▒▒█▓██▓▒█▒▒▓████████▓▓▓▓█       
+       █░░▒▒▒▒▓▓▒▒█░░▓▓█▓▓▓▓▓▓▓▓▓▓▓█       
+       ▓█░░░▒▒▒▒▒█▒░▒▓▓▓▓▓██████▓▓▓█       
+       ▒░░░▒▒▒▒▒▒▒░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓█       
+        ░░▒░▒▒▒▓▓░░▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▒       
+        ░░▒▒▒▒▒▓▒▒▓▓▒▓▓██▓▓▓▓▓▓▓▓▓▓        
+         ▒▒▒▒▒▒▒▒▒▒░▓▓▒███▓▓▓▓▓▓▓██        
+         ▒▒▒▒▒▒▒▒░▒▒▒▒▓▓▓▓▓▓█▓▓▓▓█▒        
+         ▒▒▒▒▒▓█▒░▒▒▓▓▓▓█▓▓▓▓▓▓▓▓█▓▓▒░     
+        ░▓▓▒▒▒▒░░░▒▒▒▓▓▓▓▓▓▓▓▓▓▓██▓██▓▓▓░  
+       ░░▓▓▒▒▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓█▓████▓▓█▓▓▓▒ 
+    ░░░░▒█▒░▓▓▒▒▒░░░▒▒▒▓▓▓▓█▓▓██▓██▓██▓▓▓▓▒
+░░░░░░░░░▓▒░▒▓▓▒░▒▒▒▓▓▓▓▓▓█▓██▓▓▓██▓█▓▓▓▓▓▒
+░▒▓▒░░░░░░█▒▒▒▓▒▓█▓▓▓▓▓▓▓███▓▓▓▓▓██▓▓▓█▓▓▓▒
+▒▒▒░░▒▓░░░▒█▒▒█▒░░░▓▒████▓▓▓▓▓▓▓▓██▓▓▓▒▓▓▓▒
+▒░░░▒▓▓▒░░░░▒▓▓█▓▒▒░░▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▓▒▓▒▓▒▓
 `)
 
-	texttoshow = "You look at the goddess like this"
-	utils.ShowText(texttoshow)
+	textToShow = "You look at the goddess like this"
+	utils.ShowText(textToShow)
 
-	utils.Clearscreen()
-	texttoshow = "Goddess Polaris: Oh, I forgot to mention—you’ll have a few enemies to fight; otherwise it’d be too easy, owo."
-	utils.ShowText(texttoshow)
+	utils.ClearScreen()
+	textToShow = "Goddess Polaris: Oh, I forgot to mention—you’ll have a few enemies to fight; otherwise it’d be too easy, owo."
+	utils.ShowText(textToShow)
 
+	// Fight 1 — Flower
 	StopMusic()
 	flower := monsters.New("Flower")
 	if won, exit := fightsystem.RunFight(player, flower, false); exit || !won {
 		return false
 	}
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	StartMusic()
-	texttoshow = "Goddess Polaris: Mmph! rolls eyes We’ll see if you handle what comes next just as well!"
-	utils.ShowText(texttoshow)
+	textToShow = "Goddess Polaris: Mmph! rolls eyes We’ll see if you handle what comes next just as well!"
+	utils.ShowText(textToShow)
 
+	// Fight 2 — Skeleton
 	StopMusic()
 	skeleton := monsters.New("Skeleton")
 	if won, exit := fightsystem.RunFight(player, skeleton, false); exit || !won {
 		return false
 	}
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	StartMusic()
-	texttoshow = "You near the temple… but a horrible monster, reeking of raclette, is guarding it…"
-	utils.ShowText(texttoshow)
+	textToShow = "You near the temple… but a horrible monster, reeking of raclette, is guarding it…"
+	utils.ShowText(textToShow)
 
+	// Fight 3 — Boss Potato
 	StopMusic()
 	potato := monsters.New("Boss Potato")
 	if won, exit := fightsystem.RunFight(player, potato, true); exit || !won {
 		return false
 	}
 
+	// Chapter wrap-up and progression note
 	StartWinningMusic()
-	utils.Clearscreen()
-	texttoshow = "You reach the goddess’s altar and light the sacred flame."
-	utils.ShowText(texttoshow)
+	utils.ClearScreen()
+	textToShow = "You reach the goddess’s altar and light the sacred flame."
+	utils.ShowText(textToShow)
 
-	utils.Clearscreen()
-	texttoshow = "You have 0 altars left to relight to regain the favor of Goddess Polaris."
-	utils.ShowText(texttoshow)
+	utils.ClearScreen()
+	textToShow = "You have 2 altars left to relight to regain the favor of Goddess Polaris."
+	utils.ShowText(textToShow)
 	StopMusic()
 
 	return true

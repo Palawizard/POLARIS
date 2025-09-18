@@ -12,17 +12,29 @@ import (
 	"time"
 )
 
+// TurnMenu runs the player's turn UI.
+// Returns true if the player chose to exit the fight, false otherwise.
 func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 	for {
-		utils.Clearscreen()
+		// Passive mana regeneration at the start of each menu loop.
+		if player.Mana < player.MaxMana {
+			player.Mana += player.ManaRegen
+			if player.Mana > player.MaxMana {
+				player.Mana = player.MaxMana
+			}
+		}
+
+		// Header + basic HUD
+		utils.ClearScreen()
 		fmt.Println("Turn", turn)
 		utils.SendTurn(turn)
 		monsters.PrintHeader(monster)
-		fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
+		fmt.Printf("%s HP: %s\n", player.Name, utils.HPString(player.Health, player.MaxHealth))
+		fmt.Printf("%s MP: %.0f/%.0f\n", player.Name, player.Mana, player.MaxMana)
 		fmt.Println("It's your turn!\n")
 		fmt.Println("1. Skills")
 		fmt.Println("2. Inventory")
-		fmt.Println("3. Return to menu")
+		fmt.Println("0. Return to menu")
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -30,25 +42,28 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 		switch choice {
 		case 1:
-			type sopt struct{ id string }
-			var sopts []sopt
+			// Build the list of castable skills the player owns (x>0).
+			type skillOpt struct{ id string }
+			var skillOpts []skillOpt
 			for id, qty := range player.Skills {
 				if qty > 0 {
 					if sk, ok := skills.Skills[id]; ok && sk.Apply != nil {
 						_ = sk
-						sopts = append(sopts, sopt{id: id})
+						skillOpts = append(skillOpts, skillOpt{id: id})
 					}
 				}
 			}
 
-			utils.Clearscreen()
+			// Skills submenu
+			utils.ClearScreen()
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
+			fmt.Printf("%s HP: %s\n", player.Name, utils.HPString(player.Health, player.MaxHealth))
+			fmt.Printf("%s MP: %.0f/%.0f\n", player.Name, player.Mana, player.MaxMana)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Skills\n")
-			if len(sopts) == 0 {
+			if len(skillOpts) == 0 {
 				fmt.Println("(none)")
 				fmt.Println("\n1. Return")
 				var _tmp int
@@ -57,49 +72,71 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				continue
 			}
 
-			sort.Slice(sopts, func(i, j int) bool {
-				return skills.Skills[sopts[i].id].Label < skills.Skills[sopts[j].id].Label
+			// Sort by label for a stable, readable list.
+			sort.Slice(skillOpts, func(i, j int) bool {
+				return skills.Skills[skillOpts[i].id].Label < skills.Skills[skillOpts[j].id].Label
 			})
-			for i, o := range sopts {
+
+			for i, o := range skillOpts {
 				sk := skills.Skills[o.id]
-				fmt.Printf("%d. %s (x%d)\n", i+1, sk.Label, player.Skills[o.id])
+				cost := sk.ManaCost
+				tag := ""
+				if player.Mana < cost {
+					tag = " [not enough mana]"
+				}
+				fmt.Printf("%d. %s (x%d) - %.0f MP%s\n", i+1, sk.Label, player.Skills[o.id], cost, tag)
 			}
 			fmt.Println("0. Cancel")
 
-			var sidx int
-			fmt.Scanln(&sidx)
+			// Selection + cast
+			var skillIdx int
+			fmt.Scanln(&skillIdx)
 			_ = audiosystem.PlaySFXCached("select")
-			if sidx == 0 {
+			if skillIdx == 0 {
 				continue
 			}
-			if sidx < 0 || sidx > len(sopts) {
+			if skillIdx < 0 || skillIdx > len(skillOpts) {
 				continue
 			}
-			sel := sopts[sidx-1].id
-			skills.Cast(sel, player, monster)
+			sel := skillOpts[skillIdx-1].id
+			cost := skills.Skills[sel].ManaCost
+			if player.Mana < cost {
+				fmt.Println("Not enough mana.")
+				time.Sleep(1 * time.Second)
+				continue
+			}
+			if ok := skills.Cast(sel, player, monster); !ok {
+				// Defensive: in case a spell fails its own checks.
+				fmt.Println("The spell fizzles.")
+				time.Sleep(1 * time.Second)
+				continue
+			}
 			time.Sleep(2 * time.Second)
 			return false
 
 		case 2:
-			type opt struct{ id string }
-			var opts []opt
+			// Build list of usable inventory items (those with Apply != nil and qty > 0).
+			type itemOpt struct{ id string }
+			var itemOpts []itemOpt
 			for id, qty := range player.Inventory {
 				if qty > 0 {
 					if it, ok := objects.Items[id]; ok && it.Apply != nil {
 						_ = it
-						opts = append(opts, opt{id: id})
+						itemOpts = append(itemOpts, itemOpt{id: id})
 					}
 				}
 			}
 
-			utils.Clearscreen()
+			// Items submenu
+			utils.ClearScreen()
 			fmt.Println("Turn", turn)
 			utils.SendTurn(turn)
 			monsters.PrintHeader(monster)
-			fmt.Printf("%s HP: %.0f / %.0f\n", player.Name, player.Health, player.MaxHealth)
+			fmt.Printf("%s HP: %s\n", player.Name, utils.HPString(player.Health, player.MaxHealth))
+			fmt.Printf("%s MP: %.0f/%.0f\n", player.Name, player.Mana, player.MaxMana)
 			fmt.Println("It's your turn!\n")
 			fmt.Println("Inventory (usable)\n")
-			if len(opts) == 0 {
+			if len(itemOpts) == 0 {
 				fmt.Println("(none)")
 				fmt.Println("\n1. Return")
 				var _tmp int
@@ -108,26 +145,28 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 				continue
 			}
 
-			sort.Slice(opts, func(i, j int) bool {
-				return objects.Items[opts[i].id].Label < objects.Items[opts[j].id].Label
+			// Stable alphabetical listing by item label.
+			sort.Slice(itemOpts, func(i, j int) bool {
+				return objects.Items[itemOpts[i].id].Label < objects.Items[itemOpts[j].id].Label
 			})
-			for i, o := range opts {
+			for i, o := range itemOpts {
 				it := objects.Items[o.id]
 				fmt.Printf("%d. %s (x%d)\n", i+1, it.Label, player.Inventory[o.id])
 			}
 			fmt.Println("0. Cancel")
 
-			var idx int
-			fmt.Scanln(&idx)
+			// Use item
+			var itemIdx int
+			fmt.Scanln(&itemIdx)
 			_ = audiosystem.PlaySFXCached("select")
-			if idx == 0 {
+			if itemIdx == 0 {
 				continue
 			}
-			if idx < 0 || idx > len(opts) {
+			if itemIdx < 0 || itemIdx > len(itemOpts) {
 				continue
 			}
 
-			id := opts[idx-1].id
+			id := itemOpts[itemIdx-1].id
 			it := objects.Items[id]
 			fmt.Printf("You use %s\n", it.Label)
 			if ok := objects.ApplyItem(id, player); ok {
@@ -138,11 +177,13 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 			time.Sleep(2 * time.Second)
 			return false
 
-		case 3:
+		case 0:
+			// Exit to main menu (ends the fight loop).
 			audiosystem.StopMusic()
 			return true
 
 		default:
+			// Any other input re-displays the menu.
 			continue
 		}
 	}

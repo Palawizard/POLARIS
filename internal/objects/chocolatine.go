@@ -1,0 +1,52 @@
+package objects
+
+import (
+	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
+	"projet-red_POLARIS/utils"
+	"time"
+)
+
+// effectChocolatine fully restores the player's HP and plays the heal SFX.
+func effectChocolatine(p *utils.Player) {
+	temp := p.MaxHealth
+	p.Health = temp
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "heal.mp3"))
+	utils.ClearScreen()
+	fmt.Println("You ate the chocolatine!")
+	time.Sleep(1 * time.Second)
+	utils.PrintASCII(`
+                ▒▓▓▓▓▓▓█▓█░                
+           ░▓▓▒▓██▓██████████▓▒█           
+         ▓▓▓▓▓█████████████████░ ▓         
+        ░▓▓▓██▓█████████████████░          
+       ▓▒▓▓█▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓███████        
+      ▓▓█▓█▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓█████       
+     ░▓███▒░░░░▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓████▓      
+     ▒▓██▒░░░░▒░▒▒░▒▒▒▒▒▒▓▓▓▓▓▓▓█████      
+     ░███░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓█████      
+      ▓▓▓░░░▓▒▒█▓▒▓▒▓▓▓▓▓▓██████▓████      
+      ▓▓▓▒▓██████▓▓▒▓▓████▓▓▓▓▓▓▓▓███      
+     ░▓▒░▒▒▒▒▓▓█▓▓▒████▓▓████▓▓▓▓▓██▓      
+      ░▓▒▒▓▒▒█▓██▓▒█▒▒▓████████▓▓▓▓█       
+       █░░▒▒▒▒▓▓▒▒█░░▓▓█▓▓▓▓▓▓▓▓▓▓▓█       
+       ▓█░░░▒▒▒▒▒█▒░▒▓▓▓▓▓██████▓▓▓█       
+       ▒░░░▒▒▒▒▒▒▒░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓█       
+        ░░▒░▒▒▒▓▓░░▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▒       
+        ░░▒▒▒▒▒▓▒▒▓▓▒▓▓██▓▓▓▓▓▓▓▓▓▓        
+         ▒▒▒▒▒▒▒▒▒▒░▓▓▒███▓▓▓▓▓▓▓██        
+         ▒▒▒▒▒▒▒▒░▒▒▒▒▓▓▓▓▓▓█▓▓▓▓█▒        
+         ▒▒▒▒▒▓█▒░▒▒▓▓▓▓█▓▓▓▓▓▓▓▓█▓▓▒░     
+        ░▓▓▒▒▒▒░░░▒▒▒▓▓▓▓▓▓▓▓▓▓▓██▓██▓▓▓░  
+       ░░▓▓▒▒▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓█▓████▓▓█▓▓▓▒ 
+    ░░░░▒█▒░▓▓▒▒▒░░░▒▒▒▓▓▓▓█▓▓██▓██▓██▓▓▓▓▒
+░░░░░░░░░▓▒░▒▓▓▒░▒▒▒▓▓▓▓▓▓█▓██▓▓▓██▓█▓▓▓▓▓▒
+░▒▓▒░░░░░░█▒▒▒▓▒▓█▓▓▓▓▓▓▓███▓▓▓▓▓██▓▓▓█▓▓▓▒
+▒▒▒░░▒▓░░░▒█▒▒█▒░░░▓▒████▓▓▓▓▓▓▓▓██▓▓▓▒▓▓▓▒
+▒░░░▒▓▓▒░░░░▒▓▓█▓▒▒░░▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▓▒▓▒▓▒▓
+`)
+	fmt.Println("\nYou look at the camera like this")
+	time.Sleep(2 * time.Second)
+	fmt.Printf("Your HP was MAXED OUT ! You now have %.0f hp.\n", p.Health)
+}

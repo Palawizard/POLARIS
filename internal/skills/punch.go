@@ -6,24 +6,36 @@ import (
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/utils"
+	"time"
 )
 
+// effectPunch is the basic attack: 25% crit chance, 2× crit, +20% damage per level after level 1.
 func effectPunch(p *utils.Player, m *monsters.Monster) {
-	turn := utils.GetTurn()
 	if m == nil {
 		return
 	}
+	turn := utils.GetTurn()
+
+	critical := rng.Intn(4) == 0
+
 	dmg := 8.0
-	m.Health -= dmg
-	if m.Health < 0 {
-		m.Health = 0
+	if critical {
+		dmg *= 2.0
 	}
-	utils.Clearscreen()
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "punch1.mp3"))
+	dmg *= 1.0 + 0.2*float64(p.Level-1)
+
+	applied := utils.ApplyDamage(&m.Health, dmg)
+
+	utils.ClearScreen()
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "punch1.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")
 	fmt.Printf("%s uses Punch\n", p.Name)
-	fmt.Printf("%s takes %.0f damage\n", m.Name, dmg)
-	fmt.Printf("%s HP: %.0f / %.0f\n", m.Name, m.Health, m.MaxHealth)
+	if critical {
+		fmt.Println("Critical hit!")
+		time.Sleep(1 * time.Second)
+	}
+	fmt.Printf("%s takes %d damage\n", m.Name, applied)
+	fmt.Printf("%s HP: %s\n", m.Name, utils.HPString(m.Health, m.MaxHealth))
 }

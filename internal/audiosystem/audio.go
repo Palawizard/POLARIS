@@ -16,17 +16,23 @@ import (
 )
 
 var (
-	inited    bool
-	baseSR    = beep.SampleRate(44100)
-	bgCtrl    *beep.Ctrl
-	bgCloser  io.Closer
-	mu        sync.RWMutex
-	sfxCache  = map[string]*beep.Buffer{}
-	sfxFmt    = beep.Format{}
-	masterVol = -1.0
-	sfxVol    = 0.0
+	// lazily-initialized speaker state and shared controls
+	inited   bool
+	baseSR   = beep.SampleRate(44100)
+	bgCtrl   *beep.Ctrl
+	bgCloser io.Closer
+
+	// small lock-protected SFX buffer cache and format info
+	mu       sync.RWMutex
+	sfxCache = map[string]*beep.Buffer{}
+	sfxFmt   = beep.Format{}
+
+	// volumes in effects.Volume "Volume" units (log scale, base 2)
+	masterVol = -1.0 // background music volume
+	sfxVol    = 0.0  // one-shot SFX volume
 )
 
+// Init ensures the audio speaker is ready. Safe to call multiple times.
 func Init() error {
 	if inited {
 		return nil
@@ -38,6 +44,8 @@ func Init() error {
 	return nil
 }
 
+// decode opens and decodes a supported audio file, returning a seekable
+// streamer, its format, and a closer you must Close when finished.
 func decode(path string) (beep.StreamSeekCloser, beep.Format, io.Closer, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -64,13 +72,17 @@ func decode(path string) (beep.StreamSeekCloser, beep.Format, io.Closer, error) 
 	}
 }
 
+// resampleToBase converts a stream to the engine's base sample rate if needed.
 func resampleToBase(streamer beep.Streamer, format beep.Format) beep.Streamer {
 	if format.SampleRate == baseSR {
 		return streamer
 	}
+	// quality 4 is a good trade-off for game audio
 	return beep.Resample(4, format.SampleRate, baseSR, streamer)
 }
 
+// PreloadSFX decodes an effect and stores it in memory under the given id.
+// If already cached, it returns immediately.
 func PreloadSFX(id, path string) error {
 	if err := Init(); err != nil {
 		return err
@@ -90,6 +102,7 @@ func PreloadSFX(id, path string) error {
 
 	rs := resampleToBase(stream, format)
 
+	// normalize buffer format to our base sample rate
 	bufFmt := beep.Format{
 		SampleRate:  baseSR,
 		NumChannels: format.NumChannels,
@@ -107,6 +120,7 @@ func PreloadSFX(id, path string) error {
 	return nil
 }
 
+// PlaySFXCached plays a preloaded SFX by id. It does nothing if the id was not cached.
 func PlaySFXCached(id string) error {
 	if err := Init(); err != nil {
 		return err
@@ -123,6 +137,7 @@ func PlaySFXCached(id string) error {
 	return nil
 }
 
+// PlaySFX plays an SFX from disk, preloading it into the cache on first use.
 func PlaySFX(path string) error {
 	if err := PreloadSFX(path, path); err != nil {
 		return err
@@ -130,6 +145,8 @@ func PlaySFX(path string) error {
 	return PlaySFXCached(path)
 }
 
+// PlayMusicLoop starts background music from the given file and loops it.
+// Any currently playing music is stopped first.
 func PlayMusicLoop(path string) error {
 	if err := Init(); err != nil {
 		return err
@@ -141,16 +158,20 @@ func PlayMusicLoop(path string) error {
 		return err
 	}
 	bgCloser = closer
+
 	loop := beep.Loop(-1, stream)
 	rs := resampleToBase(loop, format)
+
 	vol := &effects.Volume{Streamer: rs, Base: 2, Volume: masterVol}
 	bgCtrl = &beep.Ctrl{Streamer: vol}
 	speaker.Play(bgCtrl)
 	return nil
 }
 
+// StopMusic halts the current background track and releases its resources.
 func StopMusic() {
 	if bgCtrl != nil {
+		// Lock to avoid races with the audio thread.
 		speaker.Lock()
 		bgCtrl.Paused = true
 		bgCtrl = nil

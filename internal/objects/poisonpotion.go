@@ -2,6 +2,8 @@ package objects
 
 import (
 	"fmt"
+	"path/filepath"
+	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/utils"
 	"time"
 )
@@ -11,11 +13,9 @@ import (
 func effectPoisonPotion(p *utils.Player) {
 	for i := 0; i < 3; i++ {
 		dmg := 10.0
-		if p.Health < dmg {
-			dmg = p.Health
-		}
-		p.Health -= dmg
-		fmt.Printf("Ouch! You lost %.0f hp ! You now have %.0f hp.\n", dmg, p.Health)
+		applied := utils.ApplyDamage(&p.Health, dmg)
+		fmt.Printf("Ouch! You lost %d hp ! You now have %s hp.\n", applied, utils.HPString(p.Health, p.MaxHealth))
+		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "enemyatk.mp3"))
 		time.Sleep(1 * time.Second)
 		if utils.IsDead(p) {
 			return
