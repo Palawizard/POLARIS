@@ -47,8 +47,8 @@ func BlackSmith(player *utils.Player) {
 		}
 
 		// Footer actions on a new line as requested.
-		fmt.Printf("\n%d. Aide\n", len(catalog)+1)
-		fmt.Println("0. Retour")
+		fmt.Printf("\n%d. Help\n", len(catalog)+1)
+		fmt.Println("0. Return")
 
 		if lastMsg != "" {
 			fmt.Println()
@@ -70,7 +70,7 @@ func BlackSmith(player *utils.Player) {
 		if choice < 1 || choice > len(catalog) {
 			lastMsg = "Invalid choice."
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -82,7 +82,7 @@ func BlackSmith(player *utils.Player) {
 		if player.Money < price {
 			lastMsg = "You do not have enough coins."
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -101,7 +101,7 @@ func BlackSmith(player *utils.Player) {
 			sort.Strings(missing)
 			lastMsg = "Missing: " + strings.Join(missing, ", ")
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -116,7 +116,7 @@ func BlackSmith(player *utils.Player) {
 		AddEquipment(id, player)
 		lastMsg = fmt.Sprintf("Crafted %s. Owned: x%d", id, player.Equipment[id])
 		time.Sleep(1 * time.Second)
-		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
+		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "buy.wav"))
 	}
 }
 
@@ -166,7 +166,7 @@ func blacksmithHelp() {
 		fmt.Printf("   Total MHP bonus (full set): +%.0f\n\n", totalMHP)
 	}
 
-	fmt.Println("0. Retour")
+	fmt.Println("0. Return")
 	var _tmp int
 	fmt.Scanln(&_tmp)
 	_ = audiosystem.PlaySFXCached("select")

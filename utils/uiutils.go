@@ -29,10 +29,10 @@ func ClearScreen() {
 func ShowText(text string) {
 	for _, r := range text {
 		fmt.Print(string(r))
-		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "text.wav"))
+		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "text.wav"))
 		time.Sleep(20 * time.Millisecond)
 	}
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "text_end.wav"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "text_end.wav"))
 	fmt.Print("\n\nPress Enter to continue...")
 	_, _ = bufio.NewReader(os.Stdin).ReadString('\n')
 }

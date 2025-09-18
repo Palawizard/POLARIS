@@ -38,17 +38,17 @@ func Shop(player *utils.Player) {
 				if character.UpgradeInventorySlot(player) {
 					player.Money -= 7
 					fmt.Println("Inventory slot upgraded.")
-					_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
+					_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "buy.wav"))
 					time.Sleep(2 * time.Second)
 				} else {
 					fmt.Println("Upgrade limit reached!")
-					_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+					_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 					time.Sleep(2 * time.Second)
 				}
 				continue
 			}
 			fmt.Println("You do not have enough coins.")
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(2 * time.Second)
 			continue
 		case 0:

@@ -31,7 +31,7 @@ func effectFireball(p *utils.Player, m *monsters.Monster) {
 
 	// Presentation
 	utils.ClearScreen()
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "fire.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "fire.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")

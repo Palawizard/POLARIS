@@ -12,6 +12,6 @@ import (
 func effectHealthPotion(p *utils.Player) {
 	const gain = 50.0
 	healed := utils.ApplyHeal(&p.Health, p.MaxHealth, gain)
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "heal.mp3"))
 	fmt.Printf("You gained %d HP. HP: %s\n", healed, utils.HPString(p.Health, p.MaxHealth))
 }

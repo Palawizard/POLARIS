@@ -21,7 +21,7 @@ func IsDead(player *Player) bool {
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", "death.mp3")
+	musicPath := filepath.Join("assets", "audio", "music", "death.mp3")
 	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 		fmt.Println("play loop error:", err)
 	}

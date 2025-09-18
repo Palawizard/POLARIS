@@ -10,7 +10,7 @@ import (
 // main is the entry point of the application.
 func main() {
 	_ = audiosystem.PreloadSFX("select",
-		filepath.Join("internal", "audiosystem", "sfx", "select.wav"))
+		filepath.Join("assets", "audio", "sfx", "select.wav"))
 
 	game.InitGame()
 }

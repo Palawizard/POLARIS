@@ -18,7 +18,7 @@ func effectHeal(p *utils.Player, m *monsters.Monster) {
 
 	// Presentation
 	utils.ClearScreen()
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "heal.mp3"))
 	fmt.Println("Turn", turn)
 	if m != nil {
 		monsters.PrintHeader(m)

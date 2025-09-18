@@ -20,7 +20,7 @@ func InitGame() {
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", "titlescreen.mp3")
+	musicPath := filepath.Join("assets", "audio", "music", "titlescreen.mp3")
 	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 		fmt.Println("play loop error:", err)
 	}

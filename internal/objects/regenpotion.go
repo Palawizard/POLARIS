@@ -17,7 +17,7 @@ func effectRegenPotion(p *utils.Player) {
 		if healed <= 0 {
 			break
 		}
-		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
+		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "heal.mp3"))
 		fmt.Printf("Regeneration tick %d/%d: +%d HP: %s\n", i+1, totalTicks, healed, utils.HPString(p.Health, p.MaxHealth))
 		if p.Health >= p.MaxHealth {
 			break

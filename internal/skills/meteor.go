@@ -28,7 +28,7 @@ func effectMeteor(p *utils.Player, m *monsters.Monster) {
 	applied := utils.ApplyDamage(&m.Health, dmg)
 
 	utils.ClearScreen()
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "fire.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "fire.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")

@@ -12,7 +12,7 @@ import (
 func effectChocolatine(p *utils.Player) {
 	temp := p.MaxHealth
 	p.Health = temp
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "heal.mp3"))
 	utils.ClearScreen()
 	fmt.Println("You ate the chocolatine!")
 	time.Sleep(1 * time.Second)

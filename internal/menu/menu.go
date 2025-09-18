@@ -20,7 +20,7 @@ func ShowMenu(player *utils.Player) {
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", "menu.mp3")
+	musicPath := filepath.Join("assets", "audio", "music", "menu.mp3")
 	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 		fmt.Println("play loop error:", err)
 	}

@@ -57,7 +57,7 @@ func ItemShop(player *utils.Player) {
 		}
 		if choice < 1 || choice > len(catalog) {
 			lastMsg = "Invalid choice."
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
@@ -84,13 +84,13 @@ func ItemShop(player *utils.Player) {
 		capLeft := player.InventoryMax - total
 		if capLeft <= 0 {
 			lastMsg = "Your inventory is full."
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
 		if qty > capLeft {
 			lastMsg = fmt.Sprintf("Not enough space. You can carry at most %d more item(s).", capLeft)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
@@ -104,7 +104,7 @@ func ItemShop(player *utils.Player) {
 			} else {
 				lastMsg = fmt.Sprintf("Not enough coins. You can afford up to %d.", maxAffordable)
 			}
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
@@ -117,7 +117,7 @@ func ItemShop(player *utils.Player) {
 		player.Inventory[id] += qty
 
 		lastMsg = fmt.Sprintf("You received %d %s, total: %d", qty, it.Label, player.Inventory[id])
-		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
+		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "buy.wav"))
 		time.Sleep(1 * time.Second)
 	}
 }

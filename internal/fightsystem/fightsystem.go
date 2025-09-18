@@ -36,13 +36,13 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (won boo
 		music = "finalboss.mp3"
 	}
 
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", sfx))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", sfx))
 	time.Sleep(delay)
 
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", music)
+	musicPath := filepath.Join("assets", "audio", "music", music)
 	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 		fmt.Println("play loop error:", err)
 	}
@@ -107,7 +107,7 @@ func RunFight(player *utils.Player, enemy *monsters.Monster, boss bool) (won boo
 func grantVictoryRewards(player *utils.Player, enemy *monsters.Monster) {
 	fmt.Println("You won!")
 	audiosystem.StopMusic()
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "music", "win.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "music", "win.mp3"))
 
 	player.Money += enemy.CoinsToGive
 	fmt.Println("You received", enemy.CoinsToGive, "coins.")

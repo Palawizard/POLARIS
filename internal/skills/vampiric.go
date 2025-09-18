@@ -33,8 +33,8 @@ func effectVampiricTouch(p *utils.Player, m *monsters.Monster) {
 
 	// Feedback & SFX.
 	utils.ClearScreen()
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "punch1.mp3"))
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "punch1.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "heal.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)
 	fmt.Println("\n")

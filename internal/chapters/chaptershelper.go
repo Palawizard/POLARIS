@@ -18,7 +18,7 @@ func StartMusic() {
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", "chapters.mp3")
+	musicPath := filepath.Join("assets", "audio", "music", "chapters.mp3")
 	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 		fmt.Println("play loop error:", err)
 	}
@@ -28,7 +28,7 @@ func StartWinningMusic() {
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
-	musicPath := filepath.Join("internal", "audiosystem", "music", "chapterwon.mp3")
+	musicPath := filepath.Join("assets", "audio", "music", "chapterwon.mp3")
 	if err := audiosystem.PlayMusicLoop(musicPath); err != nil {
 		fmt.Println("play loop error:", err)
 	}

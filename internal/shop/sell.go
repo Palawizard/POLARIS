@@ -113,7 +113,7 @@ func SellShop(player *utils.Player) {
 		}
 		if choice < 1 || choice > len(catalog) {
 			lastMsg = "Invalid choice."
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
@@ -129,7 +129,7 @@ func SellShop(player *utils.Player) {
 			slot := equipment.SlotOf(sel.id)
 			if player.Equipped != nil && player.Equipped[slot] == sel.id {
 				lastMsg = "Unequip it first before selling."
-				_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+				_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 				time.Sleep(1 * time.Second)
 				continue
 			}
@@ -154,7 +154,7 @@ func SellShop(player *utils.Player) {
 		}
 
 		lastMsg = fmt.Sprintf("Sold %s for %.0f coins.", sel.label, sel.price)
-		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
+		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "buy.wav"))
 		time.Sleep(800 * time.Millisecond)
 	}
 }

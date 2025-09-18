@@ -63,7 +63,7 @@ func Equip(p *utils.Player, id string) bool {
 	p.Equipped[slot] = id
 	p.MaxHealth += BonusOf(id)
 
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "equip.mp3"))
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "equip.mp3"))
 	return true
 }
 
