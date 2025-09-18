@@ -19,7 +19,7 @@ This README documents the game’s features, how to run it, and how the codebase
 ### Run
 
 If you are on Windows, download the lastest release and launch polaris.exe.
-For others, download the source code and run launcher.sh or :
+For others, download the repository and run launcher.sh or :
 
 ```bash
 go run .\cmd\main.go
