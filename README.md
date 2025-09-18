@@ -14,7 +14,7 @@ This README documents the game’s features, how to run it, and how the codebase
 
 * Go 1.20+ (earlier versions may work)
 * A terminal that supports ANSI escape codes (for screen clear / flash)
-* Audio output (the game uses MP3/WAV assets in `internal/audiosystem`)
+* Audio output (the game uses MP3/WAV assets in `assets/audio`)
 
 ### Run
 
