@@ -226,6 +226,10 @@ main.go            // entry point: preload select SFX, start game
 
 * Audio playback built on the `beep` stack.
 * ASCII art sprinkled through chapters and special items.
+* **Game made by** :
+  * Baptiste D.M.
+  * Jules D.
+  * Nin L.P.
 * Music and SFX from :
 	* Tomodachi Life's Tomodachi Quest by Nintendo
 	* Deltarune by Toby Fox
