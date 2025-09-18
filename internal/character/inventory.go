@@ -3,7 +3,7 @@ package character
 import (
 	"fmt"
 	"projet-red_POLARIS/internal/audiosystem"
-	"projet-red_POLARIS/internal/equipement"
+	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
@@ -78,7 +78,7 @@ func AccessInventory(player *utils.Player) bool {
 			}
 			var list []kv
 			for id, qty := range player.Equipment {
-				e := equipement.GetEquipment(id)
+				e := equipment.GetEquipment(id)
 				eq := player.Equipped != nil && player.Equipped[e.Type] == id
 				list = append(list, kv{name: e.Name, slot: e.Type, def: e.Defense, qty: qty, eq: eq})
 			}
@@ -199,7 +199,7 @@ func useItemMenu(p *utils.Player) {
 		// Collect equipment (only those owned) and sort by name.
 		for id, qty := range p.Equipment {
 			if qty > 0 {
-				if eq, ok := equipement.Equipments[id]; ok {
+				if eq, ok := equipment.Equipments[id]; ok {
 					equipOpts = append(equipOpts, option{id: id, kind: "equip", label: eq.Name})
 				}
 			}
@@ -226,7 +226,7 @@ func useItemMenu(p *utils.Player) {
 			if o.kind == "item" {
 				fmt.Printf("%d. %s (x%d)\n", i+1, o.label, p.Inventory[o.id])
 			} else {
-				eq := equipement.Equipments[o.id]
+				eq := equipment.Equipments[o.id]
 				tag := ""
 				if p.Equipped != nil && p.Equipped[eq.Type] == o.id {
 					tag = " [equipped]"
@@ -256,20 +256,20 @@ func useItemMenu(p *utils.Player) {
 			}
 		} else {
 			// Toggle equipment in its slot.
-			slot := equipement.SlotOf(choice.id)
+			slot := equipment.SlotOf(choice.id)
 			cur := ""
 			if p.Equipped != nil {
 				cur = p.Equipped[slot]
 			}
 			if cur == choice.id {
-				if equipement.UnequipSlot(p, slot) {
+				if equipment.UnequipSlot(p, slot) {
 					fmt.Printf("Unequipped %s\n", choice.id)
 				} else {
 					fmt.Println("You can't unequip this.")
 				}
 			} else {
 				prev := cur
-				if equipement.Equip(p, choice.id) {
+				if equipment.Equip(p, choice.id) {
 					if prev != "" {
 						fmt.Printf("Equipped %s, replaced %s\n", choice.id, prev)
 					} else {

@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/character"
-	"projet-red_POLARIS/internal/equipement"
+	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/internal/monsters"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/internal/skills"
@@ -120,8 +120,8 @@ func grantVictoryRewards(player *utils.Player, enemy *monsters.Monster) {
 		if it, ok := objects.GetItem(id); ok {
 			character.AddInventory(player, id)
 			fmt.Println("You found", it.Label+".")
-		} else if e, ok := equipement.Equipments[id]; ok {
-			equipement.AddEquipment(id, player)
+		} else if e, ok := equipment.Equipments[id]; ok {
+			equipment.AddEquipment(id, player)
 			fmt.Println("You obtained", e.Name+".")
 		} else if s, ok := skills.Skills[id]; ok {
 			skills.SpellBook(id, player)

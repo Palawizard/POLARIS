@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/character"
-	"projet-red_POLARIS/internal/equipement"
+	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
@@ -54,7 +54,7 @@ func SellShop(player *utils.Player) {
 			if qty <= 0 {
 				continue
 			}
-			if e, ok := equipement.Equipments[id]; ok {
+			if e, ok := equipment.Equipments[id]; ok {
 				catalog = append(catalog, entry{
 					kind:  "equip",
 					id:    id,
@@ -126,7 +126,7 @@ func SellShop(player *utils.Player) {
 			player.Money += sel.price
 
 		case "equip":
-			slot := equipement.SlotOf(sel.id)
+			slot := equipment.SlotOf(sel.id)
 			if player.Equipped != nil && player.Equipped[slot] == sel.id {
 				lastMsg = "Unequip it first before selling."
 				_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))

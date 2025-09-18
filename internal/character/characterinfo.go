@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 	"projet-red_POLARIS/internal/audiosystem"
-	"projet-red_POLARIS/internal/equipement"
+	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/utils"
 	"strings"
 	"time"
@@ -141,7 +141,7 @@ func DisplayInfo(player *utils.Player) {
 	fmt.Println("Money: ", player.Money)
 	fmt.Println("Max Inventory Size: ", player.InventoryMax)
 
-	armorBonus := equipement.EquippedBonus(player)
+	armorBonus := equipment.EquippedBonus(player)
 	fmt.Printf("Health: %.0f/%.0f (+%.0f max HP from armor)\n", player.Health, player.MaxHealth, armorBonus)
 	fmt.Printf("Mana:   %.0f/%.0f (+%.0f/turn)\n\n", player.Mana, player.MaxMana, player.ManaRegen)
 
@@ -151,15 +151,15 @@ func DisplayInfo(player *utils.Player) {
 	body := "(none)"
 	feet := "(none)"
 	if id := player.Equipped["Head"]; id != "" {
-		e := equipement.GetEquipment(id)
+		e := equipment.GetEquipment(id)
 		head = fmt.Sprintf("%s (+%.0f)", e.Name, e.Defense)
 	}
 	if id := player.Equipped["Body"]; id != "" {
-		e := equipement.GetEquipment(id)
+		e := equipment.GetEquipment(id)
 		body = fmt.Sprintf("%s (+%.0f)", e.Name, e.Defense)
 	}
 	if id := player.Equipped["Feet"]; id != "" {
-		e := equipement.GetEquipment(id)
+		e := equipment.GetEquipment(id)
 		feet = fmt.Sprintf("%s (+%.0f)", e.Name, e.Defense)
 	}
 	fmt.Println(" Head:", head)

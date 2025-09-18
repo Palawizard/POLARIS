@@ -1,4 +1,4 @@
-package equipement
+package equipment
 
 import "projet-red_POLARIS/utils"
 

@@ -6,7 +6,7 @@ import (
 	"projet-red_POLARIS/internal/audiosystem"
 	"projet-red_POLARIS/internal/chapters"
 	"projet-red_POLARIS/internal/character"
-	"projet-red_POLARIS/internal/equipement"
+	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/internal/fightsystem"
 	"projet-red_POLARIS/internal/shop"
 	"projet-red_POLARIS/internal/skills"
@@ -65,7 +65,7 @@ func ShowMenu(player *utils.Player) {
 			shop.Shop(player)
 		case 5:
 			// Craft equipment.
-			equipement.BlackSmith(player)
+			equipment.BlackSmith(player)
 		case 6:
 			// Quick practice fight.
 			audiosystem.StopMusic()
