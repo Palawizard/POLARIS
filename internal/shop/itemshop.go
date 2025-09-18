@@ -12,8 +12,8 @@ import (
 )
 
 // ItemShop shows all purchasable items, sorted by label, lets the player pick one,
-// asks for a quantity, then buys that many if there is enough money and inventory space.
-// Enter 0 to return. Shows the player's current coin total and owned quantity per item.
+// then asks for a quantity with an inline hint about max affordable & capacity.
+// Enter 0 to return.
 func ItemShop(player *utils.Player) {
 	lastMsg := ""
 	for {
@@ -65,45 +65,52 @@ func ItemShop(player *utils.Player) {
 		id := catalog[choice-1]
 		it := objects.Items[id]
 
-		// Ask for quantity.
-		fmt.Printf("How many %s do you want? (0 to cancel)\n> ", it.Label)
-		var qty int
-		fmt.Scan(&qty)
-		_ = audiosystem.PlaySFXCached("select")
-
-		if qty <= 0 {
-			lastMsg = "Cancelled."
-			continue
-		}
-
-		// Compute remaining capacity.
-		total := 0
+		// Compute remaining capacity *before* asking quantity.
+		totalHeld := 0
 		for _, q := range player.Inventory {
-			total += q
+			totalHeld += q
 		}
-		capLeft := player.InventoryMax - total
+		capLeft := player.InventoryMax - totalHeld
 		if capLeft <= 0 {
 			lastMsg = "Your inventory is full."
 			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
-		if qty > capLeft {
-			lastMsg = fmt.Sprintf("Not enough space. You can carry at most %d more item(s).", capLeft)
+
+		// Compute max affordable (price can theoretically be 0).
+		maxAffordable := capLeft
+		if it.Price > 0 {
+			maxAffordable = int(math.Floor(player.Money / it.Price))
+		}
+		if maxAffordable <= 0 {
+			lastMsg = "You do not have enough coins."
 			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
 		}
 
-		// Check funds.
-		totalCost := it.Price * float64(qty)
-		if player.Money < totalCost {
-			maxAffordable := int(math.Floor(player.Money / it.Price))
-			if maxAffordable < 1 {
-				lastMsg = "You do not have enough coins."
-			} else {
-				lastMsg = fmt.Sprintf("Not enough coins. You can afford up to %d.", maxAffordable)
-			}
+		// Effective maximum is min(capacity, affordable).
+		maxBuy := capLeft
+		if maxAffordable < maxBuy {
+			maxBuy = maxAffordable
+		}
+
+		// Ask for quantity with inline hint.
+		fmt.Printf("How many %s do you want? (0 to cancel)\n", it.Label)
+		fmt.Printf("You can afford up to %d. Inventory space: %d.\n> ",
+			maxAffordable, capLeft)
+
+		var qty int
+		fmt.Scan(&qty)
+		_ = audiosystem.PlaySFXCached("select")
+
+		if qty == 0 {
+			lastMsg = "Cancelled."
+			continue
+		}
+		if qty < 0 || qty > maxBuy {
+			lastMsg = fmt.Sprintf("Invalid amount. Enter a value between 0 and %d.", maxBuy)
 			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			time.Sleep(1 * time.Second)
 			continue
@@ -113,6 +120,7 @@ func ItemShop(player *utils.Player) {
 		if player.Inventory == nil {
 			player.Inventory = make(map[string]int)
 		}
+		totalCost := it.Price * float64(qty) // OK if price == 0
 		player.Money -= totalCost
 		player.Inventory[id] += qty
 

@@ -5,7 +5,6 @@ import (
 	"math"
 	"path/filepath"
 	"projet-red_POLARIS/internal/audiosystem"
-	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/internal/skills"
@@ -33,7 +32,7 @@ func SellShop(player *utils.Player) {
 		}
 		var catalog []entry
 
-		// Collect inventory items.
+		// Inventory items.
 		for id, qty := range player.Inventory {
 			if qty <= 0 {
 				continue
@@ -49,7 +48,7 @@ func SellShop(player *utils.Player) {
 			}
 		}
 
-		// Collect equipment.
+		// Equipment.
 		for id, qty := range player.Equipment {
 			if qty <= 0 {
 				continue
@@ -65,7 +64,7 @@ func SellShop(player *utils.Player) {
 			}
 		}
 
-		// Collect spellbooks (only those that are purchasable).
+		// Spellbooks (only those that are purchasable).
 		for id, qty := range player.Skills {
 			if qty <= 0 {
 				continue
@@ -92,8 +91,16 @@ func SellShop(player *utils.Player) {
 
 		sort.Slice(catalog, func(i, j int) bool { return catalog[i].label < catalog[j].label })
 
+		// List entries; tag equipped gear as "equiped".
 		for i, e := range catalog {
-			fmt.Printf("%d. %s (x%d) — sell for %.0f coins\n", i+1, e.label, e.qty, e.price)
+			tag := ""
+			if e.kind == "equip" && player.Equipped != nil {
+				slot := equipment.SlotOf(e.id)
+				if player.Equipped[slot] == e.id {
+					tag = " [equiped]"
+				}
+			}
+			fmt.Printf("%d. %s%s (x%d) — sell for %.0f coins each\n", i+1, e.label, tag, e.qty, e.price)
 		}
 		fmt.Println("0. Return")
 
@@ -120,40 +127,75 @@ func SellShop(player *utils.Player) {
 
 		sel := catalog[choice-1]
 
+		// Compute max sellable (can't sell an equipped copy).
+		maxSell := sel.qty
+		if sel.kind == "equip" && player.Equipped != nil {
+			slot := equipment.SlotOf(sel.id)
+			if player.Equipped[slot] == sel.id && maxSell > 0 {
+				maxSell = sel.qty - 1
+			}
+		}
+		if maxSell <= 0 {
+			lastMsg = "Unequip it first before selling."
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
+			time.Sleep(1 * time.Second)
+			continue
+		}
+
+		// Ask how many to sell.
+		fmt.Printf("How many '%s' do you want to sell? (max %d, 0 to cancel): ", sel.label, maxSell)
+		var amount int
+		if _, err := fmt.Scanln(&amount); err != nil {
+			continue
+		}
+		_ = audiosystem.PlaySFXCached("select")
+
+		if amount == 0 {
+			continue
+		}
+		if amount < 0 || amount > maxSell {
+			lastMsg = "Invalid amount."
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
+			time.Sleep(1 * time.Second)
+			continue
+		}
+
+		// Apply sale.
 		switch sel.kind {
 		case "item":
-			character.RemoveInventory(player, sel.id)
-			player.Money += sel.price
+			if q, ok := player.Inventory[sel.id]; ok {
+				if amount >= q {
+					delete(player.Inventory, sel.id)
+				} else {
+					player.Inventory[sel.id] = q - amount
+				}
+			}
 
 		case "equip":
-			slot := equipment.SlotOf(sel.id)
-			if player.Equipped != nil && player.Equipped[slot] == sel.id {
-				lastMsg = "Unequip it first before selling."
-				_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
-				time.Sleep(1 * time.Second)
-				continue
-			}
 			if q, ok := player.Equipment[sel.id]; ok {
-				if q <= 1 {
+				newQ := q - amount
+				if newQ <= 0 {
+					// newQ should never be 0 if one is equipped thanks to maxSell logic.
 					delete(player.Equipment, sel.id)
 				} else {
-					player.Equipment[sel.id] = q - 1
+					player.Equipment[sel.id] = newQ
 				}
-				player.Money += sel.price
 			}
 
 		case "spell":
-			if q, ok := player.Skills[sel.id]; ok && q > 0 {
-				if q == 1 {
+			if q, ok := player.Skills[sel.id]; ok {
+				if amount >= q {
 					delete(player.Skills, sel.id)
 				} else {
-					player.Skills[sel.id] = q - 1
+					player.Skills[sel.id] = q - amount
 				}
-				player.Money += sel.price
 			}
 		}
 
-		lastMsg = fmt.Sprintf("Sold %s for %.0f coins.", sel.label, sel.price)
+		total := math.Round(sel.price * float64(amount))
+		player.Money += total
+
+		lastMsg = fmt.Sprintf("Sold %d x %s for %.0f coins.", amount, sel.label, total)
 		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "buy.wav"))
 		time.Sleep(800 * time.Millisecond)
 	}
