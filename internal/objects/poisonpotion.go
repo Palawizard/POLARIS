@@ -15,7 +15,7 @@ func effectPoisonPotion(p *utils.Player) {
 		dmg := 10.0
 		applied := utils.ApplyDamage(&p.Health, dmg)
 		fmt.Printf("Ouch! You lost %d hp ! You now have %s hp.\n", applied, utils.HPString(p.Health, p.MaxHealth))
-		_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "enemyatk.mp3"))
+		_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "enemyatk.mp3"))
 		time.Sleep(1 * time.Second)
 		if utils.IsDead(p) {
 			return

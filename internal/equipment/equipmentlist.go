@@ -1,15 +1,17 @@
-package equipement
+package equipment
 
 import "projet-red_POLARIS/utils"
 
+// Equipment represents a craftable/equippable piece of gear.
 type Equipment struct {
-	ID      string
-	Name    string
-	Type    string
-	Price   float64
-	Defense float64
+	ID      string  // unique id
+	Name    string  // display name
+	Type    string  // slot: Head, Body, Feet
+	Price   float64 // coin cost to craft
+	Defense float64 // max HP bonus
 }
 
+// Equipments lists all known equipment.
 var Equipments = map[string]Equipment{
 	"Adventurer's Hat":   {ID: "Adventurer's Hat", Name: "Adventurer's Hat", Type: "Head", Price: 5, Defense: 6},
 	"Adventurer's Tunic": {ID: "Adventurer's Tunic", Name: "Adventurer's Tunic", Type: "Body", Price: 5, Defense: 18},
@@ -24,6 +26,7 @@ var Equipments = map[string]Equipment{
 	"Iron Greaves": {ID: "Iron Greaves", Name: "Iron Greaves", Type: "Feet", Price: 14, Defense: 32},
 }
 
+// Recipes lists required materials per equipment.
 var Recipes = map[string]map[string]int{
 	"Adventurer's Hat":   {"Crow Feather": 1, "Boar Leather": 1},
 	"Adventurer's Tunic": {"Wolf Fur": 2, "Troll Skin": 1},
@@ -38,8 +41,10 @@ var Recipes = map[string]map[string]int{
 	"Iron Greaves": {"Troll Skin": 3, "Wolf Fur": 3, "Crow Feather": 4},
 }
 
+// GetEquipment returns the Equipment by id (zero value if unknown).
 func GetEquipment(id string) Equipment { return Equipments[id] }
 
+// AddEquipment increments the owned count of an equipment for the player.
 func AddEquipment(name string, p *utils.Player) {
 	if p.Equipment == nil {
 		p.Equipment = make(map[string]int)
@@ -47,6 +52,7 @@ func AddEquipment(name string, p *utils.Player) {
 	p.Equipment[name]++
 }
 
+// BonusOf returns the max HP bonus for a given equipment id.
 func BonusOf(id string) float64 {
 	if e, ok := Equipments[id]; ok {
 		return e.Defense
@@ -54,6 +60,7 @@ func BonusOf(id string) float64 {
 	return 0
 }
 
+// SlotOf returns the slot (Head/Body/Feet) for a given equipment id.
 func SlotOf(id string) string {
 	if e, ok := Equipments[id]; ok {
 		return e.Type

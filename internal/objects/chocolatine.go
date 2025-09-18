@@ -8,11 +8,12 @@ import (
 	"time"
 )
 
+// effectChocolatine fully restores the player's HP and plays the heal SFX.
 func effectChocolatine(p *utils.Player) {
 	temp := p.MaxHealth
 	p.Health = temp
-	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
-	utils.Clearscreen()
+	_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "heal.mp3"))
+	utils.ClearScreen()
 	fmt.Println("You ate the chocolatine!")
 	time.Sleep(1 * time.Second)
 	utils.PrintASCII(`

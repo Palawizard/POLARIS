@@ -3,7 +3,7 @@ package character
 import (
 	"fmt"
 	"projet-red_POLARIS/internal/audiosystem"
-	"projet-red_POLARIS/internal/equipement"
+	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/internal/objects"
 	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
@@ -11,11 +11,15 @@ import (
 	"strings"
 )
 
+// AccessInventory displays the player's inventory, skills, and equipment,
+// then lets them use an item or equip/unequip gear. It loops until the
+// player chooses to return.
 func AccessInventory(player *utils.Player) bool {
 	for {
-		utils.Clearscreen()
+		utils.ClearScreen()
 		fmt.Println("Inventory\n")
 
+		// --- Items (sorted by label) ---
 		fmt.Println("Items:")
 		if len(player.Inventory) == 0 {
 			fmt.Println(" (none)")
@@ -38,6 +42,7 @@ func AccessInventory(player *utils.Player) bool {
 			}
 		}
 
+		// --- Skills (sorted by label) ---
 		fmt.Println("\nSkills:")
 		if len(player.Skills) == 0 {
 			fmt.Println(" (none)")
@@ -60,6 +65,7 @@ func AccessInventory(player *utils.Player) bool {
 			}
 		}
 
+		// --- Equipment (sorted by slot then name) ---
 		fmt.Println("\nEquipment:")
 		if len(player.Equipment) == 0 {
 			fmt.Println(" (none)")
@@ -72,7 +78,7 @@ func AccessInventory(player *utils.Player) bool {
 			}
 			var list []kv
 			for id, qty := range player.Equipment {
-				e := equipement.GetEquipment(id)
+				e := equipment.GetEquipment(id)
 				eq := player.Equipped != nil && player.Equipped[e.Type] == id
 				list = append(list, kv{name: e.Name, slot: e.Type, def: e.Defense, qty: qty, eq: eq})
 			}
@@ -93,7 +99,7 @@ func AccessInventory(player *utils.Player) bool {
 
 		fmt.Print("\n")
 		fmt.Println("1. Use an object")
-		fmt.Println("2. Return")
+		fmt.Println("0. Return")
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -103,7 +109,7 @@ func AccessInventory(player *utils.Player) bool {
 		case 1:
 			useItemMenu(player)
 			continue
-		case 2:
+		case 0:
 			return false
 		default:
 			continue
@@ -111,6 +117,7 @@ func AccessInventory(player *utils.Player) bool {
 	}
 }
 
+// invCount returns the total number of items in the player's inventory.
 func invCount(p *utils.Player) int {
 	if p == nil || p.Inventory == nil {
 		return 0
@@ -122,6 +129,8 @@ func invCount(p *utils.Player) int {
 	return total
 }
 
+// AddInventory adds one unit of item to the player's inventory,
+// respecting the InventoryMax limit.
 func AddInventory(player *utils.Player, item string) {
 	if player == nil || item == "" {
 		return
@@ -137,6 +146,8 @@ func AddInventory(player *utils.Player, item string) {
 	fmt.Println(item, "added to inventory.")
 }
 
+// RemoveInventory removes one unit of item from the player's inventory.
+// If it was the last one, the entry is deleted.
 func RemoveInventory(player *utils.Player, item string) {
 	if player == nil || item == "" || player.Inventory == nil {
 		return
@@ -153,20 +164,23 @@ func RemoveInventory(player *utils.Player, item string) {
 	}
 }
 
+// useItemMenu lets the player use consumables or equip/unequip gear.
+// Items and equipment are shown in separate alphabetical blocks, then merged.
 func useItemMenu(p *utils.Player) {
 	for {
-		utils.Clearscreen()
+		utils.ClearScreen()
 		fmt.Println("Use an object\n")
 
 		type option struct {
 			id    string
-			kind  string
+			kind  string // "item" or "equip"
 			label string
 		}
 
 		var itemOpts []option
 		var equipOpts []option
 
+		// Collect items (only those present in inventory) and sort by label.
 		for id, qty := range p.Inventory {
 			if qty > 0 {
 				if it, ok := objects.GetItem(id); ok {
@@ -182,9 +196,10 @@ func useItemMenu(p *utils.Player) {
 			return strings.ToLower(itemOpts[i].label) < strings.ToLower(itemOpts[j].label)
 		})
 
+		// Collect equipment (only those owned) and sort by name.
 		for id, qty := range p.Equipment {
 			if qty > 0 {
-				if eq, ok := equipement.Equipments[id]; ok {
+				if eq, ok := equipment.Equipments[id]; ok {
 					equipOpts = append(equipOpts, option{id: id, kind: "equip", label: eq.Name})
 				}
 			}
@@ -193,6 +208,7 @@ func useItemMenu(p *utils.Player) {
 			return strings.ToLower(equipOpts[i].label) < strings.ToLower(equipOpts[j].label)
 		})
 
+		// Merge the two lists for display/selection.
 		opts := append([]option{}, itemOpts...)
 		opts = append(opts, equipOpts...)
 
@@ -205,11 +221,12 @@ func useItemMenu(p *utils.Player) {
 			return
 		}
 
+		// Render options with counts; equipment shows slot and [equipped] tag if applicable.
 		for i, o := range opts {
 			if o.kind == "item" {
 				fmt.Printf("%d. %s (x%d)\n", i+1, o.label, p.Inventory[o.id])
 			} else {
-				eq := equipement.Equipments[o.id]
+				eq := equipment.Equipments[o.id]
 				tag := ""
 				if p.Equipped != nil && p.Equipped[eq.Type] == o.id {
 					tag = " [equipped]"
@@ -229,32 +246,34 @@ func useItemMenu(p *utils.Player) {
 			continue
 		}
 
-		ch := opts[idx-1]
-		if ch.kind == "item" {
-			if ok := objects.ApplyItem(ch.id, p); !ok {
+		choice := opts[idx-1]
+		if choice.kind == "item" {
+			// Try to apply the item; on success, consume one.
+			if ok := objects.ApplyItem(choice.id, p); !ok {
 				fmt.Println("You can't use this object.")
 			} else {
-				RemoveInventory(p, ch.id)
+				RemoveInventory(p, choice.id)
 			}
 		} else {
-			slot := equipement.SlotOf(ch.id)
+			// Toggle equipment in its slot.
+			slot := equipment.SlotOf(choice.id)
 			cur := ""
 			if p.Equipped != nil {
 				cur = p.Equipped[slot]
 			}
-			if cur == ch.id {
-				if equipement.UnequipSlot(p, slot) {
-					fmt.Printf("Unequipped %s\n", ch.id)
+			if cur == choice.id {
+				if equipment.UnequipSlot(p, slot) {
+					fmt.Printf("Unequipped %s\n", choice.id)
 				} else {
 					fmt.Println("You can't unequip this.")
 				}
 			} else {
 				prev := cur
-				if equipement.Equip(p, ch.id) {
+				if equipment.Equip(p, choice.id) {
 					if prev != "" {
-						fmt.Printf("Equipped %s, replaced %s\n", ch.id, prev)
+						fmt.Printf("Equipped %s, replaced %s\n", choice.id, prev)
 					} else {
-						fmt.Printf("Equipped %s\n", ch.id)
+						fmt.Printf("Equipped %s\n", choice.id)
 					}
 				} else {
 					fmt.Println("You can't equip this.")
@@ -262,6 +281,7 @@ func useItemMenu(p *utils.Player) {
 			}
 		}
 
+		// Stay in the use menu unless the player explicitly returns.
 		fmt.Println("\n1. Continue")
 		fmt.Println("0. Return")
 		var cont int
@@ -273,6 +293,7 @@ func useItemMenu(p *utils.Player) {
 	}
 }
 
+// CheckInvSize reports whether the player can carry at least one more item.
 func CheckInvSize(player *utils.Player) bool {
 	if invCount(player) >= player.InventoryMax {
 		fmt.Println("Your inventory is full.")
@@ -281,12 +302,12 @@ func CheckInvSize(player *utils.Player) bool {
 	return true
 }
 
+// UpgradeInventorySlot increases InventoryMax by 10, up to a fixed number of upgrades.
 func UpgradeInventorySlot(player *utils.Player) bool {
 	if player.InventoryUpgradesUsed >= 10 {
 		fmt.Println("You can't upgrade your inventory anymore!")
 		return false
 	}
-
 	player.InventoryMax += 10
 	player.InventoryUpgradesUsed++
 	fmt.Println("Your inventory capacity has increased by 10!")

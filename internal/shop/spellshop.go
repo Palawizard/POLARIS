@@ -11,19 +11,11 @@ import (
 	"time"
 )
 
-// Spellshop is a menu allowing the player to access the different spells
-// available for purchase. It will display the player's current coins, and then
-// display a list of spells available for purchase. The player is prompted to
-// enter the number of the spell they wish to purchase. If the player enters a
-// number that is not in the range of the options, it will simply loop back to the
-// start of the menu. If the player chooses to purchase a spell, it will be added
-// to their inventory, and the player's coins will be reduced by the price of
-// the spell. After the player has purchased a spell, the player will be
-// prompted to enter "1" to return.
-func Spellshop(player *utils.Player) {
+// SpellShop shows purchasable spells; 0 returns.
+func SpellShop(player *utils.Player) {
 	lastMsg := ""
 	for {
-		utils.Clearscreen()
+		utils.ClearScreen()
 		fmt.Println("<=== Spell Shop ===>")
 		fmt.Printf("Coins: %.0f\n\n", player.Money)
 
@@ -46,7 +38,7 @@ func Spellshop(player *utils.Player) {
 			fmt.Printf("%d. Spellbook: %s (%.0f coins, %.0f mana)  [owned: x%d]\n",
 				i+1, s.Label, s.Price, s.ManaCost, owned)
 		}
-		fmt.Printf("%d. Return\n", len(catalog)+1)
+		fmt.Println("0. Return")
 
 		if lastMsg != "" {
 			fmt.Println()
@@ -54,16 +46,16 @@ func Spellshop(player *utils.Player) {
 		}
 
 		var choice int
-		fmt.Scan(&choice)
+		fmt.Scanln(&choice)
 		_ = audiosystem.PlaySFXCached("select")
 
-		if choice == len(catalog)+1 {
+		if choice == 0 {
 			return
 		}
 		if choice < 1 || choice > len(catalog) {
 			lastMsg = "Invalid choice."
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -73,13 +65,13 @@ func Spellshop(player *utils.Player) {
 		if !character.CheckInvSize(player) {
 			lastMsg = "Your inventory is full."
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			continue
 		}
 		if player.Money < s.Price {
 			lastMsg = "You do not have enough coins."
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 			continue
 		}
 
@@ -87,11 +79,11 @@ func Spellshop(player *utils.Player) {
 		if skills.SpellBook(id, player) {
 			lastMsg = fmt.Sprintf("You received 1 Spellbook: %s, total : %d", s.Label, player.Skills[id])
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "buy.wav"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "buy.wav"))
 		} else {
 			lastMsg = "Can't buy that."
 			time.Sleep(1 * time.Second)
-			_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "miss.mp3"))
+			_ = audiosystem.PlaySFX(filepath.Join("assets", "audio", "sfx", "miss.mp3"))
 		}
 	}
 }
