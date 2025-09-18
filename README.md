@@ -10,13 +10,16 @@ This README documents the game’s features, how to run it, and how the codebase
 
 ## Quick start
 
-### Requirements
+### Requirements (skip if using executable in releases)
 
 * Go 1.20+ (earlier versions may work)
 * A terminal that supports ANSI escape codes (for screen clear / flash)
 * Audio output (the game uses MP3/WAV assets in `internal/audiosystem`)
 
 ### Run
+
+If you are on Windows, download the lastest release and launch polaris.exe.
+For others, download the source code and run launcher.sh or :
 
 ```bash
 go run .\cmd\main.go
