@@ -1,11 +1,9 @@
 package utils
 
-var currentturn int
+var currentTurn int // tracks the active battle turn
 
-func SendTurn(turn int) {
-	currentturn = turn
-}
+// SendTurn sets the active battle turn.
+func SendTurn(turn int) { currentTurn = turn }
 
-func GetTurn() int {
-	return currentturn
-}
+// GetTurn returns the last turn set via SendTurn.
+func GetTurn() int { return currentTurn }

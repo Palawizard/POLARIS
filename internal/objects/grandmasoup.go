@@ -7,9 +7,10 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
+// effectGrandmaSoup heals a large chunk of HP and plays the heal SFX.
 func effectGrandmaSoup(p *utils.Player) {
 	const gain = 80.0
 	healed := utils.ApplyHeal(&p.Health, p.MaxHealth, gain)
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
-	fmt.Printf("You sip Grandma’s soup. Cozy! +%d HP %s\n", healed, utils.HPString(p.Health, p.MaxHealth))
+	fmt.Printf("You sip Grandma’s soup. Cozy! +%d HP: %s\n", healed, utils.HPString(p.Health, p.MaxHealth))
 }

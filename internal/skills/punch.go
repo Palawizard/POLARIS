@@ -9,29 +9,24 @@ import (
 	"time"
 )
 
+// effectPunch is the basic attack: 25% crit chance, 2× crit, +20% damage per level after level 1.
 func effectPunch(p *utils.Player, m *monsters.Monster) {
-	turn := utils.GetTurn()
-
-	critical := false
-
-	randomint := rng.Intn(4)
-	if randomint == 0 {
-		critical = true
-	}
-
 	if m == nil {
 		return
 	}
+	turn := utils.GetTurn()
+
+	critical := rng.Intn(4) == 0
+
 	dmg := 8.0
 	if critical {
-		dmg *= 2
+		dmg *= 2.0
 	}
-
-	dmg = dmg * (1.0 + 0.2*float64(p.Level-1))
+	dmg *= 1.0 + 0.2*float64(p.Level-1)
 
 	applied := utils.ApplyDamage(&m.Health, dmg)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "punch1.mp3"))
 	fmt.Println("Turn", turn)
 	monsters.PrintHeader(m)

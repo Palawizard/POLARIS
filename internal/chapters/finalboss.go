@@ -7,30 +7,31 @@ import (
 )
 
 func StartFinalBoss(player *utils.Player) bool {
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow := "Silence falls. The air crackles with old magic."
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "Goddess Polaris: So you made it..."
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "Goddess Polaris: You rekindled my flames, felled my beasts… and defiled my altar (I haven’t forgotten)."
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "Goddess Polaris: One final trial: prove your will is greater than your luck."
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "The ground hums. Constellations spin into a circle around you."
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "Goddess Polaris: Kneel—or fight. Choose."
 	utils.ShowText(texttoshow)
 
+	// Final Boss Start
 	StopMusic()
 	polaris := monsters.New("Polaris")
 	if won, exit := fightsystem.RunFight(player, polaris, true); exit || !won {
@@ -38,19 +39,19 @@ func StartFinalBoss(player *utils.Player) bool {
 	}
 
 	StartWinningMusic()
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "Well played ! You finished the game ! (For now)"
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "If you want to play again or cheat, here's some commands usable in the menu :"
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "991 : Chapter 1 | 992 : Chapter 2 | 993 : Chapter 3 | 994 : Final Boss | 25565 : Admin Mode"
 	utils.ShowText(texttoshow)
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	texttoshow = "Thank you for playing Polaris !"
 	utils.ShowText(texttoshow)
 

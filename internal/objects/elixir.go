@@ -7,13 +7,9 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
+// effectElixir fully restores the player's HP and plays the heal SFX.
 func effectElixir(p *utils.Player) {
-	before := p.Health
-	p.Health = p.MaxHealth
-	actual := p.Health - before
-	if actual < 0 {
-		actual = 0
-	}
+	healed := utils.ApplyHeal(&p.Health, p.MaxHealth, p.MaxHealth)
 	_ = audiosystem.PlaySFX(filepath.Join("internal", "audiosystem", "sfx", "heal.mp3"))
-	fmt.Printf("Elixir consumed! Fully restored (+%.0f HP). %s\n", actual, utils.HPString(p.Health, p.MaxHealth))
+	fmt.Printf("Elixir consumed! Fully restored (+%d HP). HP: %s\n", healed, utils.HPString(p.Health, p.MaxHealth))
 }

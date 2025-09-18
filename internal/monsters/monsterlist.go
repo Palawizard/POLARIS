@@ -5,30 +5,33 @@ import (
 	"projet-red_POLARIS/utils"
 )
 
+// Monster is the runtime state for an enemy during a fight.
+// Values like Health mutate; others (e.g., MaxHealth) are static per instance.
 type Monster struct {
-	Name           string
-	Health         float64
-	MaxHealth      float64
-	MaxATK         float64
-	EXPtogive      float64
-	Coinstogive    float64
-	Initiative     float64
-	AttackMsg      string
-	CritEvery      int
-	CritMultiplier float64
-	Loot           string
-	SinceLastCrit  int
-	Art            string
+	Name           string  // Display name
+	Health         float64 // Current HP
+	MaxHealth      float64 // Max HP
+	MaxATK         float64 // Upper bound for base attack damage roll
+	EXPToGive      float64 // EXP awarded on defeat
+	CoinsToGive    float64 // Coins awarded on defeat
+	Initiative     float64 // Turn order priority
+	AttackMsg      string  // Flavor text shown when attacking
+	CritEvery      int     // Target crit cadence (used by crit logic)
+	CritMultiplier float64 // Damage multiplier applied on crit
+	Loot           string  // Item/skill/equipment ID dropped on defeat
+	SinceLastCrit  int     // Internal counter updated by the attack pattern
+	Art            string  // Optional ASCII art header
 }
 
+// Monsters holds the immutable templates used to spawn instances via New.
 var Monsters = map[string]Monster{
 	"Goblin": {
 		Name:           "Goblin",
 		Health:         42,
 		MaxHealth:      42,
 		MaxATK:         7,
-		EXPtogive:      25,
-		Coinstogive:    18,
+		EXPToGive:      25,
+		CoinsToGive:    18,
 		Initiative:     6,
 		AttackMsg:      "The goblin darts in with a rusty shiv!",
 		CritEvery:      4,
@@ -53,8 +56,8 @@ var Monsters = map[string]Monster{
 		Health:         12,
 		MaxHealth:      12,
 		MaxATK:         1.2,
-		EXPtogive:      6,
-		Coinstogive:    6,
+		EXPToGive:      6,
+		CoinsToGive:    6,
 		Initiative:     1,
 		AttackMsg:      "Razor petals whirl toward you!",
 		CritEvery:      3,
@@ -76,8 +79,8 @@ var Monsters = map[string]Monster{
 		Health:         26,
 		MaxHealth:      26,
 		MaxATK:         6,
-		EXPtogive:      22,
-		Coinstogive:    22,
+		EXPToGive:      22,
+		CoinsToGive:    22,
 		Initiative:     4,
 		AttackMsg:      "Bones clack—its chipped blade carves the air!",
 		CritEvery:      4,
@@ -105,8 +108,8 @@ var Monsters = map[string]Monster{
 		Health:         70,
 		MaxHealth:      70,
 		MaxATK:         10,
-		EXPtogive:      60,
-		Coinstogive:    60,
+		EXPToGive:      60,
+		CoinsToGive:    60,
 		Initiative:     8,
 		AttackMsg:      "The Boss Potato belly-flops with starchy fury!",
 		CritEvery:      4,
@@ -131,8 +134,8 @@ var Monsters = map[string]Monster{
 		Health:         120,
 		MaxHealth:      120,
 		MaxATK:         16,
-		EXPtogive:      85,
-		Coinstogive:    65,
+		EXPToGive:      85,
+		CoinsToGive:    65,
 		Initiative:     5,
 		AttackMsg:      "A sugary shockwave detonates—cocoa shrapnel flies!",
 		CritEvery:      4,
@@ -158,8 +161,8 @@ var Monsters = map[string]Monster{
 		Health:         70,
 		MaxHealth:      70,
 		MaxATK:         12,
-		EXPtogive:      35,
-		Coinstogive:    28,
+		EXPToGive:      35,
+		CoinsToGive:    28,
 		Initiative:     3,
 		AttackMsg:      "A glob of acidic ooze splashes toward you!",
 		CritEvery:      4,
@@ -183,8 +186,8 @@ var Monsters = map[string]Monster{
 		Health:         85,
 		MaxHealth:      85,
 		MaxATK:         18,
-		EXPtogive:      55,
-		Coinstogive:    55,
+		EXPToGive:      55,
+		CoinsToGive:    55,
 		Initiative:     7,
 		AttackMsg:      "The flame burns you !",
 		CritEvery:      5,
@@ -202,8 +205,8 @@ var Monsters = map[string]Monster{
 		Health:         95,
 		MaxHealth:      95,
 		MaxATK:         20,
-		EXPtogive:      70,
-		Coinstogive:    70,
+		EXPToGive:      70,
+		CoinsToGive:    70,
 		Initiative:     9,
 		AttackMsg:      "The annoying dog annoys you !",
 		CritEvery:      5,
@@ -228,8 +231,8 @@ var Monsters = map[string]Monster{
 		Health:         180,
 		MaxHealth:      180,
 		MaxATK:         36,
-		EXPtogive:      180,
-		Coinstogive:    180,
+		EXPToGive:      180,
+		CoinsToGive:    180,
 		Initiative:     11,
 		AttackMsg:      "A tide of thorns lashes out in unison!",
 		CritEvery:      4,
@@ -252,8 +255,8 @@ var Monsters = map[string]Monster{
 		Health:         320,
 		MaxHealth:      320,
 		MaxATK:         40,
-		EXPtogive:      360,
-		Coinstogive:    300,
+		EXPToGive:      360,
+		CoinsToGive:    300,
 		Initiative:     13,
 		AttackMsg:      "Polaris rends reality around you!",
 		CritEvery:      4,
@@ -289,6 +292,7 @@ var Monsters = map[string]Monster{
 	},
 }
 
+// PrintHeader draws the monster header (ASCII art if any) and its HP line.
 func PrintHeader(m *Monster) {
 	if m == nil {
 		return
@@ -299,6 +303,8 @@ func PrintHeader(m *Monster) {
 	fmt.Printf("%s HP: %s\n", m.Name, utils.HPString(m.Health, m.MaxHealth))
 }
 
+// New returns a fresh instance copied from the template map.
+// Callers mutate the returned pointer without affecting the template.
 func New(id string) *Monster {
 	m := Monsters[id]
 	return &m

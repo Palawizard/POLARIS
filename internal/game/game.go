@@ -12,12 +12,11 @@ import (
 	"time"
 )
 
-// InitGame initializes the game by creating a character and starting the main
-// game loop, which allows the player to access the menu.
+// InitGame boots the title screen, music, and then enters the main menu.
 func InitGame() {
-	utils.Clearscreen()
+	utils.ClearScreen()
 
-	//Plays the main menu music
+	// Title music (loops while the splash anim plays).
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)
 	}
@@ -26,6 +25,7 @@ func InitGame() {
 		fmt.Println("play loop error:", err)
 	}
 
+	// Simple splash animation.
 	fmt.Println("\n")
 	fmt.Println("░▒▓███████▓▒░")
 	fmt.Println("░▒▓█▓▒░░▒▓█▓▒░")
@@ -36,7 +36,7 @@ func InitGame() {
 	fmt.Println("░▒▓█▓▒░       ")
 	fmt.Println("\n\n\n")
 	time.Sleep(150 * time.Millisecond)
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("\n")
 	fmt.Println("░▒▓███████▓▒░ ░▒▓██████▓▒░")
 	fmt.Println("░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░")
@@ -47,7 +47,7 @@ func InitGame() {
 	fmt.Println("░▒▓█▓▒░       ░▒▓██████▓▒░")
 	fmt.Println("\n\n\n")
 	time.Sleep(150 * time.Millisecond)
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("\n")
 	fmt.Println("░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░")
 	fmt.Println("░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░")
@@ -58,7 +58,7 @@ func InitGame() {
 	fmt.Println("░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓████████▓▒░")
 	fmt.Println("\n\n\n")
 	time.Sleep(150 * time.Millisecond)
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("\n")
 	fmt.Println("░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░")
 	fmt.Println("░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░")
@@ -69,7 +69,7 @@ func InitGame() {
 	fmt.Println("░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░")
 	fmt.Println("\n\n\n")
 	time.Sleep(150 * time.Millisecond)
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("\n")
 	fmt.Println("░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓███████▓▒░")
 	fmt.Println("░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░")
@@ -80,7 +80,7 @@ func InitGame() {
 	fmt.Println("░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░")
 	fmt.Println("\n\n\n")
 	time.Sleep(150 * time.Millisecond)
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("\n")
 	fmt.Println("░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓█▓▒░")
 	fmt.Println("░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░")
@@ -91,7 +91,7 @@ func InitGame() {
 	fmt.Println("░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░")
 	fmt.Println("\n\n\n")
 	time.Sleep(150 * time.Millisecond)
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("\n")
 	fmt.Println("░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓█▓▒░░▒▓███████▓▒░ ")
 	fmt.Println("░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░        ")
@@ -104,13 +104,13 @@ func InitGame() {
 	time.Sleep(150 * time.Millisecond)
 	fmt.Println("Press Enter to START !")
 
+	// Wait for Enter, then transition to character creation.
 	_, _ = bufio.NewReader(os.Stdin).ReadString('\n')
-
 	_ = audiosystem.PlaySFXCached("select")
 
 	c1 := character.InitCharacter()
 
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("Welcome to Polaris !")
 	time.Sleep(2 * time.Second)
 	audiosystem.StopMusic()

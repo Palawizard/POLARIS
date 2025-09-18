@@ -9,10 +9,16 @@ import (
 	"time"
 )
 
+// rng is a package-level PRNG seeded once.
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
+// AttackPattern resolves one monster action:
+// - shows the header/turn,
+// - plays attack SFX + screen flash,
+// - rolls damage with a crit chance that trends toward CritEvery,
+// - applies damage and reports whether the player survived.
 func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
-	utils.Clearscreen()
+	utils.ClearScreen()
 	fmt.Println("Turn", turn)
 	utils.SendTurn(turn)
 	PrintHeader(monster)
@@ -29,6 +35,10 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 
 	var dmg float64
 	crit := false
+
+	// Crit model: target average cadence is CritEvery.
+	// Base chance is 1/CritEvery, with a small “pity” boost growing with SinceLastCrit.
+	// Capped, and forced after ~2× cadence without a crit.
 	if monster.CritEvery > 0 {
 		base := 1.0 / float64(monster.CritEvery)
 		boost := float64(monster.SinceLastCrit) / float64(monster.CritEvery)
@@ -40,6 +50,7 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 			crit = true
 		}
 	}
+
 	if crit {
 		mult := monster.CritMultiplier
 		if mult <= 0 {
@@ -50,13 +61,14 @@ func AttackPattern(player *utils.Player, monster *Monster, turn int) bool {
 		time.Sleep(1 * time.Second)
 		monster.SinceLastCrit = 0
 	} else {
+		// Non-crit damage rolls in [0.5, 1.0] × MaxATK.
 		dmg = monster.MaxATK * (0.5 + rng.Float64()*0.5)
 		if monster.CritEvery > 0 {
 			monster.SinceLastCrit++
 		}
 	}
-	applied := utils.ApplyDamage(&player.Health, dmg)
 
+	applied := utils.ApplyDamage(&player.Health, dmg)
 	fmt.Printf("Ouch! %s deals %d damage to %s!\n", monster.Name, applied, player.Name)
 
 	if utils.IsDead(player) {
