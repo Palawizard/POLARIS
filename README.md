@@ -4,7 +4,7 @@
 
 A compact, text-driven RPG with chapters, turn-based combat, loot, crafting, spellbooks, and a light economy. Everything runs in the terminal, with sound effects and music via the `beep` audio stack.
 
-**⚠️ KNOWN BUG : DO NOT HIT ENTER IN THE COMBAT SCREEN OR SPAM ENTER IN DIALOGUES ⚠️**
+**⚠️ KNOWN BUG IN V1.0 : DO NOT HIT ENTER IN THE COMBAT SCREEN OR SPAM ENTER IN DIALOGUES ⚠️**
 
 This README documents the game’s features, how to run it, and how the codebase is laid out.
 
