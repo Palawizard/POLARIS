@@ -37,7 +37,9 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 		fmt.Println("0. Return to menu")
 
 		var choice int
-		fmt.Scanln(&choice)
+		if _, err := fmt.Scanln(&choice); err != nil {
+			continue
+		}
 		_ = audiosystem.PlaySFXCached("select")
 
 		switch choice {
@@ -90,7 +92,9 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 			// Selection + cast
 			var skillIdx int
-			fmt.Scanln(&skillIdx)
+			if _, err := fmt.Scanln(&skillIdx); err != nil {
+				continue
+			}
 			_ = audiosystem.PlaySFXCached("select")
 			if skillIdx == 0 {
 				continue
@@ -157,8 +161,11 @@ func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
 
 			// Use item
 			var itemIdx int
-			fmt.Scanln(&itemIdx)
+			if _, err := fmt.Scanln(&itemIdx); err != nil {
+				continue
+			}
 			_ = audiosystem.PlaySFXCached("select")
+
 			if itemIdx == 0 {
 				continue
 			}
