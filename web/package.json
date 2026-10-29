@@ -1,0 +1,16 @@
+{
+  "name": "polaris-web",
+  "private": true,
+  "description": "Browser shell for Polaris: xterm.js terminal around the Go/WebAssembly build",
+  "scripts": {
+    "vendor": "node scripts/vendor.mjs"
+  },
+  "dependencies": {
+    "@fontsource/big-shoulders-display": "^5.3.0",
+    "@fontsource/figtree": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "@xterm/addon-fit": "0.11.0",
+    "@xterm/addon-webgl": "0.19.0",
+    "@xterm/xterm": "6.0.0"
+  }
+}

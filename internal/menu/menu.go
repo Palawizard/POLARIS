@@ -8,6 +8,7 @@ import (
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/equipment"
 	"projet-red_POLARIS/internal/fightsystem"
+	"projet-red_POLARIS/internal/save"
 	"projet-red_POLARIS/internal/shop"
 	"projet-red_POLARIS/internal/skills"
 	"projet-red_POLARIS/utils"
@@ -26,6 +27,10 @@ func ShowMenu(player *utils.Player) {
 	}
 
 	for {
+		// Autosave each time the player is back on the main menu
+		// (browser build only; no-op in the terminal build).
+		save.Store(player, chapters.CurrentChapter())
+
 		utils.ClearScreen()
 
 		fmt.Println("Main Menu")

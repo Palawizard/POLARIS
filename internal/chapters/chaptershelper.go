@@ -14,6 +14,11 @@ func ChangeChapter(i int) {
 	currentChapter = i
 }
 
+// CurrentChapter returns the next chapter the player will start.
+func CurrentChapter() int {
+	return currentChapter
+}
+
 func StartMusic() {
 	if err := audiosystem.Init(); err != nil {
 		fmt.Println("audio init error:", err)

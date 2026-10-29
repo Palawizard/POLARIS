@@ -4,25 +4,11 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"projet-red_POLARIS/internal/audiosystem"
-	"runtime"
 	"strings"
 	"time"
 )
-
-// ClearScreen clears the console on Windows, macOS, and Linux.
-func ClearScreen() {
-	var c *exec.Cmd
-	if runtime.GOOS == "windows" {
-		c = exec.Command("cmd", "/c", "cls")
-	} else {
-		c = exec.Command("clear")
-	}
-	c.Stdout = os.Stdout
-	_ = c.Run()
-}
 
 // ShowText renders text with a simple typewriter effect and short SFX.
 // Blocks until the player presses Enter.

@@ -6,8 +6,10 @@ import (
 	"os"
 	"path/filepath"
 	"projet-red_POLARIS/internal/audiosystem"
+	"projet-red_POLARIS/internal/chapters"
 	"projet-red_POLARIS/internal/character"
 	"projet-red_POLARIS/internal/menu"
+	"projet-red_POLARIS/internal/save"
 	"projet-red_POLARIS/utils"
 	"time"
 )
@@ -108,6 +110,18 @@ func InitGame() {
 	_, _ = bufio.NewReader(os.Stdin).ReadString('\n')
 	_ = audiosystem.PlaySFXCached("select")
 
+	// Browser build: offer to resume the saved run, if there is one.
+	if d, ok := save.Load(); ok && askContinue(d) {
+		chapters.ChangeChapter(d.Chapter)
+		p := d.Player
+		utils.ClearScreen()
+		fmt.Println("Welcome back to Polaris,", p.Name+" !")
+		time.Sleep(2 * time.Second)
+		audiosystem.StopMusic()
+		menu.ShowMenu(&p)
+		return
+	}
+
 	c1 := character.InitCharacter()
 
 	utils.ClearScreen()
@@ -115,4 +129,33 @@ func InitGame() {
 	time.Sleep(2 * time.Second)
 	audiosystem.StopMusic()
 	menu.ShowMenu(&c1)
+}
+
+// askContinue shows the "Continue / New game" choice for a saved run.
+// Returns true to resume it; a new game erases the save.
+func askContinue(d save.Data) bool {
+	chapter := fmt.Sprintf("Chapter %d", d.Chapter)
+	if d.Chapter > 4 {
+		chapter = "Game finished"
+	}
+	for {
+		utils.ClearScreen()
+		fmt.Println("A saved game was found:")
+		fmt.Printf("  %s, %s, level %d, %s\n\n", d.Player.Name, character.ClassLabel(d.Player.Class), d.Player.Level, chapter)
+		fmt.Println("1. Continue")
+		fmt.Println("2. New game (erases this save)")
+
+		var choice int
+		if _, err := fmt.Scanln(&choice); err != nil {
+			continue
+		}
+		_ = audiosystem.PlaySFXCached("select")
+		switch choice {
+		case 1:
+			return true
+		case 2:
+			save.Clear()
+			return false
+		}
+	}
 }
