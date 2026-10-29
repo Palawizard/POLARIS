@@ -1,315 +1,303 @@
 ---
 name: Polaris (browser edition)
-description: The back of Polaris's red game box, whose big screenshot is the real terminal game running.
+description: An indie-RPG battle screen whose white-framed box is the live terminal game.
 colors:
-  box-red: "#b5202a"
-  box-red-deep: "#8a1520"
-  box-red-dark: "#6e0f19"
-  print-cream: "#fff1dc"
-  soft-cream: "#ffd9c8"
-  ink-red-brown: "#2b0a0d"
-  screen: "#180d11"
-  screen-print: "#21141a"
-  terminal-fg: "#f6e8d6"
+  stage: "#0c0c12"
+  frame-white: "#f4f4f6"
+  soft-ink: "#b4b4c0"
+  unlit-ink: "#6e6e7d"
+  rule-line: "#2a2a35"
+  command-yellow: "#f2cf4b"
 typography:
-  display:
-    fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
-    fontSize: "clamp(2rem, 4.4vw, 2.75rem)"
-    fontWeight: 900
-    lineHeight: 1
-    letterSpacing: "0.02em"
-  headline:
-    fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
-    fontSize: "clamp(2.2rem, 4vw, 3rem)"
-    fontWeight: 900
-    lineHeight: 0.95
-  title:
-    fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
-    fontSize: "1.55rem"
-    fontWeight: 900
-    lineHeight: 1
-    letterSpacing: "0.01em"
-  genre:
-    fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
-    fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)"
-    fontWeight: 800
+  section-heading:
+    fontFamily: "Pixelify Sans, Figtree, system-ui, sans-serif"
+    fontSize: "2rem"
+    fontWeight: 700
+    lineHeight: 1.1
+  command:
+    fontFamily: "Pixelify Sans, Figtree, system-ui, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 700
     lineHeight: 1
     letterSpacing: "0.08em"
-  key-numeral:
-    fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
-    fontSize: "1.45rem"
-    fontWeight: 900
+  dialogue:
+    fontFamily: "Pixelify Sans, Figtree, system-ui, sans-serif"
+    fontSize: "clamp(1.05rem, 2.6vw, 1.3rem)"
+    fontWeight: 500
+    lineHeight: 1.4
+  lead-in:
+    fontFamily: "Pixelify Sans, Figtree, system-ui, sans-serif"
+    fontWeight: 600
+  label:
+    fontFamily: "Pixelify Sans, Figtree, system-ui, sans-serif"
+    fontSize: "0.95rem"
+    fontWeight: 600
     lineHeight: 1
-    fontFeature: "tnum"
+  status:
+    fontFamily: "Pixelify Sans, Figtree, system-ui, sans-serif"
+    fontSize: "0.95rem"
+    fontWeight: 500
+    lineHeight: 1.3
   body:
     fontFamily: "Figtree, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 500
-    lineHeight: 1.5
-  caption:
-    fontFamily: "Figtree, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.95rem"
-    fontWeight: 700
-    lineHeight: 1.3
-  label:
-    fontFamily: "Figtree, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.8rem"
-    fontWeight: 800
-    lineHeight: 1.2
-    letterSpacing: "0.06em"
-  small-print:
-    fontFamily: "Figtree, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.82rem"
-    fontWeight: 500
-    lineHeight: 1.5
+    lineHeight: 1.55
   terminal:
-    fontFamily: "JetBrains Mono, Polaris Blocks, ui-monospace, Cascadia Mono, Menlo, Consolas, monospace"
+    fontFamily: "JetBrains Mono, Polaris Blocks, ui-monospace, Menlo, Consolas, monospace"
     fontSize: "15px"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "0"
-  vignette:
-    fontFamily: "JetBrains Mono, Polaris Blocks, ui-monospace, Cascadia Mono, Menlo, Consolas, monospace"
-    fontSize: "0.8rem"
-    fontWeight: 400
-    lineHeight: 1.08
 rounded:
-  swatch: "2px"
-  label: "6px"
-  vignette: "9px"
-  key: "10px"
-  frame: "14px"
+  none: "0px"
 spacing:
-  gutter: "clamp(14px, 3vw, 36px)"
-  key-gap: "0.5rem"
-  column-gap: "clamp(1.25rem, 2.4vw, 2.25rem)"
-  section: "clamp(2.5rem, 6vw, 4rem)"
+  frame-box: "4px"
+  frame-active: "3px"
+  frame-line: "2px"
+  top-edge: "3.5rem"
+  gutter: "clamp(12px, 3vw, 32px)"
+  keypad-gap: "0.45rem"
+  box-width-talk: "46rem"
+  box-width-play: "64rem"
 components:
-  tab:
-    backgroundColor: "{colors.print-cream}"
-    textColor: "{colors.ink-red-brown}"
-    rounded: "{rounded.key}"
-    height: "2.5rem"
-    padding: "0 0.95rem 0 0.6rem"
-  key:
-    backgroundColor: "{colors.print-cream}"
-    textColor: "{colors.ink-red-brown}"
-    rounded: "{rounded.key}"
-    size: "2.5rem"
-  sticker:
-    backgroundColor: "{colors.print-cream}"
-    textColor: "{colors.box-red}"
-    typography: "{typography.display}"
-    rounded: "{rounded.frame}"
-    height: "4rem"
-    padding: "0.35rem 1.7rem 0.45rem 1.35rem"
-  screenshot-frame:
-    backgroundColor: "{colors.screen}"
-    textColor: "{colors.terminal-fg}"
-    typography: "{typography.terminal}"
-    rounded: "{rounded.frame}"
-    height: "clamp(26rem, calc(100dvh - 10.5rem), 60rem)"
-  print-overlay:
-    backgroundColor: "{colors.screen-print}"
-    textColor: "{colors.terminal-fg}"
+  battle-box:
+    backgroundColor: "{colors.stage}"
+    rounded: "{rounded.none}"
+    width: "min(100%, 46rem)"
+    height: "15.5rem"
+  battle-box-playing:
+    width: "min(100%, 64rem)"
+    height: "calc(100dvh - 3.5rem - 5rem)"
+  command-go:
+    textColor: "{colors.command-yellow}"
+    typography: "{typography.command}"
+    rounded: "{rounded.none}"
+    padding: "0 1.5rem 0 1.2rem"
+    height: "3.4rem"
+  command-go-hover:
+    backgroundColor: "{colors.command-yellow}"
+    textColor: "{colors.stage}"
+  command-quiet:
+    textColor: "{colors.soft-ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.none}"
+    padding: "0 0.85rem 0 0.7rem"
+    height: "2.4rem"
+  command-quiet-hover:
+    textColor: "{colors.frame-white}"
+  command-icon:
+    textColor: "{colors.soft-ink}"
+    rounded: "{rounded.none}"
+    size: "2.4rem"
+  command-icon-off:
+    textColor: "{colors.unlit-ink}"
   keypad-key:
-    backgroundColor: "{colors.print-cream}"
-    textColor: "{colors.ink-red-brown}"
-    typography: "{typography.key-numeral}"
-    rounded: "{rounded.key}"
+    textColor: "{colors.frame-white}"
+    rounded: "{rounded.none}"
     height: "3rem"
+  keypad-key-unlit:
+    textColor: "{colors.unlit-ink}"
+  keypad-key-pressed:
+    backgroundColor: "{colors.command-yellow}"
+    textColor: "{colors.stage}"
   keypad-enter:
-    backgroundColor: "{colors.ink-red-brown}"
-    textColor: "{colors.print-cream}"
-    rounded: "{rounded.key}"
+    textColor: "{colors.command-yellow}"
+    rounded: "{rounded.none}"
     height: "3rem"
-  vignette:
-    backgroundColor: "{colors.screen-print}"
-    textColor: "{colors.terminal-fg}"
-    typography: "{typography.vignette}"
-    rounded: "{rounded.vignette}"
-    height: "9.5rem"
-    padding: "0.6rem"
-  kbd:
-    backgroundColor: "{colors.print-cream}"
-    textColor: "{colors.ink-red-brown}"
-    rounded: "{rounded.label}"
-    padding: "0.12em 0.45em"
-  barcode:
-    backgroundColor: "{colors.print-cream}"
-    textColor: "{colors.ink-red-brown}"
-    rounded: "{rounded.label}"
-    padding: "0.6rem 0.75rem 0.5rem"
+  kbd-key:
+    textColor: "{colors.frame-white}"
+    rounded: "{rounded.none}"
+    padding: "0 0.4em"
+  status-legend:
+    backgroundColor: "{colors.stage}"
+    textColor: "{colors.soft-ink}"
+    typography: "{typography.status}"
+    padding: "0 0.5rem"
+  encounter-box:
+    backgroundColor: "{colors.stage}"
+    textColor: "{colors.soft-ink}"
+    rounded: "{rounded.none}"
+    padding: "clamp(1.25rem, 3vw, 2rem)"
 ---
 
 # Design System: Polaris (browser edition)
 
 ## Overview
 
-**Creative North Star: "The Back of the Box"**
+**Creative North Star: "The Battle Box"**
 
-The page at `palawi.fr/polaris/` is printed on the back insert of Polaris's retail box. One cardinal red carries the whole card, with only two inks printed on it: cream and a deep red-brown. The big screenshot is not a picture. It is the live terminal game in a cream-bordered frame. Before play, a printed capture of the title screen sits exactly on the terminal's cells. Pressing the cream sticker cuts that capture away, and the running game is underneath, already showing the same title and prompt.
+The page is an indie-RPG battle screen. A dark, calm stage holds one white square pixel frame in the middle, and that frame is the live game: the unmodified Go terminal program, compiled to WebAssembly, running in an xterm.js terminal. Everything else on the page is either the game's own lettering (the dithered ░▒▓█ title, printed from the game source), the box's voice (lines that open with the narrator's `*`), or a quiet pixel control around the edge. One soft yellow marks what is active; nothing else is coloured.
 
-Density is a retail box's: one dominant screenshot, a narrow column of three feature blurbs, each with a real ASCII monster from the game, then a spec strip, a controls list and the small print with a barcode. The controls behave like hardware. Cream keys rest proud of the card, sink 2px when pressed and lie flat when the game is not listening. The warm near-black screen is the most saturated, highest-contrast area of the page. Everything printed on the red stays quieter than it.
+The system is flat and literal. There is no radius, no shadow, no gradient and no glow; depth only ever comes from one thing sitting on top of another (the dialogue panel over the hidden terminal, the frame over the stage). State reads as illumination: the frame is lit white when the game is waiting for the player and dims while the game narrates, the keypad's keys stay drawn but unlit when input would be ignored, and a muted sound button dims instead of vanishing. The signature motion is the battle box opening from its compact dialogue size to full play size when the game starts, as battle boxes resize in the genre.
 
-The system rejects the neon or glow "gamer" look: no black page around a centred terminal, and no luminous halos.
+Confirmed rejections (owner, 2026-10-29): the red "game box" world, neon or glowing "gamer" darkness, a red ground, a redrawn logo, an off-centre terminal, and a macOS-style terminal window with a hero button.
 
 **Key Characteristics:**
-- One printed red ground under a faint red-brown halftone dot (4px pitch), lighter toward the top.
-- Two inks on the red: cream and red-brown. The screen is the only dark, high-contrast area.
-- The title is the game's own ░▒▓█ block lettering, generated from the game source and never typeset in a font.
-- Controls have real travel: they rest, sink when pressed, and flatten when the game is not listening.
-- Printed rules are hairlines: 1px, and 0.5px on 2x screens.
-- One signature move: the printed capture is clipped away left to right to show the live game.
+- One centred white pixel frame (4px) that is the game itself, whole at every size.
+- One yellow (#f2cf4b) for the active thing: the selected command, the save star, the cursor, the Entrée key, a pressed key, focus and selection.
+- Unlit states are designed: dim frame, dim keys, dim icon buttons.
+- The game's own dithered title, never a redrawn wordmark.
+- Square corners, flat fills, depth by overlap only.
 
 ## Colors
 
-One printed cardinal red, two inks and a warm black screen. Nothing else appears on the page.
+A near-black blue stage, a near-white ink for the frame and text, two greys for secondary and unlit ink, one hairline grey for rules, and one soft yellow for what is active.
 
 ### Primary
-- **Box Red** (box-red): the ground of the whole page (`html` background and the middle stop of the body gradient), the sticker's text colour, the `theme-color`, and the `--app-bg` the hub sheet lands on. The body gradient goes from a slightly lighter red at the top (#bd2630) to a slightly darker one at the bottom (#a91c26), with a 4px red-brown halftone (7% alpha) over it.
-- **Box Red Deep** (box-red-deep) and **Box Red Dark** (box-red-dark): used only for the scrollbar track and thumb, and dark red is also the terminal's selection background. They never print text.
+- **Command Yellow** (`command-yellow`): the selected command's 3px frame and label (JOUER / Reprendre / Rejouer / Réessayer), its filled hover, the save star, the Entrée key on the keypad, the background of a pressed keypad key, the terminal cursor and selection, the global focus ring (3px outline, 3px offset) and `::selection`. It always means "this is live / this is the choice".
 
 ### Neutral
-- **Print Cream** (print-cream): the main ink on the red. Used for headings, the block logo, the screenshot and vignette frames, every key, the tab, the sticker body, the barcode label, focus outlines and `::selection`. Printed rules use it at 45 to 60% alpha.
-- **Soft Cream** (soft-cream): the secondary ink on the red. Used for body copy in blurbs, controls and small print, for the flap genre line and for the idle caption (5.0:1 on Box Red).
-- **Red-Brown Ink** (ink-red-brown): the second printed ink. Used for text on cream keys, the halftone dot, the barcode bars and the Entrée key's fill. Shadows are this ink's hue (rgb 60 2 10).
-- **Screen** (screen): the terminal background, set in both the CSS and the xterm theme. It is the darkest surface on the page.
-- **Screen Print** (screen-print): the printed capture and the vignette screens. It is a slightly lifted screen colour under a 3px cream dot at 5% alpha, so the print reads as a printed copy of the screen.
-- **Terminal Foreground** (terminal-fg): the game's text and the text printed on the screen (title capture, end and error notes, save line).
+- **Stage** (`stage`): the page ground, the inside of the battle box, the terminal background, the text colour on yellow fills. Also the `theme-color` and the favicon's ground.
+- **Frame White** (`frame-white`): the battle box and encounter box frames (the battle box only on the player's turn and before play), headings, dialogue lines, terminal foreground, the encounter's ASCII foes, asterisks and lead-ins, lit keypad keys, `kbd` text, the save text and "À toi de jouer".
+- **Soft Ink** (`soft-ink`): secondary reading text (dialogue hint, error detail, encounter lines, control descriptions, credits, "Le jeu raconte…", the rotate hint) and the resting label of quiet and icon commands.
+- **Unlit Ink** (`unlit-ink`): borders of resting commands and `kbd`, the battle box frame while the game narrates, unlit keypad keys, the muted sound button and pressed-in fullscreen button, terminal "bright black".
+- **Rule Line** (`rule-line`): 2px rules between below-the-fold parts and control rows, unlit key borders, scrollbar thumb.
 
 ### Named Rules
-**The Two Inks Rule.** Anything printed on the red uses only cream (at full strength or as soft cream, or as alpha rules) and red-brown. A third ink is not allowed. This is why the small logo keeps only the solid █ cells and drops the shaded tints.
+**The One Yellow Rule.** Yellow belongs only to what is active or selected: one command per dialogue, the save star, the cursor, the Entrée key, the pressed key, focus. Never a heading, never a decoration, never a second accent hue beside it.
 
-**The Live Screen Rule.** The terminal is the most saturated, highest-contrast area of the page (15.8:1). Printed areas on the red stay at about 5 to 6:1.
+**The Unlit, Not Gone Rule.** Inactive things dim to `unlit-ink` / `rule-line`; they keep their shape and place. Only the yellow and the white are "lit".
+
+**The Dim Is Not Reading Ink Rule.** `unlit-ink` (about 3.9:1 on the stage) is for borders and inactive states, not for text someone must read; reading text uses `soft-ink` or `frame-white`.
 
 ## Typography
 
-**Display Font:** Big Shoulders Display 800/900 (with Arial Narrow, sans-serif)
-**Body Font:** Figtree 500/700/800 (with ui-sans-serif, system-ui)
-**Label/Mono Font:** JetBrains Mono 400, with the generated "Polaris Blocks" font for U+2580–259F
+**Pixel Font:** Pixelify Sans 500 / 600 / 700 (fallback Figtree, system-ui) for every label, command, dialogue line, status legend, encounter lead-in and heading.
+**Body Font:** Figtree 500 / 700 for reading copy below the fold and the dialogue hint.
+**Terminal Font:** JetBrains Mono 400, with the generated "Polaris Blocks" font (U+2580-259F only) for the block elements.
 
-**Character:** Condensed, heavy uppercase box lettering over a friendly geometric sans, plus the terminal's own mono. The real title is not set in any of these fonts. It is the game's block art.
+**Character:** the pixel face speaks for the page in the game's register; Figtree carries the reading; the mono face belongs to the game and appears only where the game's own text or art does (the terminal, the encounter's ASCII sprites, the narrator's asterisks, the error detail).
 
 ### Hierarchy
-- **Display** (900, clamp(2rem, 4.4vw, 2.75rem), 1, uppercase): the sticker label (Jouer / Reprendre / Relancer / Réessayer). The end and error note headings use the same face at clamp(2rem, 6cqi, 3rem)/0.95.
-- **Headline** (900, clamp(2.2rem, 4vw, 3rem), 0.95, uppercase): section headings on the card ("Commandes").
-- **Title** (900, 1.55rem, 1, uppercase, balanced): blurb headings.
-- **Genre** (800, clamp(0.95rem, 1.4vw, 1.2rem), 0.08em, uppercase, soft cream): the single genre line on the flap, next to the logo. It is a box-front genre line, not a label above a heading.
-- **Key numeral** (900, 1.45rem, tabular): keypad digits, and `kbd` caps at 0.95em.
-- **Body** (Figtree 500, 1rem/1.5): copy, with a 34ch measure for side notes and 68ch for small print.
-- **Caption** (Figtree 700, 0.95rem/1.3): the state line under the screenshot.
-- **Label** (Figtree 800, 0.8rem, 0.06em, uppercase): spec strip items. The barcode label uses 0.72rem at 0.08em.
-- **Small print** (Figtree 500, 0.82rem/1.5): credits and legal.
-- **Terminal** (JetBrains Mono 400, line-height 1, letter-spacing 0): xterm's size is fitted per width to between 10 and 16px (15px initial). Vignettes use 0.8rem/1.08 (0.5rem on phones), and the forge flame uses 1.35rem (0.95rem on phones).
+- **Display:** the title is not set in a font. It is the game's own 86-column ░▒▓█ splash art, rendered to SVG by `web/scripts/logo.mjs` (3 x 6 units per cell; █ solid, ▓ ▒ ░ as the 75 / 50 / 25 % ordered dot dither of Polaris Blocks), inlined at `min(100%, 46rem)` in white.
+- **Section heading** (Pixelify 700, 2rem, 1.1): "Comment jouer", "Dans le jeu".
+- **Command** (Pixelify 700, 1.5rem, 0.08em, uppercase): the yellow selected command; the keypad's Entrée uses the same treatment at 1.25rem.
+- **Dialogue** (Pixelify 500, clamp(1.05rem, 2.6vw, 1.3rem), 1.4, max 60ch, `text-wrap: pretty`): the box's `*` lines.
+- **Lead-in** (Pixelify 600, inherits size, white): the bold opening phrase of each encounter line ("Quatre chapitres.").
+- **Label** (Pixelify 600, 0.95rem): quiet commands, control-list terms, `kbd` (600, 0.9em, tabular numerals).
+- **Status** (Pixelify 500, 0.95rem, 1.3): the legend on the box's bottom edge.
+- **Body** (Figtree 500, 1rem, 1.55): descriptions and encounter lines (max 62ch, `text-wrap: pretty`); credits at 0.9rem, max 70ch.
+- **Terminal** (JetBrains Mono 400, line-height 1, letter-spacing 0): 15px at creation, then fitted per box width to between 10px and 16px so about 92 columns fit; keypad digits are Pixelify 700 1.35rem.
 
 ### Named Rules
-**The Game Letters Rule.** "POLARIS" is always the game's own block art from `internal/game/game.go`, rendered by `scripts/logo.mjs` as crisp-edged SVG cells (3×6 units). The flap logo keeps only the solid █ cells. The printed capture draws ▓▒░ as the same 4×8 ordered dither (75/50/25%) that `scripts/blocks_font.py` bakes into "Polaris Blocks", so the print and the live terminal show identical dots.
+**The Game's Own Letters Rule.** The title is generated from `internal/game/game.go`, never redrawn or re-lettered. Block characters always render through Polaris Blocks (exact cells, 4 x 8 dot dither, bleed to avoid seams), on the page and in the terminal alike.
 
-**The Mono Stays On Screen Rule.** JetBrains Mono appears only on screen surfaces: the terminal, the capture's prompt line, the ASCII vignettes and the error detail. Copy on the red is never set in mono.
-
-**The Fixed Numerals Rule.** Keypad digits, `kbd` caps and the save line use tabular numerals so they keep fixed positions.
+**The Three Voices Rule.** Pixel for the page's voice, Figtree for reading, mono only for the game's own text. No fourth face.
 
 ## Layout
 
-The layout is a single 92rem-max column with a fluid gutter (`spacing.gutter`). From top to bottom: flap, back (screenshot plus blurbs), spec strip, controls, small print. Sections are separated by clamp margins (2.5–5rem). Only the flap, the spec strip and the small print draw a printed rule.
+**Stage.** The first viewport is a single centred column (`min-height: 100dvh`, flex, centred both ways): the title, then the battle box with its status legend seated on its bottom edge. Width is `min(100%, 46rem)` for title, box and status before play; box and status widen to `min(100%, 64rem)` while playing. Side padding is the gutter token; the top padding clears the absolutely positioned top edge (3.5rem + 0.5rem).
 
-- **Desktop (above 64rem):** the back is a two-column grid, `minmax(0,1fr) 19rem`. The screenshot takes about 70% of the width and the blurbs stack in the narrow column. The frame height is clamp(26rem, 100dvh − 10.5rem, 60rem), so the first viewport holds the flap, the screen and its caption. The flap is a grid of tab, logo, genre and keys. The controls section has three columns: heading, list and note. The spec strip has five cells.
-- **Tablet (64rem and below):** the back becomes one column. The blurbs become three columns under the caption, the spec strip has three cells per row with a rule between rows, and the controls stack.
-- **Phone (40rem and below):** the flap drops the genre line, the tab shrinks to its chevron as a 2.5rem square, and the logo is centred. Each blurb is a 7.5rem vignette beside its text, with 7rem-high screens. The spec strip has two cells per row. Controls terms are 7rem wide. The small print stacks above the barcode.
-- **Touch (pointer: coarse):** the keypad appears under the caption (6 columns: 1–5 and back, 6–0 and keyboard, then Entrée across the full width). The frame height becomes clamp(17rem, 100dvh − 19.5rem, 60rem) so the screen and keypad fit together.
-- **Phone landscape (coarse, max-height 32rem):** the flap and caption are hidden. The frame fills 100dvh − 4.4rem with a 5px border. The keypad becomes one row (12 equal keys plus a 2fr Entrée) of 2.6rem-high keys.
-- **Cramped (terminal under 86 columns):** `body.is-cramped` is set. In portrait on touch, the print scales the whole title to the frame width, puts the prompt line three cells under it, and shows the "Tourne ton téléphone" hint under the sticker.
-- Safe-area insets pad the body, and the small print adds the bottom inset.
+**Top edge.** A 3.5rem band, back link to palawi.fr on the left, sound and fullscreen icon commands on the right (0.5rem gap), respecting safe-area insets.
 
-**The Ninety Columns Rule.** The terminal font size is computed so that 92 columns fit (`floor(width / 92 / 0.6)`, clamped to 10–16px), then the fit addon fills the frame. The 86-column title is never scaled by CSS inside the live terminal.
+**Below the fold.** Max 64rem, centred; parts separated by a 2px `rule-line` top border with clamp(3rem, 7vw, 4.5rem) margin and clamp(2rem, 5vw, 3rem) padding. Control list rows: 9rem term column, 2px bottom rules. "Dans le jeu" is a single encounter box at the part's full width.
+
+**Adaptation.**
+- **Desktop (fine pointer):** as above; box 15.5rem tall while talking, `100dvh - 3.5rem - 5rem` while playing; hovers only under `(hover: hover) and (pointer: fine)`.
+- **Narrow (max-width 40rem):** talking box grows to 17.5rem; the encounter's ASCII foes shrink to 0.45rem (the flame to 0.8rem) and stay in one row; control terms 7rem.
+- **Touch (coarse pointer):** before play the title, box and keypad stay centred as a group, with 2rem between the top bar and the stage content (top padding 3.5rem + 2rem); while playing the stage starts at the top (3.5rem + 0.5rem) and the box is `100dvh - 3.5rem - 15.5rem` with a 15rem minimum. The keypad shows 1rem under the box (6 columns: 1-5 + erase, 6-0 + keyboard, full-width Entrée).
+- **Phone portrait (coarse):** only while playing and only when the terminal has fewer than 86 columns, a left-aligned soft-ink Pixelify 0.9rem hint under the keypad suggests turning the phone.
+- **Phone landscape (coarse, max-height 32rem):** the top edge, title and status legend hide; the box goes full width at `100dvh - 4.6rem`; the keypad becomes one row (12 equal keys + a double-width Entrée, 0.35rem gap, 2.6rem tall).
+- **Fullscreen:** the fullscreen button sends the battle box itself fullscreen (100% x 100%, frame width 0); the button is hidden where the Fullscreen API is unavailable.
+- **Reduced motion:** title, box and status keep only 160ms border-colour and opacity transitions (no resizing animation, no dialogue fade delay, no 500ms pre-start wait); the hit jolt and the screen invert are both off.
 
 ## Elevation & Depth
 
-Depth is physical and lit from above. Objects on the card cast short shadows that fall downward, tinted with the box's red-brown. Controls have a lit top edge and a darker lower lip. Nothing glows.
-
-### Shadow Vocabulary
-- **Rest** (`0 1px 2px rgb(60 2 10 / 0.35), 0 16px 30px -18px rgb(60 2 10 / 0.75)`): vignette screens lying on the card.
-- **Lift** (`0 2px 5px rgb(60 2 10 / 0.38), 0 26px 44px -20px rgb(60 2 10 / 0.85)`): the main screenshot frame.
-- **Key** (`0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55)`): tab, flap keys, keypad keys and barcode at rest.
-- **Key down** (`0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5)`): pressed and toggled-on controls.
-- **Sticker** (`0 1px 0 rgb(255 255 255 / 0.7) inset, 0 3px 6px -1px rgb(0 0 0 / 0.45), 0 22px 36px -18px rgb(0 0 0 / 0.7)`): the sticker sits on the near-black screen, so its shadow is neutral black instead of red-brown.
-- **Kbd lip** (`0 2px 0 rgb(43 10 13 / 0.35)`): the 2px lower edge of inline key caps.
+Completely flat. No `box-shadow`, no gradient, no glow, no blur anywhere. Depth is conveyed only by overlap: the status legend sits on the battle box's bottom edge, each part on a stage-coloured patch that cuts the frame line; the dialogue panel covers the (hidden) terminal inside the same frame; the frame sits on the stage. Hierarchy comes from frame weight (4px battle and encounter boxes, 3px active command / Entrée, 2px everything else) and from lit versus unlit ink.
 
 ### Named Rules
-**The Falling Light Rule.** Shadows always fall downward and are tinted with the ink of the surface below. A zero-offset, wide-blur shadow is a glow, and the system has none. (The rule is shared with the palawi.fr hub.)
-
-**The Real Travel Rule.** A pressed control moves `translateY(2px)` and switches to the key-down shadow. On fine pointers only, hover lifts it 1px (2px for the sticker). The toggled states (sound off, fullscreen on) hold the pressed position. When the game is not waiting for input, the keypad keys sit 2px down, lose their shadow and drop to 55% opacity. They flatten into the card instead of greying out.
+**The Overlap-Only Rule.** If something needs to read as "above", it overlaps and covers, as the status legend covers the frame's bottom edge; it is never shaded, lifted or haloed.
 
 ## Shapes
 
-Corners are soft, cut-card corners: 14px for the screenshot frame and sticker, 10px for keys and the tab, 9px for vignettes, 6px for `kbd` caps and the barcode label, and 2px for the caption's square swatch. Screens are framed in solid cream (8px on the main frame, 5px in phone landscape, 4px on vignettes) and clipped (`overflow: hidden`). The sticker alone is tilted −3deg.
+Every corner is square (0px). Every container is a solid pixel border in one of three weights: 4px for the battle box and the encounter box, 3px for the active command and the keypad Entrée, 2px for commands, keys, `kbd` and rules. Icons are 12 x 12 SVG strokes at 1.5, square caps, `crispEdges`; the four-point save star is the one filled, geometric shape and is always yellow. The favicon repeats the system: stage square, white 3px frame, yellow star.
 
-**The One Device Pixel Rule.** Printed rules (flap, spec strip borders, controls rows, small-print top) use the `--rule` width: 1px, or 0.5px at 2dppx and above, always in cream at 45–60% alpha. Frames are not rules. They are thick cream borders.
+### Named Rules
+**The Square Pixel Rule.** No radius, ever; frames are the only shape language.
 
 ## Components
 
-### Tab (back to palawi.fr)
-A cream printed tab: a chevron plus "palawi.fr" in Figtree 800 0.875rem, 2.5rem high, with the key shadow and real travel. On phones it becomes a 2.5rem square showing only the chevron.
+### Commands (top edge links and pixel buttons)
+Quiet, framed pixel buttons that never compete with the box.
+- **Shape:** square, 2px `unlit-ink` border, transparent fill.
+- **Quiet** (2.4rem tall, Pixelify 600 0.95rem, chevron icon + label): back to palawi.fr; "Code source" in the credits, where it is drawn in `frame-white`.
+- **Icon** (2.4rem square, 1.1rem icon): sound (speaker / crossed speaker), fullscreen (corner brackets). Unlit when muted or when fullscreen is on: `rule-line` border, `unlit-ink` icon.
+- **Hover (fine pointers only):** border and label go to `frame-white`, 140ms. **Active:** scale 0.97 with the ease-out curve. **Focus:** 3px yellow outline, 3px offset.
 
-### Keys (sound, fullscreen)
-2.5rem cream squares, 10px corners, with a 1.2rem stroke icon in red-brown. Sound swaps between the speaker-waves and speaker-cross icons and holds the pressed position when muted. Fullscreen holds the pressed position while active and is hidden when the Fullscreen API is unavailable.
+### The selected command
+The one yellow thing in a dialogue, the genre's highlighted choice.
+- 3.4rem tall, 3px `command-yellow` border, yellow uppercase Pixelify 700 1.5rem with 0.08em tracking, a filled play triangle before the label.
+- **Hover:** fills yellow, label turns `stage`. **Active:** scale 0.97.
+- Label follows the save: "Jouer" without a save, "Reprendre" with one; "Rejouer" after quitting, "Réessayer" on error.
 
-### Printed Screenshot Frame
-The live terminal (xterm.js, DOM renderer, block cursor, no bell) on the screen colour, inside an 8px cream border with 14px corners and the Lift shadow. It has fluid inner padding on the top and left only. When the game sends the DEC reverse-video flash (a monster hit), the screen inverts with a hue-rotate for about 90ms and jolts 3px. Under reduced motion the jolt is dropped and the invert is kept. In fullscreen the border and radius go to 0.
+### The dithered title and its fold
+The game's own splash title in white SVG, above the box. When the game starts it folds away: grid row 1fr to 0fr and its bottom margin to 0 over 480ms (ease-in-out), opacity to 0 over 200ms, so the box can take the stage.
 
-### Print Overlay and Cell-Grid Alignment
-The printed capture covers the frame on the screen-print colour with its 3px dot. It shows the dithered logo, "Press Enter to START !" in mono, the sticker and an optional save line. Once the terminal exists, `resize()` measures the real cell width and height and the grid origin (`--cw`, `--ch`, `--px`, `--py`, `--fs`). The print is then placed on those cells: the title spans rows 2 to 8 and 85 columns, and the prompt sits on row 12, exactly where the game prints them. The end ("À bientôt, aventurier") and error notes are printed the same way. They are centred, with a cream display heading and copy at a 34ch measure.
+### The battle box (signature)
+The white frame that is the game. Stage-coloured fill, overflow hidden, centred at every size.
+- **Idle (talking):** 4px `frame-white` frame, `min(100%, 46rem)` x 15.5rem, the dialogue panel visible, the terminal created behind it at opacity 0.
+- **Expanding:** on JOUER, the dialogue fades out (160ms), the page enters its playing state and the box animates width and height over 480ms (ease-in-out) to `min(100%, 64rem)` x `100dvh - 3.5rem - 5rem`; the title folds; after about 500ms the terminal is reset, fitted and fades in (200ms), then the game starts.
+- **Narrating:** while the game prints and is not waiting for input, the frame dims to `unlit-ink` (160ms); the legend reads "Le jeu raconte…"; typed keys are ignored.
+- **Your turn:** when the game blocks on a read, the frame is lit `frame-white` again; the legend reads "À toi de jouer" in white; the keypad lights.
+- **Hit:** when the game prints its reverse-video flash, the box jolts (translate 4px, -3px) and the screen inverts for the first 45% of 200ms, a hard two-step cut, no easing. Both are off under reduced motion.
+- **After the game / error:** the box returns to dialogue size with the end or error dialogue.
 
-**The Cell Grid Rule.** Anything printed over the live screen is positioned in terminal cells, never in arbitrary pixels, so when the cut passes the live screen continues the print without a jump.
+### Dialogue lines
+The box's own voice. Each line is a two-column grid: a large mono asterisk (1.25em) then Pixelify 500 text, max 60ch with `text-wrap: pretty`, 0.35rem apart. Below the lines, the action row: the selected command and, on the start dialogue, a Figtree 0.875rem `soft-ink` hint with a `kbd`. The panel's padding is clamp(1.1rem, 3vw, 1.6rem) clamp(1.1rem, 3vw, 1.8rem) clamp(1.1rem, 3vw, 1.5rem). Dialogues fade in and out over 160ms; the box does the moving.
 
-### Sticker (the one primary action)
-A cream sticker with red display text and a filled play triangle. It is at least 4rem high, tilted −3deg, and casts a neutral shadow. Its label reads "Jouer", or "Reprendre" when a save exists. In that case a save line in tabular numerals sits under it ("Partie de … : niveau N, chapitre N."). When pressed it sinks 2px and scales to 0.98. When the game starts, the sticker area peels off (fades out, rises 8px and turns to −6deg over 180/220ms) while the rest of the print waits for the cut.
+### Status legend
+A legend seated on the battle box's bottom edge, like a label on a frame. Same width as the box, pulled up by a negative top margin (`-0.65rem - frame/2`) so it straddles the 4px line, 1rem side inset, z-index above the box; each part is a `stage`-filled patch with 0.5rem side padding, so it cuts the frame. One line, Pixelify 500 0.95rem, `soft-ink`, `aria-live="polite"`.
+- **Save (left):** shown only when a save exists, no-wrap: yellow star then a short white tabular summary, "Nin · niv. 1 · chap. 1" (or "jeu fini"), with the title attribute "Partie sauvegardée dans ce navigateur".
+- **Turn (right):** hidden before play; "Le jeu raconte…" in `soft-ink` while narrating, "À toi de jouer" in white on the player's turn.
 
-**The One Sticker Rule.** Each print carries exactly one sticker, and it is the only primary action on the page.
+### Touch keypad
+Pixel keys that light with the player's turn (coarse pointers only).
+- Keys: 3rem tall, 2px border, transparent fill, Pixelify 700 1.35rem tabular digits; erase and keyboard keys carry 1.2rem stroke icons.
+- **Lit (game waiting):** `frame-white` border and digit. **Unlit:** `rule-line` border, `unlit-ink` digit; keys stay in place.
+- **Pressed:** fills yellow with `stage` digit (80ms fill).
+- Sits 1rem under the box.
+- **Entrée:** full width (portrait), 3px yellow border, yellow uppercase Pixelify 1.25rem, 0.08em tracking; unlit like the others when not waiting.
+- Key presses use pointerdown and never steal focus; the keyboard key opens the soft keyboard for typing a name.
 
-### Signature: The Cut-Away
-The printed capture stays in place until the game first waits for input. At that point the live screen shows the same title and prompt, and the print is clipped away with `inset(0 0 0 0)` → `inset(0 0 0 100%)` over 560ms on the ease-in-out curve. The end and error notes are laid back down with the reverse clip (`inset(0 100% 0 0)` → `inset(0)`, 460ms). Under reduced motion both become a 160ms opacity fade.
-**Narrow-screen title skip:** if the terminal is cramped (under 86 columns) when play starts, the 86-column title would wrap. The print stands in for it, the sticker press is answered as the "Press Enter to START" line, and the cut happens on the next screen.
+### Keyboard keys (`kbd`)
+Inline 2px `unlit-ink` box, white Pixelify 600 0.9em, min width 1.7em, tabular numerals. Used in the hint and the control list.
 
-### Caption
-A Figtree 700 state line under the frame, led by a 0.55rem square swatch in `currentColor`. It has four exclusive states: idle ("Appuie sur Jouer…"), starting ("Le jeu démarre…"), busy ("Le jeu raconte…"), and waiting ("À toi de jouer…"). The waiting state is the only one in full cream, swatch included. The others use soft cream. The caption is `aria-live="polite"` and is hidden in phone landscape.
+### Controls list
+A definition list of four rows: key terms in Pixelify 600 0.95rem, descriptions in `soft-ink` Figtree, each row closed by a 2px `rule-line`. Followed by a note led by the yellow save star.
 
-### Keypad (touch only)
-Cream keys 3rem high in a 6-column grid with a 0.5rem gap, Big Shoulders 900 tabular digits, plus stroke icons for back and keyboard (which opens the soft keyboard for typing the name). Entrée spans the full row in inverted ink: a red-brown fill with uppercase cream text tracked at 0.06em. Keys respond on `pointerdown` and keep focus where it is. **Listening:** keys rest with the key shadow and travel 2px on press. **Flat:** when the game is not waiting, every key flattens (see The Real Travel Rule) and its input is ignored.
+### Encounter box ("Dans le jeu")
+A second battle box, below the fold, staging what is in the game as an encounter.
+- **Frame:** 4px `frame-white`, square, padding clamp(1.25rem, 3vw, 2rem).
+- **Foes (top):** the game's three ASCII sprites (two foes and the forge flame) lined up in one row, bottom-aligned and spaced around, in white JetBrains Mono 0.85rem / 1.08 (the flame 1.35rem / 1.1); a 2px `rule-line` under them, overflow hidden. Decorative (`aria-hidden`).
+- **Lines (below):** narrator lines, each a grid of a white mono `*` (1.25em) and Figtree `soft-ink` text, max 62ch, `text-wrap: pretty`, 0.6rem apart; each opens with a white Pixelify 600 lead-in ("Quatre chapitres.", "Combats au tour par tour.", "Forge et boutiques.").
 
-### Blurbs with ASCII Vignettes
-Each blurb has a small printed screen and two text lines below it. The screen is a 4px cream frame, 9px corners, the Rest shadow and the screen-print dot, with a real monster or object from the game (skeleton, wolf, the forge flame) in mono and centred. Below it are a title-style heading and soft-cream copy at 0.95rem/1.45. The flame uses the larger vignette size.
+### Credits
+The last part: Figtree 0.9rem `soft-ink`, names in white bold, max 70ch; a link row with the "Code source" quiet command in white, plain underlined links (1px, 4px offset) and the no-cookie note.
 
-### Spec Strip
-A row of five cells (three on tablet, two on phones) between cream hairlines, with hairline dividers between cells. Each cell has a 1.6rem stroke icon (stroke width 1.8) and an uppercase Figtree 800 label. There is no fill and no card.
+### Share image
+`web/src/og.png` (1200 x 630) is a plain Playwright capture of the built first viewport before play (`web/scripts/og.py`); nothing is restyled for it.
 
-### Controls List
-A "Commandes" headline, a definition list whose rows are separated by hairlines (`kbd` caps in the term column: 9rem wide, 7rem on phones; soft-cream descriptions), and a 34ch side note about autosave.
-
-### Small Print and Barcode Link
-Soft-cream credits at 68ch, with "Polaris" in full cream, and underlined text links. On the right sits the barcode: a cream label with a fixed red-brown bar pattern (10.5rem × 3.2rem, drawn as hard gradient stops) over the label "Code source sur GitHub". It links to the repository and has the key shadow, hover lift and press travel.
-
-### Focus
-Every interactive element gets a 3px cream outline, offset 3px.
+### Related surface
+The palawi.fr hub widget wears this world under the Guest App Rule; it is documented in the hub's own DESIGN.md (`/home/claude/palawifr-static-pages/DESIGN.md`, "Polaris Battle Box (hub)"), not here.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** print everything on the red in the two inks (cream and red-brown), and keep the terminal as the only high-contrast area.
-- **Do** render "POLARIS" only from the game's block art via `scripts/logo.mjs`: solid cells for small sizes, the 4×8 dither for the printed capture.
-- **Do** place anything laid over the live terminal on measured cells (`--cw`, `--ch`, `--px`, `--py`), and reveal the game with the clip-path cut-away (560ms, cubic-bezier(0.77, 0, 0.175, 1)).
-- **Do** give every control real travel: the key shadow at rest, 2px down with the key-down shadow when pressed, and flat at 55% when the game is not listening.
-- **Do** draw printed rules with `--rule` in cream at 45–60% alpha.
-- **Do** keep tabular numerals on keys, `kbd` caps and the save line.
-- **Do** frame every screen surface in solid cream with soft corners and a downward shadow tinted in red-brown.
+- **Do** keep the battle box whole, centred and square-framed at every size; restack everything else around it.
+- **Do** show game state as illumination: frame white on the player's turn, `unlit-ink` while the game narrates; keys lit or unlit, never removed.
+- **Do** keep exactly one yellow command per dialogue and use yellow only for active things (command, save star, cursor, Entrée, pressed key, focus, selection).
+- **Do** generate the title from the game source with `web/scripts/logo.mjs` and render block characters through Polaris Blocks (`web/scripts/blocks_font.py`).
+- **Do** open lines in a box's voice with the narrator's `*`, in the battle box and the encounter box alike.
+- **Do** seat labels about the box on its frame as a legend (stage-filled patches over the edge), not as a separate row below it.
+- **Do** use the 480ms ease-in-out curve (cubic-bezier(0.77, 0, 0.175, 1)) for the box, title and status resizing, and ease-out (cubic-bezier(0.23, 1, 0.32, 1)) for press feedback; collapse to colour and opacity changes under reduced motion.
+- **Do** answer the game's "Press Enter to START" automatically when the terminal is narrower than 86 columns, so the wrapped title never shows as noise; JOUER already was the player's Enter.
 
 ### Don't:
-- **Don't** put the game in a dark page with a centred terminal window and a generic play button. The page is the red box.
-- **Don't** use neon, glow, or zero-offset luminous halos. Shadows fall downward.
-- **Don't** typeset the title in a font, or print the ▓▒░ tints as a third ink on the red.
-- **Don't** use JetBrains Mono for copy on the red. Mono belongs to screen surfaces.
-- **Don't** show a picture of the game where the live game can run. Vignettes are the game's real ASCII art, not mock-ups.
-- **Don't** add a second sticker or competing primary action to a print.
-- **Don't** add uppercase labels above headings. The flap genre line is the only small uppercase line, and it sits beside the logo.
-- **Don't** print ratings, review quotes or player counts on the box.
+- **Don't** round a corner, add a shadow, gradient, glow, blur or neon halo.
+- **Don't** bring back the red ground or the "game box" world, or a macOS-style terminal window.
+- **Don't** redraw or re-letter the Polaris title.
+- **Don't** add a second accent colour or use yellow for headings or decoration.
+- **Don't** use `unlit-ink` for text someone has to read.
+- **Don't** use Undertale or Deltarune characters, logos or exact command names (FIGHT / ACT / ITEM / MERCY); only the generic battle-box grammar.
+- **Don't** hide inactive controls; dim them.

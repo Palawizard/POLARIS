@@ -1,7 +1,7 @@
-// Generates src/logo.svg from the game's own title art (last frame of the
+// Generates src/logo-print.svg from the game's own title art (last frame of the
 // splash animation in internal/game/game.go). Each block character becomes a
-// cell: █ solid, ▓ ▒ ░ as lighter tints, so the logo is the game's lettering,
-// crisp at any size. Run: node scripts/logo.mjs
+// cell: █ solid, ▓ ▒ ░ as the same 4 x 8 dot dither as the terminal, so the title
+// matches what the game prints. Run: node scripts/logo.mjs
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -28,11 +28,6 @@ art.forEach((row, y) => {
 });
 const box = `viewBox="0 0 ${cols * W} ${art.length * H}" fill="currentColor" role="img" aria-label="Polaris" preserveAspectRatio="none" shape-rendering="crispEdges"`;
 
-// logo.svg: only the solid █ cells, for small sizes (box flap, hub widget).
-// Tints would print as a third ink on the red, and a dither turns to moiré
-// below a few device pixels per dot.
-writeFileSync(join(web, "src/logo.svg"), `<svg xmlns="http://www.w3.org/2000/svg" ${box}><path d="${runs[1].join("")}"/></svg>\n`);
-
 // logo-print.svg: shades as the 4 x 8 dot dither of the "Polaris Blocks" font
 // (scripts/blocks_font.py), so the printed capture matches the live terminal.
 const d = W / 4; // dot size; the dither repeats every 2 dots
@@ -47,4 +42,4 @@ const dithered = Object.entries(runs)
   .map(([t, p]) => `<path fill="${fills[t]}" d="${p.join("")}"/>`)
   .join("");
 writeFileSync(join(web, "src/logo-print.svg"), `<svg xmlns="http://www.w3.org/2000/svg" ${box}>${defs}${dithered}</svg>\n`);
-console.log(`src/logo.svg + src/logo-print.svg: ${cols}x${art.length} cells`);
+console.log(`src/logo-print.svg: ${cols}x${art.length} cells`);

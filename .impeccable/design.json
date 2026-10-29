@@ -1,252 +1,197 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-29T17:58:17+00:00",
+  "generatedAt": "2026-10-29T20:15:00+00:00",
   "title": "Design System: Polaris (browser edition)",
   "extensions": {
     "colorMeta": {
-      "box-red": {
+      "command-yellow": {
         "role": "primary",
-        "displayName": "Box Red",
-        "canonical": "#b5202a",
+        "displayName": "Command Yellow",
+        "canonical": "oklch(86.1% 0.151 94)",
         "tonalRamp": [
-          "#2a1315",
-          "#521e22",
-          "#7e252b",
-          "#af2730",
-          "#d8414b",
-          "#da8187",
-          "#e5bdc0",
-          "#f5ebeb"
+          "#170700",
+          "#352100",
+          "#573e00",
+          "#7b5d00",
+          "#a07e00",
+          "#c0a330",
+          "#e2c86d",
+          "#ffeea2"
         ]
       },
-      "box-red-deep": {
-        "role": "primary",
-        "displayName": "Box Red Deep",
-        "canonical": "#8a1520",
-        "tonalRamp": [
-          "#2b1215",
-          "#541d22",
-          "#81232b",
-          "#b22431",
-          "#dc3d4c",
-          "#dc7e87",
-          "#e6bcc0",
-          "#f5eaeb"
-        ]
-      },
-      "box-red-dark": {
-        "role": "primary",
-        "displayName": "Box Red Dark",
-        "canonical": "#6e0f19",
-        "tonalRamp": [
-          "#2b1215",
-          "#541c22",
-          "#82212b",
-          "#b52231",
-          "#de3a4c",
-          "#de7d87",
-          "#e7bcc0",
-          "#f5eaeb"
-        ]
-      },
-      "print-cream": {
+      "stage": {
         "role": "neutral",
-        "displayName": "Print Cream",
-        "canonical": "#fff1dc",
+        "displayName": "Stage",
+        "canonical": "oklch(15.7% 0.013 285)",
         "tonalRamp": [
-          "#2f220e",
-          "#5d4013",
-          "#925e12",
-          "#cc7e0a",
-          "#f8a220",
-          "#edba6d",
-          "#edd7b5",
-          "#f7f1e8"
+          "#0b0b0e",
+          "#242529",
+          "#414147",
+          "#606068",
+          "#81818a",
+          "#a4a4ac",
+          "#c8c8cf",
+          "#eeeef4"
         ]
       },
-      "soft-cream": {
+      "frame-white": {
         "role": "neutral",
-        "displayName": "Soft Cream",
-        "canonical": "#ffd9c8",
+        "displayName": "Frame White",
+        "canonical": "oklch(96.8% 0.003 286)",
         "tonalRamp": [
-          "#2f180e",
-          "#5d2a13",
-          "#923912",
-          "#cc460a",
-          "#f86320",
-          "#ed956d",
-          "#edc6b5",
-          "#f7ede8"
+          "#0b0b0c",
+          "#252526",
+          "#424243",
+          "#616162",
+          "#828284",
+          "#a5a5a6",
+          "#c9c9ca",
+          "#eeeeef"
         ]
       },
-      "ink-red-brown": {
+      "soft-ink": {
         "role": "neutral",
-        "displayName": "Red-Brown Ink",
-        "canonical": "#2b0a0d",
+        "displayName": "Soft Ink",
+        "canonical": "oklch(77.4% 0.017 286)",
         "tonalRamp": [
-          "#291416",
-          "#4f2125",
-          "#792a31",
-          "#a72f3a",
-          "#cf4955",
-          "#d5868d",
-          "#e3bfc3",
-          "#f4ebec"
+          "#0b0b0f",
+          "#24242a",
+          "#414149",
+          "#60606a",
+          "#81818c",
+          "#a4a4ae",
+          "#c8c8d1",
+          "#edeef6"
         ]
       },
-      "screen": {
+      "unlit-ink": {
         "role": "neutral",
-        "displayName": "Screen",
-        "canonical": "#180d11",
+        "displayName": "Unlit Ink",
+        "canonical": "oklch(54.3% 0.023 286)",
         "tonalRamp": [
-          "#241a1d",
-          "#432d35",
-          "#653f4c",
-          "#884e63",
-          "#ac6c84",
-          "#c09aa8",
-          "#dac9cf",
-          "#f2eeef"
+          "#0b0a10",
+          "#24242c",
+          "#41414b",
+          "#60606d",
+          "#818190",
+          "#a3a3b2",
+          "#c8c8d5",
+          "#ededf9"
         ]
       },
-      "screen-print": {
+      "rule-line": {
         "role": "neutral",
-        "displayName": "Screen Print",
-        "canonical": "#21141a",
+        "displayName": "Rule Line",
+        "canonical": "oklch(29.0% 0.020 285)",
         "tonalRamp": [
-          "#231b1e",
-          "#412f37",
-          "#614250",
-          "#835369",
-          "#a7728a",
-          "#bd9eac",
-          "#d8cad1",
-          "#f1eef0"
-        ]
-      },
-      "terminal-fg": {
-        "role": "neutral",
-        "displayName": "Terminal Foreground",
-        "canonical": "#f6e8d6",
-        "tonalRamp": [
-          "#292014",
-          "#503b20",
-          "#7b5729",
-          "#a9732d",
-          "#d19547",
-          "#d6b384",
-          "#e3d3bf",
-          "#f4f0eb"
+          "#0b0b10",
+          "#24242b",
+          "#41414a",
+          "#60606b",
+          "#81818e",
+          "#a3a4b0",
+          "#c8c8d3",
+          "#ededf7"
         ]
       }
     },
     "typographyMeta": {
-      "display": {
-        "displayName": "Display",
-        "purpose": "Sticker label; end/error note headings at clamp(2rem, 6cqi, 3rem)."
+      "section-heading": {
+        "displayName": "Section heading",
+        "purpose": "Below-the-fold part headings (Comment jouer, Dans le jeu)."
       },
-      "headline": {
-        "displayName": "Headline",
-        "purpose": "Section headings on the card (Commandes)."
+      "command": {
+        "displayName": "Command",
+        "purpose": "The yellow selected command; keypad Entrée at 1.25rem."
       },
-      "title": {
-        "displayName": "Title",
-        "purpose": "Blurb headings."
-      },
-      "genre": {
-        "displayName": "Genre",
-        "purpose": "The one genre line on the flap, beside the logo."
-      },
-      "key-numeral": {
-        "displayName": "Key numeral",
-        "purpose": "Keypad digits and kbd caps, tabular."
-      },
-      "body": {
-        "displayName": "Body",
-        "purpose": "Copy on the red."
-      },
-      "caption": {
-        "displayName": "Caption",
-        "purpose": "State line under the screenshot."
+      "dialogue": {
+        "displayName": "Dialogue",
+        "purpose": "The battle box's * lines, max 60ch, text-wrap: pretty."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Spec strip items; barcode label at 0.72rem."
+        "purpose": "Quiet commands, control-list terms, kbd (600, 0.9em)."
       },
-      "small-print": {
-        "displayName": "Small print",
-        "purpose": "Credits and legal."
+      "status": {
+        "displayName": "Status",
+        "purpose": "The legend seated on the battle box's bottom edge."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading copy below the fold, encounter lines (62ch), dialogue hint (0.875rem), credits (0.9rem, 70ch)."
       },
       "terminal": {
         "displayName": "Terminal",
-        "purpose": "xterm.js; size fitted to 10-16px for 92 columns."
+        "purpose": "The game's own text in xterm.js, fitted between 10px and 16px for about 92 columns; also the encounter's ASCII sprites, the narrator asterisk and the error detail. Block elements U+2580-259F come from the generated Polaris Blocks font."
       },
-      "vignette": {
-        "displayName": "Vignette",
-        "purpose": "ASCII monsters in blurb screens."
+      "lead-in": {
+        "displayName": "Lead-in",
+        "purpose": "White Pixelify 600 opening phrase of each encounter line."
       }
     },
-    "shadows": [
+    "frames": [
       {
-        "name": "rest",
-        "value": "0 1px 2px rgb(60 2 10 / 0.35), 0 16px 30px -18px rgb(60 2 10 / 0.75)",
-        "purpose": "Vignette screens lying on the card."
+        "name": "frame-box",
+        "value": "4px solid",
+        "purpose": "The battle box (white lit, unlit-ink while narrating, 0 in fullscreen) and the encounter box."
       },
       {
-        "name": "lift",
-        "value": "0 2px 5px rgb(60 2 10 / 0.38), 0 26px 44px -20px rgb(60 2 10 / 0.85)",
-        "purpose": "The main screenshot frame."
+        "name": "frame-active",
+        "value": "3px solid",
+        "purpose": "Selected command and keypad Entrée (yellow)."
       },
       {
-        "name": "key",
-        "value": "0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55)",
-        "purpose": "Tab, flap keys, keypad keys, barcode at rest."
+        "name": "frame-line",
+        "value": "2px solid",
+        "purpose": "Commands, keypad keys, kbd, part and row rules."
       },
       {
-        "name": "key-down",
-        "value": "0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5)",
-        "purpose": "Pressed and toggled-on controls."
-      },
-      {
-        "name": "sticker",
-        "value": "0 1px 0 rgb(255 255 255 / 0.7) inset, 0 3px 6px -1px rgb(0 0 0 / 0.45), 0 22px 36px -18px rgb(0 0 0 / 0.7)",
-        "purpose": "The sticker, standing on the near-black screen."
-      },
-      {
-        "name": "kbd-lip",
-        "value": "0 2px 0 rgb(43 10 13 / 0.35)",
-        "purpose": "Lower edge of inline kbd caps."
+        "name": "focus-ring",
+        "value": "outline: 3px solid #f2cf4b; outline-offset: 3px",
+        "purpose": "Every focus-visible element."
       }
     ],
+    "shadows": [],
     "motion": [
-      {
-        "name": "ease-out",
-        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
-        "purpose": "Key travel (100-160ms) and the sticker peel (180/220ms)."
-      },
       {
         "name": "ease-in-out",
         "value": "cubic-bezier(0.77, 0, 0.175, 1)",
-        "purpose": "Cut-away clip (560ms) and lay-down clip (460ms)."
+        "purpose": "Battle box width/height, title fold, status width: 480ms."
       },
       {
-        "name": "reduced-motion",
-        "value": "opacity 160ms ease-out",
-        "purpose": "Replaces both clips; the hit flash keeps the invert and drops the jolt."
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Command press scale(0.97): 140ms."
+      },
+      {
+        "name": "frame-light",
+        "value": "border-color 160ms ease",
+        "purpose": "Frame lit / dimmed with the turn."
+      },
+      {
+        "name": "dialogue-fade",
+        "value": "opacity 160ms ease",
+        "purpose": "Dialogue panel in and out."
+      },
+      {
+        "name": "screen-reveal",
+        "value": "opacity 200ms ease",
+        "purpose": "Terminal fades in once the box has opened; title opacity on fold."
       },
       {
         "name": "hit",
-        "value": "200ms linear",
-        "purpose": "Reverse-video flash on a monster hit."
+        "value": "200ms linear, two-step cut at 45%",
+        "purpose": "Box jolt translate(4px, -3px) and screen invert(1) on the game's reverse-video flash; both off under reduced motion."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "border-color 160ms ease, opacity 160ms ease",
+        "purpose": "Only transitions kept on title, box and status under prefers-reduced-motion; no pre-start wait; hit jolt and invert off."
       }
     ],
     "breakpoints": [
       {
-        "name": "tablet",
-        "value": "max-width: 64rem"
-      },
-      {
-        "name": "phone",
+        "name": "narrow",
         "value": "max-width: 40rem"
       },
       {
@@ -258,171 +203,146 @@
         "value": "pointer: coarse and orientation: portrait"
       },
       {
-        "name": "phone-landscape",
+        "name": "touch-landscape",
         "value": "pointer: coarse and orientation: landscape and max-height: 32rem"
       },
       {
-        "name": "hairline-2x",
-        "value": "min-resolution: 2dppx"
-      },
-      {
-        "name": "cramped",
-        "value": "terminal cols < 86 (body.is-cramped, JS)"
+        "name": "hover",
+        "value": "hover: hover and pointer: fine"
       }
     ]
   },
   "components": [
     {
-      "name": "Sticker",
+      "name": "Selected Command",
       "kind": "button",
-      "refersTo": "sticker",
-      "description": "The one primary action: cream sticker, red display label, tilted -3deg, real travel.",
-      "html": "<button class=\"ds-sticker\"><svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path d=\"M7 4.8v14.4L19 12z\" fill=\"currentColor\"/></svg><span>Jouer</span></button>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-sticker{display:inline-flex;align-items:center;gap:.6rem;min-height:4rem;padding:.35rem 1.7rem .45rem 1.35rem;border:0;border-radius:14px;background:var(--cream);color:var(--red);font:900 2.75rem/1 \"Big Shoulders Display\",\"Arial Narrow\",sans-serif;letter-spacing:.02em;text-transform:uppercase;cursor:pointer;transform:rotate(-3deg);box-shadow:0 1px 0 rgb(255 255 255 / .7) inset,0 3px 6px -1px rgb(0 0 0 / .45),0 22px 36px -18px rgb(0 0 0 / .7);transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out)} .ds-sticker:hover{transform:rotate(-3deg) translateY(-2px)} .ds-sticker:active{transform:rotate(-3deg) translateY(2px) scale(.98);box-shadow:0 1px 0 rgb(255 255 255 / .5) inset,0 1px 3px rgb(0 0 0 / .45)} .ds-sticker:focus-visible{outline:3px solid var(--cream);outline-offset:3px}"
+      "refersTo": "command-go",
+      "description": "The one yellow command in a dialogue (Jouer / Reprendre / Rejouer / Réessayer).",
+      "html": "<button class=\"ds-cmd-go\"><svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M3 1.5v9l7-4.5z\"/></svg><span>Jouer</span></button>",
+      "css": ".ds-cmd-go { display: inline-flex; align-items: center; gap: 0.5rem; height: 3.4rem; padding: 0 1.5rem 0 1.2rem; border: 3px solid #f2cf4b; border-radius: 0; background: transparent; color: #f2cf4b; font: 700 1.5rem/1 'Pixelify Sans', 'Figtree', system-ui, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color 140ms ease, background-color 140ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-cmd-go svg { width: 1.05rem; height: 1.05rem; fill: currentColor; } .ds-cmd-go:hover { background: #f2cf4b; color: #0c0c12; } .ds-cmd-go:active { transform: scale(0.97); } .ds-cmd-go:focus-visible { outline: 3px solid #f2cf4b; outline-offset: 3px; }"
     },
     {
-      "name": "Flap Key",
+      "name": "Quiet Command",
       "kind": "button",
-      "refersTo": "key",
-      "description": "2.5rem cream key with a red-brown stroke icon; pressed or toggled sinks 2px.",
-      "html": "<button class=\"ds-key\" aria-label=\"Son\"><svg viewBox=\"0 0 24 24\" width=\"19\" height=\"19\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9.5h3.5L12 5.5v13l-4.5-4H4z\" fill=\"currentColor\"/><path d=\"M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11\"/></svg></button>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-key{display:grid;place-items:center;width:2.5rem;height:2.5rem;border:0;border-radius:10px;background:var(--cream);color:var(--ink);cursor:pointer;box-shadow:var(--key);transition:transform 140ms var(--ease-out),box-shadow 140ms var(--ease-out)} .ds-key:hover{transform:translateY(-1px)} .ds-key:active{transform:translateY(2px);box-shadow:var(--key-down)} .ds-key:focus-visible{outline:3px solid var(--cream);outline-offset:3px}"
+      "refersTo": "command-quiet",
+      "description": "Top-edge back link and the Code source link: framed, grey until hovered.",
+      "html": "<a class=\"ds-cmd-quiet\" href=\"#\"><svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M7 2 3 6l4 4\"/></svg><span>palawi.fr</span></a>",
+      "css": ".ds-cmd-quiet { display: inline-flex; align-items: center; gap: 0.5rem; height: 2.4rem; padding: 0 0.85rem 0 0.7rem; border: 2px solid #6e6e7d; border-radius: 0; background: transparent; color: #b4b4c0; font: 600 0.95rem/1 'Pixelify Sans', 'Figtree', system-ui, sans-serif; text-decoration: none; transition: color 140ms ease, border-color 140ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-cmd-quiet svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; } .ds-cmd-quiet:hover { border-color: #f4f4f6; color: #f4f4f6; } .ds-cmd-quiet:active { transform: scale(0.97); } .ds-cmd-quiet:focus-visible { outline: 3px solid #f2cf4b; outline-offset: 3px; }"
     },
     {
-      "name": "Tab",
-      "kind": "nav",
-      "refersTo": "tab",
-      "description": "Printed cream tab back to palawi.fr.",
-      "html": "<a class=\"ds-tab\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"17\" height=\"17\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m15 6-6 6 6 6\"/></svg><span>palawi.fr</span></a>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-tab{display:inline-flex;align-items:center;gap:.3rem;height:2.5rem;padding:0 .95rem 0 .6rem;border-radius:10px;background:var(--cream);color:var(--ink);font:800 .875rem/1 Figtree,ui-sans-serif,system-ui,sans-serif;text-decoration:none;box-shadow:var(--key);transition:transform 140ms var(--ease-out),box-shadow 140ms var(--ease-out)} .ds-tab:hover{transform:translateY(-1px)} .ds-tab:active{transform:translateY(2px);box-shadow:var(--key-down)} .ds-tab:focus-visible{outline:3px solid var(--cream);outline-offset:3px}"
+      "name": "Icon Command",
+      "kind": "button",
+      "refersTo": "command-icon",
+      "description": "Sound and fullscreen; unlit (rule-line border, unlit-ink icon) when muted or when fullscreen is on.",
+      "html": "<button class=\"ds-cmd-icon\" aria-pressed=\"true\"><svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M1.5 4.5h2l3-2.5v8l-3-2.5h-2z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8.5 4.5q1 1.5 0 3M10 3q2 3 0 6\"/></svg></button><button class=\"ds-cmd-icon\" aria-pressed=\"false\"><svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M1.5 4.5h2l3-2.5v8l-3-2.5h-2z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"m8.5 4.5 3 3m0-3-3 3\"/></svg></button>",
+      "css": ".ds-cmd-icon { display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; margin-right: 0.5rem; border: 2px solid #6e6e7d; border-radius: 0; background: transparent; color: #b4b4c0; cursor: pointer; transition: color 140ms ease, border-color 140ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-cmd-icon svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; } .ds-cmd-icon[aria-pressed=\"false\"] { border-color: #2a2a35; color: #6e6e7d; } .ds-cmd-icon:hover { border-color: #f4f4f6; color: #f4f4f6; } .ds-cmd-icon:active { transform: scale(0.97); } .ds-cmd-icon:focus-visible { outline: 3px solid #f2cf4b; outline-offset: 3px; }"
     },
     {
-      "name": "Keypad",
+      "name": "Battle Box (talking)",
+      "kind": "custom",
+      "refersTo": "battle-box",
+      "description": "The signature: the white 4px frame with the box's * dialogue and the selected command. Hover dims the frame to preview the narrating state.",
+      "html": "<section class=\"ds-box\"><div class=\"ds-box-lines\"><p>Un RPG au tour par tour, né dans un terminal.</p><p>Quatre chapitres, des monstres, une forge. Et une chocolatine.</p></div><div class=\"ds-box-act\"><span class=\"ds-box-go\">&#9654; Jouer</span><span class=\"ds-box-hint\">Chiffres puis <kbd>Entrée</kbd>.</span></div></section>",
+      "css": ".ds-box { display: grid; grid-template-rows: 1fr auto; gap: 1rem; width: min(100%, 46rem); min-height: 15.5rem; padding: 1.4rem 1.6rem; border: 4px solid #f4f4f6; border-radius: 0; background: #0c0c12; color: #f4f4f6; transition: border-color 160ms ease; } .ds-box:hover { border-color: #6e6e7d; } .ds-box-lines p { display: grid; grid-template-columns: 1.4em 1fr; margin: 0 0 0.35rem; max-width: 60ch; text-wrap: pretty; font: 500 1.2rem/1.4 'Pixelify Sans', 'Figtree', sans-serif; } .ds-box-lines p::before { content: '*'; font: 400 1.25em/1.1 'JetBrains Mono', monospace; } .ds-box-act { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; } .ds-box-go { display: inline-flex; align-items: center; height: 3.4rem; padding: 0 1.5rem 0 1.2rem; border: 3px solid #f2cf4b; color: #f2cf4b; font: 700 1.5rem/1 'Pixelify Sans', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; } .ds-box-hint { font: 500 0.875rem/1.55 'Figtree', sans-serif; color: #b4b4c0; } .ds-box-hint kbd { padding: 0 0.4em; border: 2px solid #6e6e7d; color: #f4f4f6; font: 600 0.9em/1.5 'Pixelify Sans', sans-serif; }"
+    },
+    {
+      "name": "Status Legend",
+      "kind": "custom",
+      "refersTo": "status-legend",
+      "description": "Seated on the battle box's bottom edge: stage-filled patches cut the 4px frame; yellow save star with the short save summary left, turn line right (hidden before play).",
+      "html": "<div class=\"ds-legend-wrap\"><div class=\"ds-legend-box\"></div><div class=\"ds-legend\"><p class=\"ds-legend-save\" title=\"Partie sauvegardée dans ce navigateur\"><svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M6 .5 7.4 4.6 11.5 6 7.4 7.4 6 11.5 4.6 7.4.5 6l4.1-1.4z\"/></svg>Nin · niv. 1 · chap. 1</p><p class=\"ds-legend-turn\">À toi de jouer</p></div></div>",
+      "css": ".ds-legend-wrap { width: min(100%, 46rem); } .ds-legend-box { height: 6rem; border: 4px solid #f4f4f6; background: #0c0c12; } .ds-legend { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 1.3rem; margin-top: calc(-0.65rem - 2px); padding: 0 1rem; font: 500 0.95rem/1.3 'Pixelify Sans', 'Figtree', sans-serif; color: #b4b4c0; } .ds-legend p { margin: 0; padding: 0 0.5rem; background: #0c0c12; } .ds-legend-save { display: inline-flex; align-items: center; gap: 0.5rem; min-width: 0; white-space: nowrap; color: #f4f4f6; font-variant-numeric: tabular-nums; } .ds-legend-save svg { width: 0.9rem; height: 0.9rem; fill: #f2cf4b; } .ds-legend-turn { margin-left: auto !important; color: #f4f4f6; }"
+    },
+    {
+      "name": "Touch Keypad",
       "kind": "custom",
       "refersTo": "keypad-key",
-      "description": "Touch keypad: listening keys rest proud; add .is-flat when the game is not waiting.",
-      "html": "<div class=\"ds-keypad\"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>0</button><button class=\"ds-enter\">Entrée</button></div>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-keypad{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;padding:1rem;background:var(--red)} .ds-keypad button{height:3rem;border:0;border-radius:10px;background:var(--cream);color:var(--ink);font:900 1.45rem/1 \"Big Shoulders Display\",\"Arial Narrow\",sans-serif;font-variant-numeric:tabular-nums;box-shadow:var(--key);transition:transform 100ms var(--ease-out),box-shadow 100ms var(--ease-out),opacity 150ms ease} .ds-keypad button:active{transform:translateY(2px);box-shadow:var(--key-down)} .ds-keypad button:focus-visible{outline:3px solid var(--cream);outline-offset:3px} .ds-keypad .ds-enter{grid-column:1/-1;background:var(--ink);color:var(--cream);font-size:1.3rem;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 1px 0 rgb(255 255 255 / .12) inset,0 3px 6px -2px rgb(40 0 6 / .6)} .ds-keypad.is-flat button{opacity:.55;transform:translateY(2px);box-shadow:none}"
+      "description": "Lit keys while the game waits, unlit (still drawn) otherwise; pressed keys fill yellow; Entrée is the yellow full-width key.",
+      "html": "<div class=\"ds-keypad\"><button>1</button><button>2</button><button>3</button><button class=\"ds-unlit\">4</button><button class=\"ds-unlit\">5</button><button class=\"ds-unlit\">6</button><button class=\"ds-enter\">Entrée</button></div>",
+      "css": ".ds-keypad { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.45rem; width: 100%; max-width: 24rem; } .ds-keypad button { display: grid; place-items: center; height: 3rem; border: 2px solid #f4f4f6; border-radius: 0; background: transparent; color: #f4f4f6; font: 700 1.35rem/1 'Pixelify Sans', sans-serif; font-variant-numeric: tabular-nums; cursor: pointer; transition: color 120ms ease, border-color 120ms ease, background-color 80ms ease; } .ds-keypad button.ds-unlit { border-color: #2a2a35; color: #6e6e7d; } .ds-keypad button:active { background: #f2cf4b; border-color: #f2cf4b; color: #0c0c12; } .ds-keypad button:focus-visible { outline: 3px solid #f2cf4b; outline-offset: 3px; } .ds-keypad .ds-enter { grid-column: 1 / -1; border: 3px solid #f2cf4b; color: #f2cf4b; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase; }"
     },
     {
-      "name": "Printed Screenshot Frame",
+      "name": "Encounter Box",
       "kind": "card",
-      "refersTo": "screenshot-frame",
-      "description": "Live screen in an 8px cream frame with the Lift shadow; mono text on the warm black.",
-      "html": "<div class=\"ds-frame\"><pre>Press Enter to START !\n█</pre></div>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-frame{border:8px solid var(--cream);border-radius:14px;background:var(--screen);box-shadow:0 2px 5px rgb(60 2 10 / .38),0 26px 44px -20px rgb(60 2 10 / .85);overflow:hidden;padding:1rem;min-height:10rem} .ds-frame pre{margin:0;color:var(--term-fg);font:400 15px/1 \"JetBrains Mono\",ui-monospace,monospace}"
+      "refersTo": "encounter-box",
+      "description": "\"Dans le jeu\": one 4px white box, the game's ASCII sprites lined up on top over a 2px rule, narrator * lines with a Pixelify lead-in below.",
+      "html": "<div class=\"ds-enc\"><div class=\"ds-enc-foes\" aria-hidden=\"true\"><pre>   .-.\n  (o.o)\n   |=|\n  __|__</pre><pre class=\"ds-enc-flame\">   )\n  ) \\\n / ) (\n \\(_)/</pre></div><div class=\"ds-enc-lines\"><p><strong>Quatre chapitres.</strong> Une fleur, un squelette, une patate géante… et Polaris tout au bout.</p><p><strong>Forge et boutiques.</strong> La chocolatine coûte 40 pièces.</p></div></div>",
+      "css": ".ds-enc { max-width: 40rem; padding: 1.6rem; border: 4px solid #f4f4f6; border-radius: 0; background: #0c0c12; } .ds-enc-foes { display: flex; align-items: flex-end; justify-content: space-around; gap: 1.5rem; padding-bottom: 1.6rem; border-bottom: 2px solid #2a2a35; overflow: hidden; } .ds-enc-foes pre { margin: 0; color: #f4f4f6; font: 400 0.85rem/1.08 'JetBrains Mono', monospace; } .ds-enc-foes .ds-enc-flame { font-size: 1.35rem; line-height: 1.1; } .ds-enc-lines { padding-top: 1.3rem; } .ds-enc-lines p { position: relative; padding-left: 1.4em; max-width: 62ch; margin: 0 0 0.6rem; font: 500 1rem/1.55 'Figtree', sans-serif; color: #b4b4c0; text-wrap: pretty; } .ds-enc-lines p::before { content: '*'; position: absolute; left: 0; top: 0; color: #f4f4f6; font: 400 1.25em/1.1 'JetBrains Mono', monospace; } .ds-enc-lines strong { color: #f4f4f6; font-family: 'Pixelify Sans', sans-serif; font-weight: 600; }"
     },
     {
-      "name": "Blurb with ASCII Vignette",
-      "kind": "card",
-      "refersTo": "vignette",
-      "description": "Printed mini screen with a real game monster, then a display title and soft-cream copy.",
-      "html": "<article class=\"ds-blurb\"><pre class=\"ds-vignette\">   )\n  ) \\\n / ) (\n \\(_)/</pre><h2>Forge et boutiques</h2><p>Revends ton butin, forge trois panoplies.</p></article>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-blurb{display:grid;gap:.75rem;padding:1rem;background:var(--red);color:var(--cream);max-width:19rem} .ds-vignette{margin:0;display:grid;place-items:center;height:9.5rem;padding:.6rem;border:4px solid var(--cream);border-radius:9px;background:radial-gradient(rgb(246 232 214 / .05) .7px,transparent 1.1px) 0 0/3px 3px,var(--screen-print);color:var(--term-fg);font:400 1.35rem/1.1 \"JetBrains Mono\",ui-monospace,monospace;box-shadow:0 1px 2px rgb(60 2 10 / .35),0 16px 30px -18px rgb(60 2 10 / .75)} .ds-blurb h2{margin:0;font:900 1.55rem/1 \"Big Shoulders Display\",\"Arial Narrow\",sans-serif;letter-spacing:.01em;text-transform:uppercase} .ds-blurb p{margin:0;color:var(--cream-soft);font:500 .95rem/1.45 Figtree,ui-sans-serif,sans-serif}"
-    },
-    {
-      "name": "Spec Strip",
+      "name": "Controls List",
       "kind": "custom",
-      "refersTo": "",
-      "description": "Cells between one-device-pixel cream rules, stroke icon plus uppercase label.",
-      "html": "<ul class=\"ds-specs\"><li><svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/></svg>1 joueur</li><li>Jeu en anglais</li></ul>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-specs{display:grid;grid-template-columns:repeat(2,1fr);margin:0;padding:0;list-style:none;background:var(--red);color:var(--cream);border-block:1px solid rgb(255 241 220 / .6)} .ds-specs li{display:flex;align-items:center;gap:.65rem;padding:1rem;font:800 .8rem/1.2 Figtree,ui-sans-serif,sans-serif;letter-spacing:.06em;text-transform:uppercase} .ds-specs li+li{border-left:1px solid rgb(255 241 220 / .6)}"
-    },
-    {
-      "name": "Barcode Link",
-      "kind": "button",
-      "refersTo": "barcode",
-      "description": "Cream label with fixed red-brown bars linking to the source code.",
-      "html": "<a class=\"ds-barcode\" href=\"#\"><span class=\"ds-bars\"></span><span class=\"ds-bl\">Code source sur GitHub</span></a>",
-      "css": ":host{--red:#b5202a;--cream:#fff1dc;--cream-soft:#ffd9c8;--ink:#2b0a0d;--screen:#180d11;--screen-print:#21141a;--term-fg:#f6e8d6;--key:0 1px 0 rgb(255 255 255 / 0.65) inset, 0 -2px 0 rgb(43 10 13 / 0.12) inset, 0 3px 6px -2px rgb(60 2 10 / 0.55);--key-down:0 1px 0 rgb(255 255 255 / 0.4) inset, 0 1px 2px -1px rgb(60 2 10 / 0.5);--ease-out:cubic-bezier(0.23, 1, 0.32, 1)} .ds-barcode{display:inline-grid;gap:.35rem;padding:.6rem .75rem .5rem;border-radius:6px;background:var(--cream);color:var(--ink);text-decoration:none;box-shadow:var(--key);transition:transform 140ms var(--ease-out),box-shadow 140ms var(--ease-out)} .ds-barcode:hover{transform:translateY(-1px)} .ds-barcode:active{transform:translateY(2px);box-shadow:var(--key-down)} .ds-barcode:focus-visible{outline:3px solid var(--cream);outline-offset:3px} .ds-bars{display:block;width:10.5rem;height:3.2rem;background:linear-gradient(90deg,var(--ink) 0 2%,transparent 2% 4%,var(--ink) 4% 5%,transparent 5% 8%,var(--ink) 8% 11%,transparent 11% 12%,var(--ink) 12% 13%,transparent 13% 16%,var(--ink) 16% 18%,transparent 18% 19%,var(--ink) 19% 22%,transparent 22% 24%,var(--ink) 24% 25%,transparent 25% 27%,var(--ink) 27% 30%,transparent 30% 31%,var(--ink) 31% 32%,transparent 32% 35%,var(--ink) 35% 36%,transparent 36% 38%,var(--ink) 38% 41%,transparent 41% 42%,var(--ink) 42% 44%,transparent 44% 47%,var(--ink) 47% 48%,transparent 48% 50%,var(--ink) 50% 53%,transparent 53% 54%,var(--ink) 54% 55%,transparent 55% 58%,var(--ink) 58% 60%,transparent 60% 61%,var(--ink) 61% 64%,transparent 64% 66%,var(--ink) 66% 67%,transparent 67% 69%,var(--ink) 69% 72%,transparent 72% 73%,var(--ink) 73% 74%,transparent 74% 77%,var(--ink) 77% 79%,transparent 79% 80%,var(--ink) 80% 83%,transparent 83% 85%,var(--ink) 85% 86%,transparent 86% 88%,var(--ink) 88% 91%,transparent 91% 92%,var(--ink) 92% 93%,transparent 93% 96%,var(--ink) 96% 98%,transparent 98% 99%,var(--ink) 99% 100%)} .ds-bl{font:800 .72rem/1 Figtree,ui-sans-serif,sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:center}"
+      "refersTo": "kbd-key",
+      "description": "Pixel kbd terms and soft descriptions, each row closed by a 2px rule.",
+      "html": "<dl class=\"ds-keys\"><div><dt><kbd>1</kbd> à <kbd>9</kbd></dt><dd>choisir une option du menu</dd></div><div><dt><kbd>Entrée</kbd></dt><dd>valider, ou faire avancer le texte</dd></div></dl>",
+      "css": ".ds-keys { margin: 0; max-width: 44rem; } .ds-keys div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; align-items: baseline; padding: 0.55rem 0; border-bottom: 2px solid #2a2a35; } .ds-keys dt { font: 600 0.95rem/1.6 'Pixelify Sans', sans-serif; color: #f4f4f6; white-space: nowrap; } .ds-keys dd { margin: 0; font: 500 1rem/1.55 'Figtree', sans-serif; color: #b4b4c0; } .ds-keys kbd { display: inline-block; min-width: 1.7em; padding: 0 0.4em; border: 2px solid #6e6e7d; color: #f4f4f6; font: 600 0.9em/1.5 'Pixelify Sans', sans-serif; text-align: center; }"
     }
   ],
   "narrative": {
-    "northStar": "The Back of the Box",
-    "overview": "**Creative North Star: \"The Back of the Box\"**\n\nThe page at `palawi.fr/polaris/` is printed on the back insert of Polaris's retail box. One cardinal red carries the whole card, with only two inks printed on it: cream and a deep red-brown. The big screenshot is not a picture. It is the live terminal game in a cream-bordered frame. Before play, a printed capture of the title screen sits exactly on the terminal's cells. Pressing the cream sticker cuts that capture away, and the running game is underneath, already showing the same title and prompt.\n\nDensity is a retail box's: one dominant screenshot, a narrow column of three feature blurbs, each with a real ASCII monster from the game, then a spec strip, a controls list and the small print with a barcode. The controls behave like hardware. Cream keys rest proud of the card, sink 2px when pressed and lie flat when the game is not listening. The warm near-black screen is the most saturated, highest-contrast area of the page. Everything printed on the red stays quieter than it.\n\nThe system rejects the neon or glow \"gamer\" look: no black page around a centred terminal, and no luminous halos.",
+    "northStar": "The Battle Box",
+    "overview": "The page is an indie-RPG battle screen. A dark, calm stage holds one white square pixel frame in the middle, and that frame is the live game: the unmodified Go terminal program, compiled to WebAssembly, running in an xterm.js terminal. Everything else on the page is either the game's own lettering (the dithered ░▒▓█ title, printed from the game source), the box's voice (lines that open with the narrator's `*`), or a quiet pixel control around the edge. One soft yellow marks what is active; nothing else is coloured.\n\nThe system is flat and literal. There is no radius, no shadow, no gradient and no glow; depth only ever comes from one thing sitting on top of another (the dialogue panel over the hidden terminal, the frame over the stage). State reads as illumination: the frame is lit white when the game is waiting for the player and dims while the game narrates, the keypad's keys stay drawn but unlit when input would be ignored, and a muted sound button dims instead of vanishing. The signature motion is the battle box opening from its compact dialogue size to full play size when the game starts, as battle boxes resize in the genre.\n\nConfirmed rejections (owner, 2026-10-29): the red \"game box\" world, neon or glowing \"gamer\" darkness, a red ground, a redrawn logo, an off-centre terminal, and a macOS-style terminal window with a hero button.",
     "keyCharacteristics": [
-      "One printed red ground under a faint red-brown halftone dot (4px pitch), lighter toward the top.",
-      "Two inks on the red: cream and red-brown. The screen is the only dark, high-contrast area.",
-      "The title is the game's own ░▒▓█ block lettering, generated from the game source and never typeset in a font.",
-      "Controls have real travel: they rest, sink when pressed, and flatten when the game is not listening.",
-      "Printed rules are hairlines: 1px, and 0.5px on 2x screens.",
-      "One signature move: the printed capture is clipped away left to right to show the live game."
+      "One centred white pixel frame (4px) that is the game itself, whole at every size.",
+      "One yellow (#f2cf4b) for the active thing: the selected command, the save star, the cursor, the Entrée key, a pressed key, focus and selection.",
+      "Unlit states are designed: dim frame, dim keys, dim icon buttons.",
+      "The game's own dithered title, never a redrawn wordmark.",
+      "Square corners, flat fills, depth by overlap only."
     ],
     "rules": [
       {
-        "name": "The Two Inks Rule",
-        "body": "Anything printed on the red uses only cream (at full strength or as soft cream, or as alpha rules) and red-brown. A third ink is not allowed. This is why the small logo keeps only the solid █ cells and drops the shaded tints.",
+        "name": "The One Yellow Rule",
+        "body": "Yellow belongs only to what is active or selected: one command per dialogue, the save star, the cursor, the Entrée key, the pressed key, focus. Never a heading, never a decoration, never a second accent hue beside it.",
         "section": "colors"
       },
       {
-        "name": "The Live Screen Rule",
-        "body": "The terminal is the most saturated, highest-contrast area of the page (15.8:1). Printed areas on the red stay at about 5 to 6:1.",
+        "name": "The Unlit, Not Gone Rule",
+        "body": "Inactive things dim to `unlit-ink` / `rule-line`; they keep their shape and place. Only the yellow and the white are \"lit\".",
         "section": "colors"
       },
       {
-        "name": "The Game Letters Rule",
-        "body": "\"POLARIS\" is always the game's own block art from `internal/game/game.go`, rendered by `scripts/logo.mjs` as crisp-edged SVG cells (3×6 units). The flap logo keeps only the solid █ cells. The printed capture draws ▓▒░ as the same 4×8 ordered dither (75/50/25%) that `scripts/blocks_font.py` bakes into \"Polaris Blocks\", so the print and the live terminal show identical dots.",
+        "name": "The Dim Is Not Reading Ink Rule",
+        "body": "`unlit-ink` (about 3.9:1 on the stage) is for borders and inactive states, not for text someone must read; reading text uses `soft-ink` or `frame-white`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Game's Own Letters Rule",
+        "body": "The title is generated from `internal/game/game.go`, never redrawn or re-lettered. Block characters always render through Polaris Blocks (exact cells, 4 x 8 dot dither, bleed to avoid seams), on the page and in the terminal alike.",
         "section": "typography"
       },
       {
-        "name": "The Mono Stays On Screen Rule",
-        "body": "JetBrains Mono appears only on screen surfaces: the terminal, the capture's prompt line, the ASCII vignettes and the error detail. Copy on the red is never set in mono.",
+        "name": "The Three Voices Rule",
+        "body": "Pixel for the page's voice, Figtree for reading, mono only for the game's own text. No fourth face.",
         "section": "typography"
       },
       {
-        "name": "The Fixed Numerals Rule",
-        "body": "Keypad digits, `kbd` caps and the save line use tabular numerals so they keep fixed positions.",
-        "section": "typography"
-      },
-      {
-        "name": "The Ninety Columns Rule",
-        "body": "The terminal font size is computed so that 92 columns fit (`floor(width / 92 / 0.6)`, clamped to 10–16px), then the fit addon fills the frame. The 86-column title is never scaled by CSS inside the live terminal.",
-        "section": "layout"
-      },
-      {
-        "name": "The Falling Light Rule",
-        "body": "Shadows always fall downward and are tinted with the ink of the surface below. A zero-offset, wide-blur shadow is a glow, and the system has none. (The rule is shared with the palawi.fr hub.)",
+        "name": "The Overlap-Only Rule",
+        "body": "If something needs to read as \"above\", it overlaps and covers, as the status legend covers the frame's bottom edge; it is never shaded, lifted or haloed.",
         "section": "elevation"
       },
       {
-        "name": "The Real Travel Rule",
-        "body": "A pressed control moves `translateY(2px)` and switches to the key-down shadow. On fine pointers only, hover lifts it 1px (2px for the sticker). The toggled states (sound off, fullscreen on) hold the pressed position. When the game is not waiting for input, the keypad keys sit 2px down, lose their shadow and drop to 55% opacity. They flatten into the card instead of greying out.",
-        "section": "elevation"
-      },
-      {
-        "name": "The One Device Pixel Rule",
-        "body": "Printed rules (flap, spec strip borders, controls rows, small-print top) use the `--rule` width: 1px, or 0.5px at 2dppx and above, always in cream at 45–60% alpha. Frames are not rules. They are thick cream borders.",
+        "name": "The Square Pixel Rule",
+        "body": "No radius, ever; frames are the only shape language.",
         "section": "shapes"
-      },
-      {
-        "name": "The Cell Grid Rule",
-        "body": "Anything printed over the live screen is positioned in terminal cells, never in arbitrary pixels, so when the cut passes the live screen continues the print without a jump.",
-        "section": "components"
-      },
-      {
-        "name": "The One Sticker Rule",
-        "body": "Each print carries exactly one sticker, and it is the only primary action on the page.",
-        "section": "components"
       }
     ],
     "dos": [
-      "**Do** print everything on the red in the two inks (cream and red-brown), and keep the terminal as the only high-contrast area.",
-      "**Do** render \"POLARIS\" only from the game's block art via `scripts/logo.mjs`: solid cells for small sizes, the 4×8 dither for the printed capture.",
-      "**Do** place anything laid over the live terminal on measured cells (`--cw`, `--ch`, `--px`, `--py`), and reveal the game with the clip-path cut-away (560ms, cubic-bezier(0.77, 0, 0.175, 1)).",
-      "**Do** give every control real travel: the key shadow at rest, 2px down with the key-down shadow when pressed, and flat at 55% when the game is not listening.",
-      "**Do** draw printed rules with `--rule` in cream at 45–60% alpha.",
-      "**Do** keep tabular numerals on keys, `kbd` caps and the save line.",
-      "**Do** frame every screen surface in solid cream with soft corners and a downward shadow tinted in red-brown."
+      "**Do** keep the battle box whole, centred and square-framed at every size; restack everything else around it.",
+      "**Do** show game state as illumination: frame white on the player's turn, `unlit-ink` while the game narrates; keys lit or unlit, never removed.",
+      "**Do** keep exactly one yellow command per dialogue and use yellow only for active things (command, save star, cursor, Entrée, pressed key, focus, selection).",
+      "**Do** generate the title from the game source with `web/scripts/logo.mjs` and render block characters through Polaris Blocks (`web/scripts/blocks_font.py`).",
+      "**Do** open lines in a box's voice with the narrator's `*`, in the battle box and the encounter box alike.",
+      "**Do** seat labels about the box on its frame as a legend (stage-filled patches over the edge), not as a separate row below it.",
+      "**Do** use the 480ms ease-in-out curve (cubic-bezier(0.77, 0, 0.175, 1)) for the box, title and status resizing, and ease-out (cubic-bezier(0.23, 1, 0.32, 1)) for press feedback; collapse to colour and opacity changes under reduced motion.",
+      "**Do** answer the game's \"Press Enter to START\" automatically when the terminal is narrower than 86 columns, so the wrapped title never shows as noise; JOUER already was the player's Enter."
     ],
     "donts": [
-      "**Don't** put the game in a dark page with a centred terminal window and a generic play button. The page is the red box.",
-      "**Don't** use neon, glow, or zero-offset luminous halos. Shadows fall downward.",
-      "**Don't** typeset the title in a font, or print the ▓▒░ tints as a third ink on the red.",
-      "**Don't** use JetBrains Mono for copy on the red. Mono belongs to screen surfaces.",
-      "**Don't** show a picture of the game where the live game can run. Vignettes are the game's real ASCII art, not mock-ups.",
-      "**Don't** add a second sticker or competing primary action to a print.",
-      "**Don't** add uppercase labels above headings. The flap genre line is the only small uppercase line, and it sits beside the logo.",
-      "**Don't** print ratings, review quotes or player counts on the box."
+      "**Don't** round a corner, add a shadow, gradient, glow, blur or neon halo.",
+      "**Don't** bring back the red ground or the \"game box\" world, or a macOS-style terminal window.",
+      "**Don't** redraw or re-letter the Polaris title.",
+      "**Don't** add a second accent colour or use yellow for headings or decoration.",
+      "**Don't** use `unlit-ink` for text someone has to read.",
+      "**Don't** use Undertale or Deltarune characters, logos or exact command names (FIGHT / ACT / ITEM / MERCY); only the generic battle-box grammar.",
+      "**Don't** hide inactive controls; dim them."
     ]
   }
 }

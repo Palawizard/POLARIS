@@ -9,20 +9,22 @@ related_targets: []
 
 `palawi.fr/polaris/`, the browser edition of Polaris (Go terminal RPG compiled to WebAssembly). Mode: Experience, the game leads from the first viewport. Audience: palawi.fr visitors on phones for a quick session, friends who come back to their save. Related: the Polaris widget on the palawi.fr hub (full width under the PalaCards booster), which wears this world under the Guest App Rule.
 
+Redesign of 2026-10-29 (second round): the red "game box" was rejected by Palawi (red hurts the eyes, terminal not centred, redrawn logo ugly). Pinned by Palawi: dark and calm (no neon, no glow), the game's own ░▒▓█ title as it shows in the terminal, the terminal centred alone in the first viewport, everything else below.
+
 ## Direction contract
 
-THESIS: The page is the back of Polaris's game box, and its big screenshot is the real game running. Refuses the dark page with a centred terminal window and a play button.
+THESIS: The page is an indie-RPG battle screen: a dark stage with one white-framed box in the middle, and the box is the live game. Refuses the generic dark page with a macOS-style terminal window and a hero button.
 
-OWN-WORLD: Committed colour: one printed cardinal red carries the whole box (grounded in "Projet Red", the school project's name), two inks on it (cream and deep red-brown), a warm near-black screen. Title is the game's own ░▒▓█ block lettering set in cream. Big Shoulders Display for box headings, Figtree for copy, JetBrains Mono only inside the terminal and the ASCII vignettes. Printed screenshot frames with a cream border, crisp one-device-pixel rules, a cream sticker as the one primary action, a barcode that links to the source code.
+OWN-WORLD: Near-black blue ground, one white for the frame and text, one soft yellow for what is active (the selected command, the save star) and nothing else. Square pixel frames (4px white), no radius, no shadow, no gradient, no glow: depth only by overlap. Pixelify Sans for every label and command, JetBrains Mono plus the Polaris Blocks font inside the terminal, Figtree for reading copy below the fold. The title is the game's dithered ░▒▓█ lettering in white.
 
-STORY: The visitor sees the box of a game, understands the screenshot is playable, presses the sticker, and the printed capture is cut away to reveal the live title animation. Below: what is inside the game (chapters, fights, forge, shops) with real ASCII monsters, the box's spec strip, credits as small print.
+STORY: The visitor sees the game's title over a small battle box that speaks in the game's voice ("* ..."), presses JOUER, and the box opens to full size with the game running in it. The frame is lit white when it is the player's turn and dims while the game narrates. Below: how to play, what is in the game, credits.
 
-FIRST VIEWPORT: Top flap: block title left, printed tab back to palawi.fr and sound/fullscreen buttons right. Then the screenshot, the live terminal, taking about 70% of the width on desktop and the full width on phones, the Jouer sticker on it. Desktop: a narrow back-of-box column to its right with three feature blurbs and monster vignettes. Phones: keypad of printed keys under the screen.
+FIRST VIEWPORT: Top edge: small pixel link back to palawi.fr left, sound and fullscreen pixel buttons right. Centre: the dithered title, then the battle box centred both ways (compact before play, about 90 columns wide and filling the height once playing), under it a yellow save star line when a save exists. Phones: the box full width, pixel keypad under it.
 
-FORM: The game's retail box (back insert), position 5 on the ordered list, seed:f54f69bec49d53a6. Raises: controls with real travel, keys depress into the card and flatten when the game is not listening (from the CD-ROM console); the live screen is the most saturated, highest-contrast region, the print stays in two inks (from the ink basin); tabular fixed-position numerals in the spec strip and keypad (from the nixie counter); every printed rule drawn at one device pixel (from the reference setting). Signature interaction: the printed capture is cut away (clip-path, in-out) to reveal the running game.
+FORM: Indie RPG battle box, position 3 on the ordered list, seed:b8124c8e6a3c86b3. Raises: the box stays whole and centred at every size while everything else restacks around it (from the minihompy room); unlit states are designed, keys and frame dim instead of disappearing (from the seven-segment display); the game's state reads as illumination, frame lit on the player's turn (from the signboard alley); only the active thing gets the bright edge (from the moon-shadow bazaar); depth only by overlap, never by shading (from the layered papercut). Signature interaction: the battle box expands from its compact dialogue size to the full play size when the game starts, as battle boxes resize in the genre.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
 ## Constraints
 
-The game stays the unmodified terminal program; the terminal keeps about 90 columns where the screen allows. Page in French, game in English. Credits and music sources as in the repo. No neon or glow. No invented claims (no ratings, reviews, player counts).
+The game stays the unmodified terminal program; the terminal keeps about 90 columns where the screen allows. Page in French, game in English. Credits and music sources as in the repo. No neon or glow, no red ground. No Undertale characters, logos or exact command names (FIGHT/ACT/ITEM/MERCY): only the generic battle-box grammar. No invented claims.
