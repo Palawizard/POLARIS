@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "web/src/index.html"
+        ],
+        "createdAt": "2026-10-29T17:43:43.041Z",
+        "reason": "Claude: the printed capture overlay fills the framed screen edge to edge by design (screenshot inside its cream border); the terminal itself has inner padding"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "web/src/*"
+        ],
+        "createdAt": "2026-10-29T17:44:06.490Z",
+        "reason": "Claude: downward-offset drop shadows tinted with the box's red ink on a red (not dark) ground, per the Falling Light rule; no zero-offset halo"
+      }
+    ]
+  }
+}

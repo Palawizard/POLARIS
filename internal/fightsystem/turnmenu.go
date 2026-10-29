@@ -15,15 +15,17 @@ import (
 // TurnMenu runs the player's turn UI.
 // Returns true if the player chose to exit the fight, false otherwise.
 func TurnMenu(player *utils.Player, monster *monsters.Monster, turn int) bool {
-	for {
-		// Passive mana regeneration at the start of each menu loop.
-		if player.Mana < player.MaxMana {
-			player.Mana += player.ManaRegen
-			if player.Mana > player.MaxMana {
-				player.Mana = player.MaxMana
-			}
+	// Passive mana regeneration, once per turn. (It used to run on every
+	// pass of the menu loop, so an empty Enter or backing out of a submenu
+	// regenerated mana again: the "don't hit Enter in combat" bug.)
+	if player.Mana < player.MaxMana {
+		player.Mana += player.ManaRegen
+		if player.Mana > player.MaxMana {
+			player.Mana = player.MaxMana
 		}
+	}
 
+	for {
 		// Header + basic HUD
 		utils.ClearScreen()
 		fmt.Println("Turn", turn)

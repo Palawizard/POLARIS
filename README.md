@@ -4,7 +4,9 @@
 
 A compact, text-driven RPG with chapters, turn-based combat, loot, crafting, spellbooks, and a light economy. Everything runs in the terminal, with sound effects and music via the `beep` audio stack.
 
-**⚠️ KNOWN BUG IN V1.0 : DO NOT HIT ENTER IN THE COMBAT SCREEN OR SPAM ENTER IN DIALOGUES ⚠️**
+**▶ Play it in your browser: [palawi.fr/polaris](https://palawi.fr/polaris/)** (same code, compiled to WebAssembly, with autosave).
+
+> The v1.0 bug where pressing Enter in combat regenerated mana is fixed: mana now regenerates once per turn. In the browser, keys typed while the game is not waiting for input are ignored, so Enter spam can no longer skip dialogues.
 
 This README documents the game’s features, how to run it, and how the codebase is laid out.
 
@@ -192,6 +194,29 @@ Each recipe costs coins + materials (from loot). Prices and recipes are balanced
 
 ---
 
+## Browser edition (`web/`)
+
+The game also runs in the browser at [palawi.fr/polaris](https://palawi.fr/polaris/), from this same code:
+
+* `GOOS=js GOARCH=wasm` builds the game to WebAssembly. Only three spots have a browser variant, chosen by build tags: `internal/audiosystem/audio_js.go` (sound through the page), `utils/clear_js.go` (clear screen with ANSI codes) and `internal/save/backend_js.go` (autosave in `localStorage`). The terminal build has no save system, as before.
+* `web/src/polaris.js` plugs the game into an [xterm.js](https://xtermjs.org/) terminal: it replaces Go's file I/O so stdout goes to the terminal and stdin behaves like a terminal line by line.
+* The run is saved each time you are back on the main menu; at launch the game offers to continue it.
+
+Build and run locally (Go 1.25, Node 22):
+
+```bash
+GOOS=js GOARCH=wasm go build -trimpath -ldflags="-s -w" -o /tmp/polaris.wasm ./cmd
+cd web && npm ci
+node scripts/build.mjs /tmp/polaris.wasm "$(go env GOROOT)/lib/wasm/wasm_exec.js"
+python3 -m http.server -d dist 8000   # then open http://localhost:8000/
+```
+
+Or with Docker, from the repository root: `docker build -f web/Dockerfile -t polaris-web .` then `docker run -p 8080:8080 polaris-web`.
+
+`web/scripts/logo.mjs` (title SVGs from the game's own title art), `web/scripts/blocks_font.py` (a tiny font for the ░▒▓█ block characters) and `web/scripts/og.py` (share image) regenerate committed assets.
+
+---
+
 ## Directory layout
 
 ```
@@ -219,7 +244,7 @@ main.go            // entry point: preload select SFX, start game
 
 ## Known limitations
 
-* No save/load system yet.
+* No save/load system in the terminal build (the browser edition autosaves).
 * Terminal flash/jitter depends on ANSI support; very minimal terminals may ignore it.
 
 ---
