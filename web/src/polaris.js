@@ -19,7 +19,7 @@ const COLS_TARGET = 92; // the title art is 86 columns wide
 const enc = new TextEncoder();
 
 const $ = (sel) => document.querySelector(sel);
-const shell = $(".term");
+const shell = $(".box");
 const stage = $(".term__screen");
 const overlayStart = $("#start");
 const overlayEnd = $("#end");
@@ -193,14 +193,14 @@ function makeTerminal() {
     allowProposedApi: false,
     disableStdin: false,
     theme: {
-      background: "#180d11",
-      foreground: "#f6e8d6",
-      cursor: "#fff1dc",
-      cursorAccent: "#180d11",
-      selectionBackground: "#6e0f19",
-      selectionForeground: "#fff1dc",
-      black: "#180d11",
-      brightBlack: "#8a6f6a",
+      background: "#0c0c12",
+      foreground: "#f4f4f6",
+      cursor: "#f2cf4b",
+      cursorAccent: "#0c0c12",
+      selectionBackground: "#f2cf4b",
+      selectionForeground: "#0c0c12",
+      black: "#0c0c12",
+      brightBlack: "#6e6e7d",
     },
   });
   fit = new FitAddon.FitAddon();
@@ -224,18 +224,6 @@ function resize() {
     /* hidden */
   }
   document.body.classList.toggle("is-cramped", term.cols < 86);
-  const screen = stage.querySelector(".xterm-screen");
-  if (screen && term.cols && term.rows) {
-    const r = screen.getBoundingClientRect();
-    const box = shell.getBoundingClientRect();
-    const st = shell.style;
-    st.setProperty("--cw", `${r.width / term.cols}px`);
-    st.setProperty("--ch", `${r.height / term.rows}px`);
-    st.setProperty("--px", `${r.left - box.left - shell.clientLeft}px`);
-    st.setProperty("--py", `${r.top - box.top - shell.clientTop}px`);
-    st.setProperty("--fs", `${term.options.fontSize}px`);
-    st.setProperty("--cols", String(term.cols));
-  }
 }
 new ResizeObserver(() => resize()).observe(stage);
 
@@ -258,29 +246,20 @@ function setWaiting() {
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-// Signature move: the printed capture is cut away and the live game shows through.
-function cutAway(el) {
+// Dialogs ("* ..." lines in the box) fade in and out; the box itself does
+// the moving (see the .box transitions in polaris.css).
+function hideDialog(el) {
   if (el.hidden) return;
-  const anim = reduceMotion.matches
-    ? el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: "ease-out" })
-    : el.animate([{ clipPath: "inset(0 0 0 0)" }, { clipPath: "inset(0 0 0 100%)" }], {
-        duration: 560,
-        easing: "cubic-bezier(0.77, 0, 0.175, 1)",
-      });
-  anim.finished.then(() => (el.hidden = true), () => (el.hidden = true));
+  el.classList.add("is-leaving");
+  setTimeout(() => {
+    el.hidden = true;
+    el.classList.remove("is-leaving");
+  }, reduceMotion.matches ? 0 : 160);
 }
-
-// The reverse: a printed note is laid back over the screen.
-function layDown(el) {
+function showDialog(el) {
+  el.classList.add("is-leaving");
   el.hidden = false;
-  if (reduceMotion.matches) {
-    el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: "ease-out" });
-  } else {
-    el.animate([{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0 0 0)" }], {
-      duration: 460,
-      easing: "cubic-bezier(0.77, 0, 0.175, 1)",
-    });
-  }
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.remove("is-leaving")));
 }
 
 function fulfil() {
@@ -365,15 +344,13 @@ function output(bytes) {
   fs.read = (fd, buffer, offset, length, position, callback) => {
     if (fd !== 0) return callback(enosys());
     pendingRead = { buffer, offset, length, callback };
-    if (revealOnRead && skipTitle) {
-      // Narrow screen: the 86-column title would wrap, so the print stands in
-      // for it. The sticker was the player's "Press Enter to START": answer
-      // it here and cut on the next screen instead.
+    if (skipTitle) {
+      // Narrow screen: the 86-column title would wrap into noise. The JOUER
+      // command was the player's "Press Enter to START", so answer it here.
       skipTitle = false;
       ready = enc.encode("\n");
       return fulfil();
     }
-    if (revealOnRead) reveal();
     if (ready.length) fulfil();
     else setWaiting();
   };
@@ -427,19 +404,19 @@ async function compile() {
 const compiling = compile();
 compiling.catch(() => {});
 
+const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
+let skipTitle = false;
+
+// Signature move: the box opens from its dialogue size to the full play size
+// (the page title folds away), then the game starts inside it.
 async function run() {
   if (running) return;
   running = true;
   audio.unlock();
   audio.preloadAll(SFX);
-  document.body.classList.add("is-playing", "is-starting");
-  overlayStart.classList.add("is-starting");
-  await termReady;
-  // The print stays on until the game first waits for the player: by then
-  // the live screen holds the same title and prompt, so the cut reveals the
-  // game without a jump. The sticker peels off and the music starts at once.
-  revealOnRead = true;
-  skipTitle = document.body.classList.contains("is-cramped");
+  [overlayStart, overlayEnd, overlayError].forEach(hideDialog);
+  document.body.classList.add("is-playing");
+  await Promise.all([termReady, sleep(reduceMotion.matches ? 0 : 500)]);
 
   term.reset();
   pendingRead = null;
@@ -447,6 +424,7 @@ async function run() {
   line = "";
   setWaiting();
   resize();
+  skipTitle = term.cols < 86;
   term.focus();
 
   try {
@@ -459,33 +437,20 @@ async function run() {
   } catch (err) {
     console.error(err);
     audio.stopMusic();
-    revealOnRead = false;
-    document.body.classList.remove("is-playing", "is-starting");
-    overlayStart.classList.remove("is-starting");
-    overlayStart.hidden = true;
-    overlayEnd.hidden = true;
-    layDown(overlayError);
+    document.body.classList.remove("is-playing");
+    showDialog(overlayError);
     $("#error-detail").textContent = String(err && err.message ? err.message : err);
   } finally {
-    if (revealOnRead) reveal();
+    skipTitle = false;
     running = false;
     pendingRead = null;
     setWaiting();
   }
 }
 
-let revealOnRead = false;
-let skipTitle = false;
-function reveal() {
-  revealOnRead = false;
-  document.body.classList.remove("is-starting");
-  [overlayStart, overlayEnd, overlayError].forEach(cutAway);
-  overlayStart.classList.remove("is-starting");
-}
-
 function showEnd() {
   document.body.classList.remove("is-playing");
-  layDown(overlayEnd);
+  showDialog(overlayEnd);
   overlayEnd.querySelector("button").focus({ preventScroll: true });
 }
 
@@ -497,11 +462,11 @@ function updateStartCopy() {
     save = null;
   }
   const el = $("#save-line");
-  const label = $(".sticker__label");
+  const label = $(".go__label");
   if (!el) return;
   if (save && save.player && save.player.Name) {
-    const ch = save.chapter > 4 ? "jeu terminé" : `chapitre ${save.chapter}`;
-    el.textContent = `Partie de ${save.player.Name} : niveau ${save.player.Level}, ${ch}.`;
+    const ch = save.chapter > 4 ? "jeu fini" : `chap. ${save.chapter}`;
+    $("#save-text").textContent = `${save.player.Name} · niv. ${save.player.Level} · ${ch}`;
     el.hidden = false;
     label.textContent = "Reprendre";
   } else {
@@ -511,8 +476,8 @@ function updateStartCopy() {
 }
 updateStartCopy();
 
-// The terminal exists from the start, under the printed capture, so the
-// capture can be laid exactly on the cells the title will occupy.
+// The terminal exists from the start (hidden in the compact box), so the game
+// starts instantly once the box has opened.
 const termReady = Promise.all([
   document.fonts.load('16px "JetBrains Mono"'),
   document.fonts.load('16px "Polaris Blocks"', "\u2588"),
@@ -520,12 +485,11 @@ const termReady = Promise.all([
   .catch(() => {})
   .then(() => {
     makeTerminal();
-    document.documentElement.classList.add("has-term");
   });
 
 document.querySelectorAll("[data-run]").forEach((b) => b.addEventListener("click", run));
 
-// Fullscreen on the terminal window (desktop, Android).
+// Fullscreen on the battle box (desktop, Android).
 const fsBtn = $("#fullscreen");
 if (!document.fullscreenEnabled) fsBtn.hidden = true;
 fsBtn.addEventListener("click", () => {
