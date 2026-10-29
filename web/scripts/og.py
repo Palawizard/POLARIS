@@ -1,6 +1,8 @@
 """Renders src/og.png (1200 x 630), the share image of palawi.fr/polaris/:
-a real capture of the built page, first viewport, before the game starts
-(the box flap, the printed title screen and the Jouer sticker).
+a capture of the built page, first viewport, before the game starts (the box
+flap, the printed title screen and the Jouer sticker). To fit the 1200 x 630
+frame, the capture hides the caption and the side blurbs and lets the screen
+take the full width; nothing is drawn that the page does not show.
 
 Usage: python3 scripts/og.py <url of the built page, e.g. http://127.0.0.1:8099/polaris/>
 Needs Python Playwright with Chromium.
