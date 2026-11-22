@@ -10,8 +10,6 @@ A compact, text-driven RPG with chapters, turn-based combat, loot, crafting, spe
 
 This README documents the game's features, how to run it, and how the codebase is laid out.
 
----
-
 ## Quick start
 
 ### Requirements (skip if using executable in releases)
@@ -31,8 +29,6 @@ go run .\cmd\main.go
 
 That boots the title animation and music. Press **Enter** to start, then follow on-screen prompts.
 
----
-
 ## How to play (controls)
 
 * Menus use **numbers** + **Enter**.
@@ -40,13 +36,11 @@ That boots the title animation and music. Press **Enter** to start, then follow 
 * During story text, press **Enter** to continue.
 * In combat:
 
-  * **1**: Skills
-  * **2**: Inventory (usable items)
-  * **0**: Return to main menu (exits the current fight)
+  * 1: Skills
+  * 2: Inventory (usable items)
+  * 0: Return to main menu (exits the current fight)
 
 > Tip: The "Training Fight" from the main menu is a safe place to grind.
-
----
 
 ## Game flow
 
@@ -57,8 +51,6 @@ That boots the title animation and music. Press **Enter** to start, then follow 
 5. **Rewards**: win coins, EXP, and loot (crafting mats, items, or abilities).
 6. **Spend**: buy/sell in the shops, craft gear at the black-smith, and upgrade inventory capacity.
 
----
-
 ## Combat system
 
 ![Combat](assets/readme/images/fight.png)
@@ -66,13 +58,11 @@ That boots the title animation and music. Press **Enter** to start, then follow 
 Turn-based and deterministic in UI, with controlled randomness inside:
 
 * **Initiative** decides who goes first on the first round.
-* **Mana regeneration**: each of your turns you passively regen MP (by class).
-* **Critical hits (player)**: offensive skills (including Punch) have a flat crit chance (25%) unless stated otherwise. Heals don't crit.
-* **Critical hits (monsters)**: each monster has a target cadence `CritEvery`. Crits are **randomized** around that cadence with a "pity" effect:
-* **Damage & HP**: damage and healing are computed in floats but **rounded at application** so numbers on screen always match the true HP total. HP never drops below 0 or above max.
-* **On death**: you "respawn" to half max HP with a short hint + death music, then you're returned to menus.
-
----
+* Mana regeneration: each of your turns you passively regen MP (by class).
+* Critical hits (player): offensive skills (including Punch) have a flat crit chance (25%) unless stated otherwise. Heals don't crit.
+* Critical hits (monsters): each monster has a target cadence `CritEvery`. Crits are **randomized** around that cadence with a "pity" effect:
+* Damage & HP: damage and healing are computed in floats but **rounded at application** so numbers on screen always match the true HP total. HP never drops below 0 or above max.
+* On death: you "respawn" to half max HP with a short hint + death music, then you're returned to menus.
 
 ## Character & progression
 
@@ -93,27 +83,23 @@ Turn-based and deterministic in UI, with controlled randomness inside:
   * +5 Max MP, full MP
   * Level-up messages explain the gains.
 
----
-
 ## Inventory, items, and capacity
 
-* **Capacity**: starts at 10. You can purchase upgrades (+10 each) up to 10 times.
+* Capacity: starts at 10. You can purchase upgrades (+10 each) up to 10 times.
 * **Inventory view** shows items, skills, and equipment. After using/equipping from the inventory, you **stay** in the inventory menu for faster management.
 
 **Selected consumables**
 
-* **Potion**: +50 HP
-* **Bandage**: +20 HP
-* **Hi-Potion**: +120 HP
-* **Grandma Soup**: +80 HP
-* **Baguette**: +60 HP
-* **Elixir**: Full heal
-* **Regen Potion**: 4 ticks of +15 HP over time
-* **Chocolatine**: Fully heals with a celebratory ASCII cut-in
+* Potion: +50 HP
+* Bandage: +20 HP
+* Hi-Potion: +120 HP
+* Grandma Soup: +80 HP
+* Baguette: +60 HP
+* Elixir: Full heal
+* Regen Potion: 4 ticks of +15 HP over time
+* Chocolatine: Fully heals with a celebratory ASCII cut-in
 
 All healing amounts apply with the same rounding rules used everywhere else.
-
----
 
 ## Skills (spellbooks)
 
@@ -127,8 +113,6 @@ Buy spellbooks to gain skill charges (they stack). Mana is spent on cast.
 * Vampiric Touch: 14 base, can crit (\~1.75×), heals you for 50% of damage dealt.
 * Heal: +35 HP, **no critical**.
 
----
-
 ## Equipment & crafting (black-smith)
 
 ![Blacksmith](assets/readme/images/blacksmith.png)
@@ -137,9 +121,9 @@ Three slots: **Head**, **Body**, **Feet**. Equipment increases **Max HP** (shown
 
 **Sets available**
 
-* **Adventurer**: Hat / Tunic / Boots
-* **Leather**: Cap / Armor / Boots
-* **Iron**: Helm / Plate / Greaves
+* Adventurer: Hat / Tunic / Boots
+* Leather: Cap / Armor / Boots
+* Iron: Helm / Plate / Greaves
 
 Each recipe costs coins + materials (from loot). Prices and recipes are balanced for early-game progression.
 
@@ -152,8 +136,6 @@ Each recipe costs coins + materials (from loot). Prices and recipes are balanced
   * **Full set** required materials
   * **Full set** total coins
   * **Full set** total MHP
-
----
 
 ## Shops (buy, sell, upgrade)
 
@@ -181,8 +163,6 @@ Each recipe costs coins + materials (from loot). Prices and recipes are balanced
 
 * "Upgrade Inventory (+10)" costs 7 coins, up to 10 times.
 
----
-
 ## Audio & visuals
 
 * **Music** and **SFX** are handled by `github.com/faiface/beep` and friends.
@@ -191,8 +171,6 @@ Each recipe costs coins + materials (from loot). Prices and recipes are balanced
 
   * **ClearScreen** for a clean UI each step
   * **Flash** effect on enemy attack (subtle jitter + quick invert)
-
----
 
 ## Browser edition (`web/`)
 
@@ -214,8 +192,6 @@ python3 -m http.server -d dist 8000   # then open http://localhost:8000/
 Or with Docker, from the repository root: `docker build -f web/Dockerfile -t polaris-web .` then `docker run -p 8080:8080 polaris-web`.
 
 `web/scripts/logo.mjs` (title SVGs from the game's own title art), `web/scripts/blocks_font.py` (a tiny font for the ░▒▓█ block characters) and `web/scripts/og.py` (share image) regenerate committed assets.
-
----
 
 ## Directory layout
 
@@ -240,20 +216,16 @@ utils/
 main.go            // entry point: preload select SFX, start game
 ```
 
----
-
 ## Known limitations
 
 * No save/load system in the terminal build (the browser edition autosaves).
 * Terminal flash/jitter depends on ANSI support; very minimal terminals may ignore it.
 
----
-
 ## Credits & miscellany
 
 * Audio playback built on the `beep` stack.
 * ASCII art sprinkled through chapters and special items.
-* **Game made by** :
+* Game made by :
   * Baptiste D.M.
   * Jules D.
   * Nin L.P.
